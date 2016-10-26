@@ -1,0 +1,15 @@
+Yellow#Junior
+Orange#Senior
+Yellow#Junior
+Purple#Junior
+Brown-2#Junior
+White#Senior
+Orange#Senior
+Red#Junior
+Brown-2#Senior
+Yellow#Senior
+Red#Junior
+Blue#Senior
+Green@Senior
+Purple#Junior
+White#Junior
