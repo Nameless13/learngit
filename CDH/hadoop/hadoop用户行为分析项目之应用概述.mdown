@@ -1,0 +1,146 @@
+# hadoop用户行为分析项目之应用概述
+## 应用概述
+### hadoop业务场景,应用场景
+
+- 业务场景:
+    + 时延
+    + 吞吐量
+- 应用场景:
+    + MapReduce计算模型
+    + 海量数据的离线分析
+    + 静态数据源
+    
+### 用户行为分析平台搭建注意事项:
+- 高可用性
+- NNA和NNS节点配置注意事项
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 指定HDFS的NameService为cluster1,需要和core-site.xml中的保持一致 -->
+    <property>
+        <name>dfs.nameservice</name>
+        <value>cluster1</value>
+    </property>
+    <!-- cluster1下面又两个NameNode,分别是nna,nns -->
+    <property>
+        <name>dfs.ha.namenodes.cluster1</name>
+        <value>nna,nns</value>
+    </property>
+    <!-- nna的RPC通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc-address.cluster1.nna</name>
+        <value>nna:9000</value>
+    </property>
+    <!-- nns的RPC通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc.address.cluster.nns</name>
+        <value>nns:9000</value>
+    </property>
+    <!-- nna的http通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc.address.cluster.nna</name>
+        <value>nna:50070</value>
+    </property>
+    <!-- nns的http通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc.address.cluster.nns</name>
+        <value>nns:50070</value>
+    </property>
+    <!-- 共享存储目录地址,节点保证是奇数 -->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://dn1:8485;dn2:8485;dn3:8485/cluster1</value>
+    </property>
+    <!-- 配置失败自动切换实现方式 -->
+    <property>
+        <name>dfs.client.failover.proxy.provider.cluster1</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfigureFailoverProxyProvider</value>
+    </property>
+    <!-- 配置隔离机制 -->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>sshfence</value>
+    </property>
+    <!-- 使用隔离机制是需要ssh免密码登录 -->
+    <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/home/hadoop/.ssh/id_rsa</value>
+    </property>
+    <!-- 指定NameNode的元数据在JournalNode上的存放位置 -->
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/home/hadoop/tmp/journal</value>
+    </property>
+    <!-- 指定高可用自动转换机制 -->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- 指定 -->
+    <!-- 指定DataNode数据存储地址 -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/home/hadoop/dfs/data</value>
+    </property>
+    <!-- 指定数据冗余份数 -->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+    </property>
+    <!-- 指定可以通过web访问HDFS目录 -->
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+    </property>
+    <!-- 保证数据恢复 -->
+    <property>
+        <name>dfs.journalnode.http-address</name>
+        <value>0.0.0.0:8480</value>
+    </property>
+    <property>
+        <name>dfs.journalnode.rpc-address</name>
+        <value>0.0.0.0:8485</value>
+    </property>
+    <!-- ZooKeeper集群的地址和端口,注意,数量一定是奇数,且不少于三个节点 -->
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>dn1:2181.dn2:2181,dn3:2181</value>
+    </property>
+</configuration>
+
+```
+
+```
+<configuration>
+    <!-- 指定hdfs的nameservice为cluster1,是NameNode的URI -->
+    <property>
+        <name>dfs.defaultFS</name>
+        <value>hdfs://cluster1</value>
+    </property>
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>131072</value>
+    </property>
+    <!-- 指定hadoop临时目录 -->
+    <property>
+        <name>dhadoop.tmp.dir</name>
+        <value>/home/hadoop/tmp</value>
+    </property>
+    <!-- 指定可以在任何IP访问 -->
+    <property>
+        <name>hadoop.proxyuser.hduser.hosts</name>
+        <value>*</value>
+    </property>
+    <!-- 指定所有用户可以访问 -->
+    <property>
+        <name>hadoop.proxyuser.hduser.groups</name>
+        <value>*</value>
+    </property>
+    <!-- 指定zookeeper地址 -->
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>dn1:2181.dn2:2181,dn3:2181</value>
+    </property>
+</configuration>
+```
+
