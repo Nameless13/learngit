@@ -75,9 +75,9 @@ $ yum install python26
 1. 等待几分钟，Cloudera Manager Server启动。要观察启动过程，请运行tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log在Cloudera Manager Server主机上。如果Cloudera Manager Server未启动，请参阅 排除安装和升级问题。
 2. 在Web浏览器中，输入 http：// 服务器主机：7180，其中Server主机是运行Cloudera Manager Server的主机的FQDN或IP地址。
 将显示Cloudera Manager管理控制台的登录屏幕。
-3. 使用凭据登录到Cloudera Manager管理控制台：用户名： 管理员 密码： 管理员。
-4. 登录后，将显示“ Cloudera Manager最终用户许可条款和条件”页面。阅读条款和条件，然后选择是接受它们。
-5. 单击继续。将显示欢迎使用Cloudera Manager页面。
+3. 使用凭据登录到Cloudera Manager管理控制台：**用户名**： 管理员 **密码**： 管理员。
+4. 登录后，将显示“ **Cloudera Manager最终用户许可条款和条件**”页面。阅读条款和条件，然后选择是接受它们。
+5. 单击**继续**。将显示**欢迎使用Cloudera Manager**页面。
 
 ## 使用Cloudera Manager向导安装和配置软件
 在群集主机上安装和配置Cloudera Manager，CDH和托管服务软件涉及以下主要步骤。
@@ -95,13 +95,52 @@ $ yum install python26
 4. 单击搜索。Cloudera Manager标识集群上的主机。验证显示的主机数量与要安装服务的主机数量匹配。清除不存在的主机条目，并清除不想安装服务的主机。单击继续。将显示“选择存储库”屏幕。
 
 ### 安装CDH和托管服务软件
-保留默认分发方法使用宗地和CDH的默认版本5.将“其他宗地”选项保留为“无”。
-对于Cloudera Manager Agent，保留此Cloudera Manager Server的默认匹配版本。单击继续。将显示“JDK安装选项”屏幕。
-选择安装Oracle Java SE开发工具包（JDK）复选框以允许Cloudera Manager在每个群集主机上安装JDK或取消选中是否打算自行安装。保持安装Java无限强度加密策略文件复选框。单击继续。将显示“启用单用户模式”屏幕。
-将单用户模式复选框清除，然后单击继续。此时将显示“提供SSH登录凭据”页面。
-指定主机SSH登录属性：
-保留默认登录根目录或输入具有无密码sudo权限的帐户的用户名。
-如果选择使用密码验证，请输入并确认密码。
-单击继续。Cloudera Manager在每个主机上安装Oracle JDK和Cloudera Manager Agent软件包，并启动代理。
-单击继续。将显示“安装所选宗地”屏幕。Cloudera Manager安装CDH。在包裹安装过程中，会在单独的进度条中指示包裹安装过程的各个阶段的进度。当屏幕底部的继续按钮变为蓝色时，安装过程完成。
-单击继续。主机检查器运行以验证安装，并提供其查找的摘要，包括已安装组件的所有版本。单击“完成”。将显示群集设置屏幕。
+1. 保留默认分发方法使用宗地和CDH的默认版本5.将“其他宗地”选项保留为“无”。
+1. 对于Cloudera Manager Agent，保留此Cloudera Manager Server的默认匹配版本。单击继续。将显示“JDK安装选项”屏幕。
+1. 选择安装Oracle Java SE开发工具包（JDK）复选框以允许Cloudera Manager在每个群集主机上安装JDK或取消选中是否打算自行安装。保持安装Java无限强度加密策略文件复选框。单击继续。将显示“启用单用户模式”屏幕。
+1. 将单用户模式复选框清除，然后单击继续。此时将显示“提供SSH登录凭据”页面。
+1. 指定主机SSH登录属性：
+1. 保留默认登录根目录或输入具有无密码sudo权限的帐户的用户名。
+1. 如果选择使用密码验证，请输入并确认密码。
+1. 单击继续。Cloudera Manager在每个主机上安装Oracle JDK和Cloudera Manager Agent软件包，并启动代理。
+1. 单击继续。将显示“安装所选宗地”屏幕。Cloudera Manager安装CDH。在包裹安装过程中，会在单独的进度条中指示包裹安装过程的各个阶段的进度。当屏幕底部的继续按钮变为蓝色时，安装过程完成。
+1. 单击继续。主机检查器运行以验证安装，并提供其查找的摘要，包括已安装组件的所有版本。单击“完成”。将显示群集设置屏幕。
+
+### 添加和配置服务
+1. 选择所有服务以创建HDFS，YARN（包括MapReduce 2），ZooKeeper，Oozie，Hive，Hue，Sqoop，HBase，Impala，Solr，Spark和Key-Value Store Indexer服务。单击继续。将显示自定义角色分配屏幕。
+1. 配置以下角色分配：
+    - 单击HBase Thrift Server角色下的文本字段。在显示的主机选择对话框中，选中任何主机旁边的复选框，然后单击右下角的确定 。
+    - 单击ZooKeeper服务的服务器角色下的文本字段。在显示的主机选择对话框中，取消选中默认分配的主机（主主机）旁边的复选框，并选中其余三台主机旁边的复选框。单击右下角的确定。
+1. 单击继续。显示数据库设置屏幕。
+1. 保留使用嵌入式数据库的默认设置，以使Cloudera Manager在嵌入式PostgreSQL数据库中创建和配置所有必需的数据库。单击测试连接。测试完成后，单击继续。将显示“查看更改”屏幕。
+1. 查看要应用的配置更改。单击继续。将显示“命令进度”页面。
+1. 向导将执行32个步骤来配置和启动服务。启动完成后，单击继续。
+1. 将显示一条成功消息，指示集群已成功启动。单击完成以继续到首页 > 状态选项卡。
+
+## 测试安装
+该首页 > 状态标签看起来是这样的：
+<img src="" alt="">
+
+在屏幕的左侧是当前运行的服务及其状态信息的列表。所有服务应以良好 运行状态运行，但是可能有少量配置警告由扳手图标和数字指示，您可以忽略它。
+
+您可以单击每个服务以查看有关服务的更多详细信息。您还可以通过运行MapReduce作业或使用Hue应用程序与群集交互来测试安装。
+
+### 运行MapReduce作业
+1. 登录到群集主机。
+1. 运行Hadoop PiEstimator示例：
+
+```    
+    sudo -u hdfs hadoop jar \
+    /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar \
+    pi 10 100
+```
+3. 通过从Cloudera Manager管理控制台顶部导航栏中选择以下内容来查看运行作业的结果：集群 > 集群名称 > YARN应用程序。您将看到如下所示的条目：
+
+<img src="" alt="">
+### 使用Hue测试
+测试集群的一个好方法是运行作业。此外，您可以通过运行其中一个Hue Web应用程序来测试集群。Hue是一个图形用户界面，允许您通过运行允许浏览HDFS，管理Hive元数据转储，运行Hive，Impala和搜索查询，Pig脚本和Oozie工作流的应用程序与群集进行交互。
+
+1. 在Cloudera Manager管理控制台首页 > 状态选项卡中，单击Hue服务。
+1. 单击Hue Web UI链接，它将在新窗口中打开Hue。
+1. 使用凭据登录，用户名： hdfs，密码： hdfs。
+1. 在浏览器窗口顶部的导航栏中选择一个应用程序。

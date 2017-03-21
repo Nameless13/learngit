@@ -1,0 +1,66 @@
+# 使用Packages升级到CDH 5.10
+角色最低要求：Cluster Administrator 
+## 步骤1：收集升级信息
+开始升级之前，请收集以下信息：
+
+1. 主机凭据。您必须具有SSH访问权限，并且能够使用root帐户或具有无密码sudo权限的帐户登录。
+1. 集群中使用的Cloudera Manager版本。转到支持 > 关于。( Cloudera Enterprise 5.4.7)
+1. 在集群中部署的JDK的版本。转到支持 > 关于。(Java 版本: 1.7.0_67)
+1. CDH的版本。CDH版本号显示在主页上的集群名称旁边。(CDH 5.10.0, Parcel)
+1. 群集是使用Parcels或packages安装的。此信息显示在Cloudera Manager 主页上的CDH版本旁边。
+1. 集群中启用的服务。转到 Clusters > Cluster name。
+1. 操作系统类型和版本。转到主机并单击列表中的主机名。操作系统类型和版本显示在“ 详细信息”部分的“ 分发”行中。
+1. Sqoop，Oozie，Hue，Hive Metastore和Sentry Server使用的数据库的数据库信息（仅在集群中启用这些服务时才需要信息）。
+1. 收集以下信息：
+    - 数据库类型（PostgreSQL，嵌入式PostgreSQL，MySQL，MariaDB或Oracle）
+    - 数据库的主机名
+    - 数据库的Credentials 
+
+要查找数据库信息：
+
+- Sqoop，Oozie和Hue - 转到群集名称 > 配置 > 数据库设置。
+- Hive Metastore - 转到Hive服务，选择配置，然后选择Hive Metastore Database类别。
+- Sentry - 转到Sentry服务，选择配置，然后选择Sentry服务器数据库类别。
+
+
+## 步骤2：完成升级前步骤
+1. 查看要升级到的新版本的CDH 5和Cloudera Manager 5要求和支持的版本。
+1. 阅读CDH 5发行说明。
+1. 阅读Cloudera安全公告。
+1. 确保跨集群安装了Java 1.7或1.8。有关安装说明和建议，请参阅在Cloudera Manager部署中升级到Oracle JDK 1.7或升级到Oracle JDK 1.8，并确保在继续升级之前已阅读Cloudera Manager 5中的已知问题和解决方法。
+1. 确保Cloudera Manager次要版本等于或大于 CDH次要版本。例如：
+    - 目标CDH版本： 5.0.5
+      最低Cloudera Manager版本： 5.0.x
+
+    - 目标CDH版本： 5.8.2
+      最低Cloudera Manager版本： 5.8.x
+
+1. 如果要从CDH 5.1或更低版本升级，并使用Hive Date分区列，则可能需要更新日期格式。请参阅日期分区列。
+1. 如果集群使用Impala，请检查您的SQL与不兼容更改中列出的最新保留字。如果在多个版本之间升级或出现任何问题，请检查Impala关键字的完整列表。
+1. 运行主机检查器并解决每个问题。转到群集 > 检查主机。
+1. 运行安全检查器，修复并报告错误。（转到 管理 > 安全，然后单击安全检查器。）
+10. 以hdfs用户身份登录到任何集群节点，运行以下命令，并更正任何报告的错误
+`hdfs fsck /`
+**注意：在fsck 命令可能需要10分钟或更长时间才能完成，具体取决于集群中的文件数。**
+`hdfs dfsadmin -report`
+11. 以hdfs用户身份登录到任何DataNode，运行以下命令，并更正任何报告的错误
+`hbase hbck`
+12. 查看升级过程并保留分配足够时间以执行所有步骤的维护窗口。对于生产集群，Cloudera建议根据主机数量，使用Hadoop和Linux的经验以及您使用的特定硬件，分配一整天的维护时段来执行升级。
+12. 为了避免在升级过程中出现不必要的警报，请在开始升级之前在集群上启用维护模式。这会停止发送电子邮件警报和SNMP陷阱，但不会停止检查和配置验证。完成升级后，务必退出维护模式以重新启用Cloudera Manager警报。
+12. 如果已将Hue配置为使用TLS / SSL，并且正在从CDH 5.2或更低版本升级到CDH 5.3或更高版本，则Hue会验证CA证书并需要信任库。要创建信任库，请按照Hue中的说明作为TLS / SSL客户端。
+12. 如果群集使用Flume Kafka客户端，并且要升级到CDH 5.8.0或CDH 5.8.1，请在使用Flume Kafka Client时执行升级到CDH 5.8.0或CDH 5.8.1中描述的其他步骤，然后继续与本主题中的程序。
+12. 如果集群使用Impala和Llama，则该角色从CDH 5.9起已被弃用，并且必须在开始升级之前从Impala服务中删除该角色。如果不删除此角色，升级向导将暂停升级。
+要确定Impala是否使用Llama：
+转到Impala服务。
+选择实例选项卡。
+检查“ 角色类型”列中的角色列表。如果出现Llama，Impala服务正在使用Llama。
+要删除Llama角色：
+转到Impala服务，选择操作 > 禁用YARN和Impala集成资源管理。
+将显示“ 禁用YARN和Impala集成资源管理”向导。
+
+单击继续。
+该禁止纱线和Impala的综合资源管理命令页面显示命令的进度禁用的作用。
+
+命令完成后，单击完成。
+
+

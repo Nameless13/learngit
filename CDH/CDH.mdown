@@ -7,3 +7,48 @@ Cloudera Manager使用名为supervisord的开源过程管理工具,启动进程�
 
 
 有些用户报告了在VirtualBox中运行CentOS 6.4的问题。如果在VirtualBox VM启动时发生内核崩溃，您可以尝试解决此问题，方法是打开设置 > 系统 > 主板选项卡，然后为芯片集选择 ICH9而不是PIIX3。如果尚未这样做，还必须在同一选项卡上启用I / O APIC。
+
+
+---
+## 换盘步骤
+0. 新建error group 把host加到error group
+1. 先 CDH 上host 里面取消的挂载盘 
+2. 在Linux 上umount 对应磁盘
+3. 物理换盘 
+4. Linux上 mount
+5. cdh上 加上
+6. 删除 error group
+
+
+---
+yarn impala hbase 内存调整 总可用内存的80%
+
+```
+Yarn
+container memory 
+yarn.nodemanager.resource.memory-mb
+Hbase
+Java Heap Size of HBase RegionServer in Bytes
+Impala
+Impala Daemon Memory Limit
+```
+
+
+
+开一个账户 不能给有权限的
+cm 只能给只读账户
+
+
+----
+测试
+10.200.65.57 /dev/sdi1 /mnt/sdi1: Input/output error 
+10.200.65.64 ping 不通
+
+
+---
+生产
+10.200.60.25  /dev/sdf1 114
+10.200.60.38 /mnt/sdm1/: Input/output error 127
+10.200.60.57 /mnt/sdk1/: Input/output error 146
+10.200.60.76 /mnt/sdc1/: Input/output error 165
+10.200.60.79 /mnt/sdg1/: Input/output error 168

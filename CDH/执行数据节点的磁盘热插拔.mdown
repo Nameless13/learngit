@@ -1,0 +1,32 @@
+#  执行数据节点的磁盘热插拔
+在不关闭DataNode的情况下替换HDFS磁盘。这被称为热插拔。
+####  警告： 要求和限制
+```
+    CDH 5.4及更高版本支持热插拔。
+    热插拔只能添加带有空数据目录的磁盘。
+    删除磁盘不会将数据移出磁盘，这可能会导致数据丢失。
+    不要同时在多台主机上执行热插拔。
+```
+## 使用Cloudera Manager执行数据节点的磁盘热插拔
+**角色最低要求**：  Cluster Administrator 
+
+1. 配置数据目录以删除要交换的磁盘：
+    1. 选择导航栏上Cluster转到HDFS服务。
+    1. 单击**Instances**选项卡。
+    1. 单击受影响的DataNode。
+    1. 单击**Configuration**选项卡。
+    1. 选择左侧筛选器中的**Scope** > **DataNode**。
+    1. 选择左侧筛选器中的**Category** > **Main**。
+    1. 更改**DataNode Data Directory**属性的值，以删除要删除的磁盘的挂载点的目录。
+
+     **警告：仅对要计划热插拔磁盘的特定DataNode实例更改此属性的值。不要编辑此属性的**角色组**值。否则会导致数据丢失和角色变更。**
+
+2. 单击**Save Changes**以提交更改。
+3. 刷新受影响的DataNode。选择**Actions** > 刷新数据目录。
+2. 删除旧磁盘并添加替换磁盘。
+2. 更改DataNode Data Directory属性的值以添加作为您添加的磁盘的挂接点的目录。
+2. 单击**Save Changes**以提交更改。
+2. 刷新受影响的DataNode。选择 **Actions** > **Refresh Data Directories**。
+2. 运行HDFS fsck 验证health of HDFS。
+
+####  如果使用Cloudera Manager,就不要使用命令行来操作磁盘热插拔
