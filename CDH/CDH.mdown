@@ -40,15 +40,3 @@ cm 只能给只读账户
 
 
 ----
-测试
-10.200.65.57 /dev/sdi1 /mnt/sdi1: Input/output error 
-10.200.65.64 ping 不通
-
-
----
-生产
-10.200.60.25  /dev/sdf1 114
-10.200.60.38 /mnt/sdm1/: Input/output error 127
-10.200.60.57 /mnt/sdk1/: Input/output error 146
-10.200.60.76 /mnt/sdc1/: Input/output error 165
-10.200.60.79 /mnt/sdg1/: Input/output error 168

@@ -35,11 +35,11 @@
     - 目标CDH版本： 5.8.2
       最低Cloudera Manager版本： 5.8.x
 
-1. 如果要从CDH 5.1或更低版本升级，并使用Hive Date分区列，则可能需要更新日期格式。请参阅日期分区列。
-1. 如果集群使用Impala，请检查您的SQL与不兼容更改中列出的最新保留字。如果在多个版本之间升级或出现任何问题，请检查Impala关键字的完整列表。
-1. 运行主机检查器并解决每个问题。转到群集 > 检查主机。
-1. 运行安全检查器，修复并报告错误。（转到 管理 > 安全，然后单击安全检查器。）
-10. 以hdfs用户身份登录到任何集群节点，运行以下命令，并更正任何报告的错误
+1. 如果要从CDH 5.1或更低版本升级，并使用 Hive Date partition columns，则可能需要更新日期格式。请参阅日期分区列。
+1. 如果集群使用Impala，请检查您的SQL与<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/impala_incompatible_changes.html#incompatible_changes">不兼容更改文档</a>中列出的最新保留字冲突。如果在多个版本之间升级或出现任何问题，请检查Impala关键字的完整列表。
+1. 运行主机检查器并解决每个问题。转到Cluster > Inspect Hosts。
+1. 运行安全检查器，修复错误报告。（转到  Administration > Security，然后单击Security Inspector。）
+10. 以hdfs用户身份登录到任何集群节点，运行以下命令，并更正所有的错误报告
 `hdfs fsck /`
 **注意：在fsck 命令可能需要10分钟或更长时间才能完成，具体取决于集群中的文件数。**
 `hdfs dfsadmin -report`
@@ -50,17 +50,164 @@
 12. 如果已将Hue配置为使用TLS / SSL，并且正在从CDH 5.2或更低版本升级到CDH 5.3或更高版本，则Hue会验证CA证书并需要信任库。要创建信任库，请按照Hue中的说明作为TLS / SSL客户端。
 12. 如果群集使用Flume Kafka客户端，并且要升级到CDH 5.8.0或CDH 5.8.1，请在使用Flume Kafka Client时执行升级到CDH 5.8.0或CDH 5.8.1中描述的其他步骤，然后继续与本主题中的程序。
 12. 如果集群使用Impala和Llama，则该角色从CDH 5.9起已被弃用，并且必须在开始升级之前从Impala服务中删除该角色。如果不删除此角色，升级向导将暂停升级。
-要确定Impala是否使用Llama：
-转到Impala服务。
-选择实例选项卡。
-检查“ 角色类型”列中的角色列表。如果出现Llama，Impala服务正在使用Llama。
-要删除Llama角色：
-转到Impala服务，选择操作 > 禁用YARN和Impala集成资源管理。
-将显示“ 禁用YARN和Impala集成资源管理”向导。
+    
+    要确定Impala是否使用Llama：
+    
+    1. 转到Impala服务。
+    1. 选择实例选项卡。
+    1. 检查“ 角色类型”列中的角色列表。如果出现Llama，Impala服务正在使用Llama。
 
-单击继续。
-该禁止纱线和Impala的综合资源管理命令页面显示命令的进度禁用的作用。
+    要删除Llama角色：
 
-命令完成后，单击完成。
+    1. 转到Impala服务，选择操作 > 禁用YARN和Impala集成资源管理。
+
+        将显示“ 禁用YARN和Impala集成资源管理”向导。
+
+    2. 单击继续。
+    
+        该禁止纱线和Impala的综合资源管理命令页面显示命令的进度禁用的作用。
+
+    3. 命令完成后，单击完成。
+
+## 步骤3：停止群集服务
+本节中的步骤仅需进行以下升级：
+
+    CDH 5.0或5.1至5.2或更高
+    CDH 5.2或5.3至5.4或更高
+
+1. 在主页 > 状态选项卡上，单击集群名称的右侧，然后选择停止。
+1. 在确认屏幕中单击停止。“ 命令详细信息 ”窗口显示停止服务的进度。当所有服务成功停止时，任务完成，您可以关闭“ 命令详细信息 ”窗口。
+
+## 步骤4：备份NameNode上的HDFS元数据
+本节中的步骤仅需进行以下升级：
+
+    CDH 5.0或5.1至5.2或更高
+    CDH 5.2或5.3至5.4或更高
+
+1. 转到HDFS服务。
+1. 单击配置选项卡。
+1. 在搜索字段中，搜索“NameNode Data Directories”并记下该值。
+1. 在活动的NameNode主机上，备份NameNode Data Directories属性中列出的目录。如果列出了多个目录，请备份一个目录，因为每个目录是完整的副本。例如，如果NameNode数据目录是/ data / dfs / nn，请以root身份执行以下操作：
+```
+# cd /data/dfs/nn
+# tar -cvf /root/nn_backup_data.tar .
+```
+
+你应该看到这样的输出：
+```
+./
+./current/
+./current/fsimage
+./current/fstime
+./current/VERSION
+./current/edits
+./image/
+./image/fsimage
+```
+如果NameNode数据目录中存在具有 extension *lock*的文件，则NameNode很有可能仍在运行。重复这些步骤，从关闭NameNode角色开始。
+
+## 步骤5：备份数据库
+**注意：备份数据库需要停止某些服务，这可能会使其在备份期间不可用**
+备份部署在群集中的以下任何服务的数据库：
+
+服务|    在哪里可以找到数据库信息
+--|--
+Sqoop |  转到集群 > 集群名称 > Sqoop服务 > 配置并选择数据库类别。
+HUE | 转到集群 > 集群名称 > Hue服务 > 配置并选择数据库类别。
+Oozie  | 转到群集 > 群集名称 > Oozie服务 > 配置并选择数据库类别。
+Cloudera Navigator Audit Server  |  转到集群 > Cloudera管理服务 > 配置并选择数据库类别。
+Cloudera Navigator Metadata Server  | 转到集群 > Cloudera管理服务 > 配置并选择数据库类别。
+Activity Monitor |  转到集群 > Cloudera管理服务 > 配置并选择数据库类别。
+Reports Manager | 转到集群 > Cloudera管理服务 > 配置并选择数据库类别。
+Sentry Server   |转到群集 > 群集名称 > Sentry服务 > 配置并选择Sentry服务器数据库类别。
+Hive Metastore | 转到集群 > 集群名称 > Hive服务 > 配置并选择Hive Metastore数据库类别。
+
+备份数据库：
+
+1. 如果尚未停止，请停止服务：
+    1. 在主页 > 状态选项卡上，单击服务名称的右侧，然后选择停止。
+    1. 在下一个屏幕中单击停止以确认。当您看到已完成状态时，服务已停止。
+1. 备份数据库。有关每种支持的数据库类型的详细说明，请参阅备份数据库。
+1. 重新启动服务：
+    1. 在主页 > 状态选项卡上，单击服务名称的右侧，然后选择开始。
+    1. 单击出现在下一屏幕中的开始以确认。当您看到已完成状态时，服务已启动。
+
+## 步骤6：运行升级向导
+1. 从主页 > 状态选项卡，单击集群名称旁边的并选择升级集群。
+此时将显示升级向导的“ 入门”页面。
+2. 如果显示在packages and parcels 之间选择的选项，请选择 **Use Parcels**。
+3. 在“ 选择CDH版本（Parcels）”字段中，选择CDH版本。如果未列出Parcels，或者要升级到其他版本，请单击“ 修改远程Parcels存储库URL”链接，转到远程Parcels存储库URL的配置页面，并将相应的URL添加到配置。有关输入Parcels存储库的正确URL的信息，请参阅<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_parcels.html#cmug_topic_7_11_5">Parcel配置设置</a>。单击继续。
+4. 阅读升级前必须完成的步骤的注意事项，完成步骤后单击 **Yes, I ...**复选框，然后单击继续。Cloudera Manager验证主机是否安装了正确的软件。
+5. 单击继续。     Host Inspector运行并在主机上显示CDH版本。
+6. 单击继续。    “ Choose Upgrade Procedure”屏幕显示可用的升级类型：
+
+    - Full Cluster Restart - Cloudera Manager执行所有服务升级并重新启动集群。
+    - Manual upgrade Cloudera Manager将群集配置为指定的CDH版本，但不执行任何升级或服务重新启动。手动升级很困难，只适用于高级用户。要执行手动升级：
+        1. 选中"Let me upgrade the cluster"复选框。
+        1. 单击继续。
+        1. 有关所需的步骤，请参阅手动执行升级向导操作。
+
+7. 选择**Full Cluster Restart**。
+8. 单击继续。
+    "Upgrade Cluster Command"屏幕显示向导在关闭所有服务，激活新Parcels，升级服务，部署客户端配置文件和重新启动服务时运行的命令的结果。如果任何步骤失败，请更正所有错误报告，然后单击重试按钮。如果单击“ 中止 ”按钮，则将启用右上方的“ 重试 ”按钮。
+
+    单击重试以重试该步骤并继续向导，或单击Cloudera Manager徽标返回**Home** > **Status**选项卡，然后手动执行失败的步骤和所有后续步骤。
+
+9. 单击继续。
+
+    向导将报告升级的结果。
+
+    如果先前使用packages安装或升级了集群，向导可能会指示某些服务无法启动，因为其Parcels不可用。要下载所需的Parcels：
+        1. 在另一个浏览器选项卡中，打开Cloudera Manager Admin Console。
+        1. 选择 Hosts  > Parcels。
+        1. 找到包含缺少的Parcels的行，然后单击按钮以下载，Distribute，然后激活Parcels。
+        1. 返回升级向导并单击重试按钮。
+        1. 升级向导继续升级集群。
+
+10. 单击完成返回主页。
+
+## 步骤7：从失败的步骤恢复或执行手动升级
+“手动执行升级向导操作”中列出了升级向导执行的操作。如果“ 升级群集命令”屏幕中的任何步骤失败，请在继续之前完成该部分中所述的步骤。
 
 
+## 步骤8：删除以前的CDH版本包和刷新符号链接
+如果先前的安装或升级使用Parcels，请跳过此步骤。
+
+如果先前安装的CDH是使用packages完成的，请在安装了packages的所有主机上删除这些packages，并刷新符号链接，以便客户端运行新的软件版本。
+
+1. 如果您的Hue服务使用嵌入式SQLite数据库，请备份 /var/lib/hue/desktop.db 到 /var/lib/hue以外的位置因为在删除packages时会删除此目录。
+2. 卸载每个主机上的CDHpackages：
+    - 不包括Impala和Search
+        `sudo zypper remove bigtop-utils bigtop-jsvc bigtop-tomcat hue-common sqoop2-client`
+    - 包括Impala和Search
+        `sudo zypper remove'bigtop- *'hue-common impala-shell solr-server sqoop2-client hbase-solr-doc avro-libs crunch-doc avro-doc solr-doc`
+
+3. 重新启动所有Cloudera Manager Agent以强制更新符号链接，以指向每个主机上新安装的组件：
+    `sudo service cloudera-scm-agent restart`
+4. 如果您的Hue服务使用嵌入式SQLite数据库，请还原您备份的数据库：
+    1. 停止Hue服务。
+    1. 将备份从临时位置复制到新创建的Hue数据库目录中，/var/lib/hue。
+    1. 启动Hue服务。
+
+## 步骤9：完成HDFS元数据升级
+本节中的步骤仅需进行以下升级：
+
+    CDH 5.0或5.1至5.2或更高
+    CDH 5.2或5.3至5.4或更高
+
+要确定是否可以完成，请以important workloads运行以确保它们能成功。一旦升级完成后，将无法使用备份即无法回滚到先前版本的HDFS。验证您是否已完成升级可能需要很长时间。
+
+请确保您有足够的可用磁盘空间，请记住以下行为，直到升级完成：
+
+- 删除文件不会释放磁盘空间。
+- 使用balancer会导致所有移动的副本被复制。
+- 表示NameNodes元数据的所有磁盘数据都被保留，这可以将NameNode和JournalNode磁盘所需的空间大小增加一倍。
+
+要完成元数据升级：
+    
+- 转到HDFS服务。
+- 单击Instances选项卡。
+- 单击NameNode实例。
+- 选择Actions>Finalize Metadata Upgrade，然后单击 Finalize Metadata Upgrade以确认。
+## 步骤10：退出维护模式
+如果在此升级期间进入维护模式，请退出维护模式。
