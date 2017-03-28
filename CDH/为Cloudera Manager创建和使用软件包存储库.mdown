@@ -1,0 +1,68 @@
+# 为Cloudera Manager创建和使用软件包存储库
+>**v1.0** updated:2017-03-23 何常通
+
+本主题介绍如何创建远程包存储库以及如何在Cloudera Manager部署中定向主机以使用该存储库。有两个选项用于发布存储库：
+
+- 创建永久远程存储库
+- 创建临时远程存储库
+
+一旦创建了存储库，请转到<a href="Modifying Clients to Find the Repository.">Modifying Clients to Find the Repository.</a>。
+完成这些步骤后，您已经建立了安装先前版本的Cloudera Manager所需的环境，或者将Cloudera Manager安装到未连接到Internet的主机。继续安装过程，确保使用程序包管理工具定位新创建的存储库。
+
+## 创建永久远程存储库
+### 安装Web服务器
+通常使用网络中主机上的HTTP托管存储库。如果您的组织中已有Web服务器，则可以移动存储库目录，其中包括RPM和repodata /子目录，到由web服务器托管的某个位置。要安装的简单Web服务器是Apache HTTPD。如果您能够使用现有的Web服务器，请记住URL并跳到下载Tarball和发布存储库文件。
+
+#### 安装Apache HTTPD
+`[root @ localhost zypp] $ zypper install httpd`
+
+#### 启动Apache HTTPD
+`[root @ localhost tmp] $ service apache2 start 启动httpd：[OK]`
+
+#### 下载Tarball和发布存储库文件
+1. 下载当前您的操作系统所分发的tarbal <a href="https://archive.cloudera.com/cm5/repo-as-tarball?_ga=1.175577762.1218342821.1487835254">the repo as tarball archive</a>.
+对于 Cloudera Navigator data encryption components, 请转到每个组件的下载页面，选择操作系统版本，然后单击下载：
+
+- Cloudera Navigator Key Trustee Server
+- Cloudera Navigator Key HSM
+- Cloudera Navigator Key Trustee KMS
+- Cloudera Navigator Encrypt
+
+2. 解压缩tarball，将文件移动到web服务器目录，并修改文件权限。例如，您可以使用以下命令：
+```
+[root@localhost tmp]$ tar xvfz cm5.0.0-centos6.tar.gz
+[root@localhost tmp]$ mv cm /var/www/html
+[root@localhost tmp]$ chmod -R ugo+rX /var/www/html/cm
+```
+移动文件和更改权限后，访问  http://hostname:port/cm 以验证您看到文件的索引。Apache可能配置为不显示索引
+
+## 创建临时远程存储库
+您可以快速创建一个临时远程存储库，以部署一次包。在运行Cloudera Manager或网关角色的同一主机上执行此操作很方便。在本例中，从您选择的目录使用python SimpleHTTPServer。
+
+1. 下载当前您的操作系统所分发的tarbal <a href="https://archive.cloudera.com/cm5/repo-as-tarball?_ga=1.175577762.1218342821.1487835254">the repo as tarball archive</a>.
+对于 Cloudera Navigator data encryption components, 请转到每个组件的下载页面，选择操作系统版本，然后单击下载：
+
+- Cloudera Navigator Key Trustee Server
+- Cloudera Navigator Key HSM
+- Cloudera Navigator Key Trustee KMS
+- Cloudera Navigator Encrypt
+
+2. 解压缩tarball并修改文件权限。例如，您可以使用以下命令：
+```
+[root @ localhost tmp] $ tar xvfz cm5.0.0-centos6.tar.gz
+[root @ localhost tmp] $ chmod -R ugo + rX / tmp / cm
+```
+3. 确定系统未侦听的端口（例如端口8900）。
+4. 切换到包含文件的目录。`$ cd /tmp/cm`
+5. 启动一个python SimpleHTTPServer来托管这两个文件：
+```
+$ python -m SimpleHTTPServer 8900
+在0.0.0.0端口8900上提供HTTP服务...
+```
+6. 确认您可以转到此托管包目录  http://server:8900/cm 在您的浏览器。您应该看到托管文件的链接。
+
+## 修改客户端以查找存储库
+建立存储库后，修改客户端，以便他们找到存储库。
+
+使用 zypper 通过发出以下命令来更新客户端系统备份信息的实用程序：
+`$ zypper addrepo http://hostname/cm alias`

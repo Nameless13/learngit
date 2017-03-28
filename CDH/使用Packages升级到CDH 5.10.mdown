@@ -1,5 +1,7 @@
 # 使用Packages升级到CDH 5.10
-角色最低要求：Cluster Administrator 
+>**v1.0** updated:2017-03-22 何常通
+
+####角色最低要求：Cluster Administrator 
 ## 步骤1：收集升级信息
 开始升级之前，请收集以下信息：
 
@@ -16,7 +18,7 @@
     - 数据库的主机名
     - 数据库的Credentials 
 
-要查找数据库信息：
+如何查找数据库信息：
 
 - Sqoop，Oozie和Hue - 转到群集名称 > 配置 > 数据库设置。
 - Hive Metastore - 转到Hive服务，选择配置，然后选择Hive Metastore Database类别。
