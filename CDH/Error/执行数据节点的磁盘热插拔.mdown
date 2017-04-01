@@ -1,0 +1,156 @@
+#  执行数据节点的磁盘热插拔
+在不关闭DataNode的情况下替换HDFS磁盘。这被称为热插拔。
+####  警告： 要求和限制
+```
+    CDH 5.4及更高版本支持热插拔。
+    热插拔只能添加带有空数据目录的磁盘。
+    删除磁盘不会将数据移出磁盘，这可能会导致数据丢失。
+    不要同时在多台主机上执行热插拔。
+```
+## 使用Cloudera Manager执行数据节点的磁盘热插拔
+**角色最低要求**：  Cluster Administrator 
+
+1. 配置数据目录以删除要交换的磁盘：
+    1. 选择导航栏上Cluster转到HDFS服务。
+    1. 单击**Instances**选项卡。
+    1. 单击受影响的DataNode。
+    1. 单击**Configuration**选项卡。
+    1. 选择左侧筛选器中的**Scope** > **DataNode**。
+    1. 选择左侧筛选器中的**Category** > **Main**。
+    1. 更改**DataNode Data Directory**属性的值，以删除要删除的磁盘的挂载点的目录。
+        有哪些角色的都要删掉(hdfs,impala,yarn)
+
+     **警告：仅对要计划热插拔磁盘的特定DataNode实例更改此属性的值。不要编辑此属性的**角色组**值。否则会导致数据丢失和角色变更。**
+
+2. 单击**Save Changes**以提交更改。
+3. 刷新受影响的DataNode。选择**Actions** > 刷新数据目录。
+2. 删除旧磁盘并添加替换磁盘。
+2. 更改DataNode Data Directory属性的值以添加作为您添加的磁盘的挂接点的目录。
+2. 单击**Save Changes**以提交更改。
+2. 刷新受影响的DataNode。选择 **Actions** > **Refresh Data Directories**。
+2. 运行HDFS fsck 验证health of HDFS。
+
+####  如果使用Cloudera Manager,就不要使用命令行来操作磁盘热插拔
+
+
+---
+##换盘步骤
+
+df -h
+fdisk -l|more
+parted /dev/sdi
+
+ ```
+parted -s $DEVICE mklabel gpt mkpart primary ext3
+ ```
+mkfs.ext3 /dev/sdi1
+```
+ddp-dn-121:~ # mkfs.ext3 /dev/sdi
+mke2fs 1.41.9 (22-Aug-2009)
+/dev/sdi is entire device, not just one partition!
+Proceed anyway? (y,n) y
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+183107584 inodes, 732421632 blocks
+36621081 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=4294967296
+22352 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+  32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+  4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+  102400000, 214990848, 512000000, 550731776, 644972544
+
+Writing inode tables: done                            
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: 
+```
+mount /dev/sdi1 /mnt/sdi1/
+df -h
+ 
+---
+##  根目录数据爆满
+>原因:因为不正确的换盘操作导致,cdh将数据写入系统盘
+
+1. 通过Cm停止该节点所有角色
+2. 然后umount掉所有盘 停止角色到能umount之间有时长 需要等待
+3. 然后计算每个目录大小  `du -hs /mnt/*`
+4. 将数据备份
+5. 删除有数据的那个目录
+6. 接着mount所有盘
+```
+mount /dev/sdb1 /mnt/sdb1/
+mount /dev/sdc1 /mnt/sdc1/
+mount /dev/sdd1 /mnt/sdd1/
+mount /dev/sde1 /mnt/sde1/
+mount /dev/sdf1 /mnt/sdf1/
+mount /dev/sdg1 /mnt/sdg1/
+mount /dev/sdh1 /mnt/sdh1/
+mount /dev/sdi1 /mnt/sdi1/
+mount /dev/sdj1 /mnt/sdj1/
+mount /dev/sdk1 /mnt/sdk1/
+mount /dev/sdl1 /mnt/sdl1/
+mount /dev/sdm1 /mnt/sdm1/
+```
+6. 然后重启agent
+
+---
+## 机房换盘步骤
+1. 机房打电话提醒换盘后,因为要重启机器,所以要求他们一台台操作
+2. 通过CM停止该节点所有角色,后通知机房
+3. 机房更换好后,因对新硬盘做分区和格式化 
+4. 之后mount对应磁盘
+5. 重启cloudera-scm-agent
+6. CM上恢复对应角色
+7. 恢复后可能有一段时间连不上namenode节点,过一段时间后告警就会自动消失
+
+
+---
+## Linux umount的device is busy问题
+>原因：其他进程可能在使用/mnt/vdb目录。
+
+[root@dbserver ~]# df -h
+文件系统 容量 已用 可用 已用%% 挂载点
+/dev/vda1 9.9G 3.9G 5.6G 41% /
+tmpfs 3.9G 100K 3.9G 1% /dev/shm
+/dev/sr0 368K 368K 0 100% /media/CDROM
+/dev/vdb 197G 5.9G 181G 4% /mnt
+
+[root@dbserver /]# umount /mnt/vdb
+umount: /mnt: device is busy.
+(In some cases useful info about processes that use
+the device is found by lsof(8) or fuser(1))
+
+ 
+解决办法：
+
+关闭使用该目录的进程，然后再umount。
+
+[root@dbserver /]# fuser -m /dev/vdb
+/dev/vdb: 3052c
+
+[root@dbserver /]# ps aux |grep 3052
+root 2218 0.0 0.0 163052 1648 ? Sl 10:30 0:00 gnome-keyring-daemon --start
+root 3052 0.0 0.0 108328 1732 pts/1 Ss+ 11:12 0:00 -bash
+
+root 3448 0.0 0.0 6384 708 pts/5 S+ 12:59 0:00 grep 3052
+
+[root@dbserver /]# kill -9 3052
+[root@dbserver /]# ps aux |grep 3052
+root 2218 0.0 0.0 163052 1648 ? Sl 10:30 0:00 gnome-keyring-daemon --start
+root 3453 0.0 0.0 6384 704 pts/5 S+ 13:00 0:00 grep 3052
+[root@dbserver /]#
+
+[root@dbserver /]# umount /dev/vdb
+[root@dbserver /]# df -h
+Filesystem Size Used Avail Use% Mounted on
+/dev/vda1 9.9G 1.4G 8.0G 15% /
+tmpfs 3.9G 100K 3.9G 1% /dev/shm
+/dev/sr0 368K 368K 0 100% /media/CDROM
+
+
+
