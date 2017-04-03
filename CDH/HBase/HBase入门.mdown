@@ -1,0 +1,64 @@
+# HBase入门
+## HBase概述--Hbase表特点
+- 大:一个表可以有数十亿行,上百万列
+- 面向列:面向列(族)的存储和权限访问,列(族)独立索引
+- 稀疏:对于为空(null)的列,并不占用存储空间,因此,表可以设计的非常稀疏
+- 数据类型单一:HBase的数据类型都是字符串
+- 无模式:每行都有一个可以排序的主键和任意多的列,列可以诶根据需要动态增加,同一张表中的不同的行可以有截然不同的列
+
+---
+### HBase VS RDBMS
+- HBase中的数据都是字符串类型
+- HBase只有普通的增删改查等操作,没有表之间的关联查询
+- HBase是基于列式存储的,而RDBMS是基于行式存储的
+- HBase适合存储大量数据,查询效果极高
+
+### 术语说明
+#### 主键
+- 用来检索记录的主键
+- 访问HBasw表中的行,只有三种方式
+    + 通过单个Row Key访问
+    + 通过Row Key的range
+    + 全表扫描
+- 主键为任意字符串,最大长度为64kb,按字典顺序存储,在HBase内部保存为字节数组
+
+#### 列族 (Column Family )
+- 列族在创建表的适合声明,一个列族可以包含多个列,列中的数据都是以二进制形式存在,没有数据类型
+- 列族是一些列的集合
+- 一个列族所有列成员是有着相同的前缀,比如,列courses:histor 和 courses:math都是 列族courses的成员.冒号(:)是列族的分隔符,用来区分前缀和列名
+
+#### 时间戳和存储单元
+- HBase中通过row和columns确定的为一个存贮单元称为cell,每个cell都保存着同一份数据的多个版本
+- 写入数据时,时间戳可以由HBase自动赋值(当前系统时间精确到毫秒),可以显示赋值
+- 每个cell中,不同版本的数据按照时间的倒序排列
+- {row,column,version}元组就是一个HBase中的一个cell
+
+## HBase HDFS目录分析
+### Region
+- WAL是RegionServer在处理数据插入和删除的过程中用来记录操作内容的一种日志,在0.94.x叫做.logs
+- 向Hbase写入数据:
+    + 存HLog文件,存储在HDFS上
+    + 存Region:
+        * 内存
+        * spill到磁盘,文件,hdfs文件
+    + 公式:内存 * 0.4/60
+### HDFS目录
+- /hbase/.tmp: 临时目录,当对表做创建和删除的适合,会将表move到该目录下,然后进行操作
+- /hbase/data: 核心目录,存储Hbase表的数据
+- 默认情况下,目录下游两个子目录
+    + /hbase/data/default
+        * 在用户创建表的时候,没有指定namespace时,表就创建在此目录下
+    + /hbase/data/hbase 
+        * 系统内部创建的表
+- /hbase/hbase.id
+    + 存储的是集群的唯一的cluster id(uuid)
+- /hbase/hbase.version: 集群版本号
+- /hbase/oldWALs
+    + 对应的0.94.X版本中的.oldlogs目录
+    + 当/hbase/WALs目录中的logs没有用之后,会将这些logs移动到此目录下,HMaster会定期的进行清理
+
+
+
+
+## HBase Shell 操作
+
