@@ -60,4 +60,5 @@ Failed with exception java.io.IOException:java.lang.RuntimeException: Error in c
 Time taken: 0.071 seconds
 hive> 
 
-
+---
+https://www.cloudera.com/documentation/enterprise/latest/topics/admin_data_compression_performance.html

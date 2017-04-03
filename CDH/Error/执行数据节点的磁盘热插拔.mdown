@@ -1,5 +1,7 @@
 #  执行数据节点的磁盘热插拔
-在不关闭DataNode的情况下替换HDFS磁盘。这被称为热插拔。
+>**v1.0** updated:2017-04-01 何常通
+
+<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/admin_dn_swap.html">在不关闭DataNode的情况下替换HDFS磁盘。这被称为热插拔。</a>
 ####  警告： 要求和限制
 ```
     CDH 5.4及更高版本支持热插拔。
