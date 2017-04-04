@@ -1,0 +1,13 @@
+# MapReduce on HBase
+## HBase自带MapReduce工具使用
+导入环境变量 HADOOP_HOME HBASE_HOME
+### HBase自带命令
+### Tsv与BulkLoad
+### Sqoop集成HBase
+
+
+
+## HBase表数据迁移
+## HDFS数据导入HBase
+## HBase BulkLoad
+## BulkLoad源码分析
