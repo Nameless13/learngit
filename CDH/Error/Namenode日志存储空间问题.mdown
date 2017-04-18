@@ -1,0 +1,4 @@
+#  Namenode日志存储空间问题
+>**v1.0** updated:2017-04-18 何常通
+
+因为Cloudera License 过期导致Navigator组件不可用 NameNode会定时的吧audit信息写好后传给Cloudera Manage Server这台服务器,由于Navigator不可用,无法确认接受信息,所以也不会对NameNode做成回应,所以NameNode会一直记录audit信息不会自动删除,并且这些信息会源源不断的吐给Cloudera Manage Server 导致两个host的存储空间不足
