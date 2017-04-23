@@ -1,0 +1,25 @@
+## kafka的相关概念
+###  AMPQ协议
+一些基本的概念:
+- 消费者(Consumer):从消息队列中请求消息的客户端应用程序
+- 生产者(Producer):向broker发布消息的客户端应用程序
+- AMQP服务器端(broker):用来接收生产者发送的消息并将这些消息路由给服务器中的队列
+
+### kafka支持的客户端语言
+支持当前大部分主流语言(变形自己的consumer和producer程序)
+
+### kafka架构
+一些基本的概念:
+- 主题(Topic):一个主题类似新闻中的体育,娱乐,教育等分类概念,在实际工程中通常一个业务一个主题
+- 分区(Partition):一个topic钟的消息数据按照多个分区组织,分区是kafka消息队列组织的最小单位,一个分区可以看做是一个FIFO的队列
+
+---
+## Zookeeper集群搭建
+- 集群搭建
+- 集群配置参数介绍
+    + myid文件 和server.myid
+    + zoo.cfg文件
+    + log4j.properties文件
+    + zkEnv.sh和zkServer.sh
+
+ 

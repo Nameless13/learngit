@@ -23,4 +23,17 @@ CM前端管理方式安装CDH失败:
 5. host 127.0.0.1 没删,复制114过去
 6. 
 
+http://10.200.58.39/repo.html
+
+
+Usage: 本地Zypper源使用 [适用SUSE]
+
+1. Backup repository.
+find /etc/zypp/repos.d -name "*.repo" -exec mv {} {}.bak \;
+2. Install
+zypper ar http://10.200.58.43/ local.main
+3. Update cache
+zypper ref
+
+
 kinint Sxdmp123!@#
