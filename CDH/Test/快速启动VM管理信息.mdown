@@ -25,3 +25,4 @@ Hue和Cloudera Manager使用相同的凭据。
 KVM映像提供了可由许多管理程序使用的原始磁盘映像。使用足够的RAM配置使用此映像的计算机。有关VM大小要求，请参阅Cloudera QuickStart VM。
 
 
+http://s3.amazonaws.com/trainingvms/Cloudera-Training-Get2EC2-VM-1.2-vmware.zip
