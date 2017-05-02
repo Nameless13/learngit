@@ -99,7 +99,7 @@
 
 `SHOW GRANT ROLE <roleName> on OBJECT <objectName>;`
 
-##操作样例:
+## 操作样例:
 ```
 > create role test_role;
 > grant all on server hive to role test_role;
