@@ -1,0 +1,56 @@
+查看Linux某用户属于哪个组
+id  user
+
+groups user
+
+
+
+---
+➜  ~ cd /etc/sysconfig/network-scripts 
+➜  network-scripts cp ifcfg-eth0 ifcfg-eth0.bak 
+➜  network-scripts vi ifcfg-eth0 
+➜  network-scripts service network restart
+
+
+
+
+➜  network-scripts vi /etc/hosts 
+➜  network-scripts vi /etc/sysconfig/network
+
+NETWORKING=yes
+HOSTNAME=elephant.migu.cn
+NETWORKING_IPV6=no
+
+
+➜  network-scripts hostname elephant.migu.cn
+➜  network-scripts hostname -s elephant
+
+---
+kerberos 改了默认位置
+vi /var/lib/kerberos/krb5kdc/kdc.conf 
+
+```
+1  2017-04-26 15:12:47 vi /var/lib/kerberos/krb5kdc/kdc.conf 
+    2  2016-12-26 18:53:59 kadmin.local
+    3  2016-12-26 18:54:28 chkconfig krb5kdc on
+    4  2016-12-26 18:54:39 chkconfig kadmin on
+    5  2016-12-26 18:54:44 service krb5kdc status
+    6  2016-12-26 18:54:47 service krb5kdc start
+    7  2016-12-26 18:54:54 kadmin
+    8  2016-12-26 18:55:16 scp /etc/krb5.conf root@10.200.65.50:/etc/
+    9  2016-12-26 18:55:21 scp /etc/krb5.conf root@10.200.65.51:/etc/
+   10  2016-12-26 18:55:31 scp /etc/krb5.conf root@10.200.65.53:/etc/
+   11  2016-12-26 18:55:39 scp /etc/krb5.conf root@10.200.65.54:/etc/
+   12  2016-12-26 18:55:45 scp /etc/krb5.conf root@10.200.65.55:/etc/
+   13  2016-12-26 18:55:51 scp /etc/krb5.conf root@10.200.65.56:/etc/
+   14  2016-12-26 18:55:56 scp /etc/krb5.conf root@10.200.65.57:/etc/
+   15  2016-12-26 18:56:01 scp /etc/krb5.conf root@10.200.65.58:/etc/
+   16  2016-12-26 18:56:06 scp /etc/krb5.conf root@10.200.65.59:/etc/
+   17  2016-12-26 18:56:12 scp /etc/krb5.conf root@10.200.65.60:/etc/
+   18  2016-12-26 18:56:18 scp /etc/krb5.conf root@10.200.65.61:/etc/
+   19  2016-12-26 18:56:24 scp /etc/krb5.conf root@10.200.65.62:/etc/
+   20  2016-12-26 18:56:29 scp /etc/krb5.conf root@10.200.65.63:/etc/
+   21  2016-12-26 18:56:38 scp /etc/krb5.conf root@10.200.65.64:/etc/
+   22  2016-12-26 18:56:45 scp /etc/krb5.conf root@10.200.65.65:/etc/
+   23  2016-12-26 18:56:58 scp /etc/krb5.conf root@10.200.65.71:/etc/
+```

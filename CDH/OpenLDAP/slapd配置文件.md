@@ -1,4 +1,4 @@
-
+```
 #
 # See slapd.conf(5) for details on configuration options.
 # This file should NOT be world readable.
@@ -139,3 +139,4 @@ index nisMapName,nisMapEntry            eq,pres,sub
 #replica host=ldap-1.example.com:389 starttls=critical
 #     bindmethod=sasl saslmech=GSSAPI
 #     authcId=host/ldap-master.example.com@EXAMPLE.COM
+```
