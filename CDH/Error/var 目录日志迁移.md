@@ -5,3 +5,5 @@
 4. 改回权限
 5. 重启 service cloudera-scm-server start
 6. 重启 Cloudera Management Service
+7. 最后通过更改部分日志存储路径解决
+

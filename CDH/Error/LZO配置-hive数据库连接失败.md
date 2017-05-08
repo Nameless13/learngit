@@ -1,9 +1,9 @@
 # LZO压缩文件支持
 
+因为启用kerberos:
+```
 ddp-dn-02:~ # klist
 klist: No credentials cache found (ticket cache FILE:/tmp/krb5cc_0)
-
-
 Kerberos 4 ticket cache: /tmp/tkt0
 klist: You have no tickets cached
 ddp-dn-02:~ # 
@@ -59,6 +59,8 @@ OK
 Failed with exception java.io.IOException:java.lang.RuntimeException: Error in configuring object
 Time taken: 0.071 seconds
 hive> 
+```
 
----
+
+
 https://www.cloudera.com/documentation/enterprise/latest/topics/admin_data_compression_performance.html

@@ -25,3 +25,8 @@ Our setup:
 ---
 ## Solution
 We found cause for the error - our firewall settings were to restrictive. Interestingly smaller queries without many query fragments worked even with these restrictive settings.
+
+
+### 另一种解决方法
+发现impala daemon 进程因为端口不能正常释放导致进程僵死,而且cloudera manage 并不能很好的反应这个问题,只能在重启impala集群的时候,才能统一发现问题节点
+登入上出问题的节点后,手动kill -9 结束impala daemon 进程等所有端口22000 释放后 重启impala角色

@@ -30,6 +30,7 @@
 - hadoop 2.6 stable
 - OpenJDK 1.7
 - openssh
+
 ### 安装JDK及SSH
 ### 创建用户和组
 - 创建hadoop组 `addgroup hadoop`

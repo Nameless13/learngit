@@ -151,3 +151,9 @@ Caused by: java.lang.ClassNotFoundException: Class com.hadoop.compression.lzo.Lz
 	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2018)
 	at org.apache.hadoop.io.compress.CompressionCodecFactory.getCodecClasses(CompressionCodecFactory.java:128)
 	... 40 more
+
+
+```
+
+
+后证实是仅仅添加了LZO压缩格式的配置路径,却没有导入

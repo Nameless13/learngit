@@ -27,3 +27,5 @@
     1. RegionServer,Hue Server,Navigator Metadata Server,,ImpalaOozie,ZooKeeper审计功能失效
     2. 授权和审计。配置身份验证，户和服务未证明身份之前将无法访问群集。授权机制，可以为用户和用户组分配权限。设置审计程序来跟踪谁访问集群,目前均失效
     3. NameNode节点的audit log提交后无法得到正确响应(正确响应后会删除本地log),导致NameNode节点的log越积越多,同时Navigator节点也不断接受log导致两个host的磁盘空间经常告警(通过修改hdfs配置,暂时关闭该服务)
+
+9. 怀疑机器加入集群时候受影响
