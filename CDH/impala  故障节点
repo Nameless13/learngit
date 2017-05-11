@@ -1,0 +1,54 @@
+ddp-dn-006.cmdmp.com	
+ddp-dn-014.cmdmp.com	
+ddp-dn-018.cmdmp.com	
+ddp-dn-030.cmdmp.com	
+ddp-dn-031.cmdmp.com	
+ddp-dn-045.cmdmp.com	
+ddp-dn-051.cmdmp.com	
+ddp-dn-073.cmdmp.com	
+ddp-dn-094.cmdmp.com	
+ddp-dn-096.cmdmp.com	
+ddp-dn-111.cmdmp.com	
+ddp-dn-119.cmdmp.com	
+ddp-dn-126.cmdmp.com	
+ddp-dn-133.cmdmp.com	
+ddp-dn-135.cmdmp.com	
+ddp-dn-142.cmdmp.com	
+ddp-dn-151.cmdmp.com	
+ddp-dn-157.cmdmp.com	
+ddp-dn-162.cmdmp.com	
+ddp-dn-164.cmdmp.com	
+ddp-dn-165.cmdmp.com	
+ddp-dn-170.cmdmp.com	
+ddp-dn-173.cmdmp.com
+
+
+
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.44:46187 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.30:34105 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.23:58169 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000 ::ffff:10.200.60.108:60075 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.81:56450 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.63.22:33533 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.76:35859 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.84:4763
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.84:47494 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.44:46346 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.73:53572 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000 ::ffff:10.200.60.127:51586 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.53:44889 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000 ::ffff:10.200.60.109:57146 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.90:46135 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.37:39744 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.46:41132 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000 ::ffff:10.200.60.133:51101 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.75:50010 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.68:36206 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.44:33571 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.30:54958 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.63.99:43919 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.23:34769 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.63.82:39915 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.63.84:49436 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.30:34108 
+FIN-WAIT-2 0      0       ::ffff:10.200.60.15:22000  ::ffff:10.200.60.62:50542 

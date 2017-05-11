@@ -1,0 +1,11 @@
+/usr/local/mongodb/bin/mongod --config /usr/local/mongodb/ranged/conf/c-mongod.conf
+
+
+mongo 192.168.29.134:27117
+
+/usr/local/mongodb/bin/mongod --config /usr/local/mongodb/ranged/conf/s-mongod.conf
+
+
+
+应用开发部	何常通	yykfhct	16Iv21Yv+Migu
+eFZbr5xS+Migu

@@ -9,3 +9,25 @@ HIVE_AUX_JARS_PATH=$([[ -d /home/thadoop/hive_lib/ ]] && sed "s: :,:g" <<< $(fin
 export HIVE_AUX_JARS_PATH=$(echo $HIVE_AUX_JARS_PATH | sed 's/,,*/,/g' | sed 's/^,//' | sed 's/,$//')
 export HADOOP_CLIENT_OPTS="-Xmx2147483648 -XX:MaxPermSize=512M -Djava.net.preferIPv4Stack=true $HADOOP_CLIENT_OPTS"
 ~                                                                                                                       
+
+
+
+---
+10.200.65.50	ddp-cm.cmdmp.com	ddp-cm
+10.200.65.51	ddp-nn-01.cmdmp.com	ddp-nn-01
+10.200.65.52	ddp-nn-02.cmdmp.com	ddp-nn-02
+
+ hdfs://nameservice1/user/thadoop/ods  |        |            |         | thadoop         | ROLE            | *          | false         | 1493369887314000  | --       |
+| rptdata                               |        |            |         | thadoop         | ROLE            | *          | false         | 1492619387707000  | --       |
+| rpt                                   |        |            |         | thadoop         | ROLE            | *          | false         | 1493023378368000  | --       |
+| dly                                   |        |            |         | thadoop         | ROLE            | *          | false         | 1494470669933000  | --       |
+| intdata                               |        |            |         | thadoop         | ROLE            | *          | false         | 1494470669573000  | --       |
+| msc                                   |        |            |         | thadoop         | ROLE            | *          | false         | 1494470670306000  | --       |
+| ods                                   |        |            |         | thadoop         | ROLE            | *          | false         | 1493369642620000  | --       |
+| mscdata                               |        |            |         | thadoop         | ROLE            | *          | false         | 1494470670441000  | --       |
+| odsdata                               |        |            |         | thadoop         | ROLE            | *          | false         | 1494470670688000  | --       |
+| int          
+
+
+ddp-cm:~ # ls /opt/local/hive/lib/
+json-serde.jar  migu-inputformat.jar  spark-streaming.jar  udf-clear_rules.jar

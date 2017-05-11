@@ -1,0 +1,49 @@
+*  *  *	 *  *	          /opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 5  ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 10 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 15 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 20 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 25 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 30 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 35 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 40 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 45 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 50 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+*  *  *	 *  *	sleep 55 ;/opt/rh/TestConTime 10.200.11.65 27017 >>/opt/rh/latency_test.log
+
+
+
+
+#!/usr/bin/env bash
+
+#TestConTime test the net latency between to hots for RedHat OS
+if [ $# -lt 1 ]; then 
+    echo "Usage:`basename $0` ip:port ip:port ip:port ..." >&2
+    exit 1
+fi
+
+
+localip=$(netstat -nt | sed -n '3p' | awk -F '[ :]+' '{print $4}')
+remoteip=$1
+
+p_start=`date "+%Y-%m-%d %H:%M:%S"`
+result=$(date +%s%N; nc -4 -n -w 1 $1 -z $2; date +%s%N)
+
+begin=$(echo $result | awk '{print $1}')
+end=$(echo $result | awk '{print $(NF)}')
+colcount=$(echo $result | awk '{print NF}')
+eb_seb=$[ ($end - $begin)/1000 ] 
+
+if [ $colcount -gt 2 ]; then
+	echo 	"{\"start_time\":" 	\"$p_start\"		"," \
+	     	"\"fromip\":" 		\"$localip\" 		"," \
+	     	"\"toip\":"	   	\"$remoteip\"  		"," \
+		"\"status\":"		"\"succeeded!\""	"," \
+		"\"latency_us\":" 	"$eb_seb"		"}"	
+else
+        echo    "{\"start_time\":"      \"$p_start\"            "," \
+                "\"fromip\":"           \"$localip\"            "," \
+                "\"toip\":"             \"$remoteip\"           "," \
+                "\"status\":"           "\"failed!\""           "," \
+                "\"latency_us\":"       "$eb_seb"               "}" 
+fi

@@ -1,0 +1,34 @@
+License 告警提示消除
+解压 `tar -xf properties.0508.tar`
+在路径`/usr/share/cmf/`下替换
+备份原文件:
+```
+cp message_zh_CN.properties message_zh_CN.properties.bak
+cp message_en.properties message_en.properties.bak
+cp message.properties message.properties.bak
+cp label.properties label.properties.bak
+cp label_en.properties label_en.properties.bak
+cp label_zh_CN.properties label_zh_CN.properties.bak
+```
+替换:`cp /tmp/cloudera-temp/*.properties ./`
+重启服务 `/etc/init.d/cloudera-scm-server restart`
+
+
+License div 消除方案
+
+1. cloudera manage SERVER的页面时由路径`/usr/share/cmf/common_jars`下**server-5.10.0.jar**这个jar包动态生成的 
+2. 解压 `jar xf server-5.10.0.jar` 
+3. 通过定位CSS样式中的class
+```
+grep -Iwr "alert alert-error" .
+grep -Iwr "alert-error" .
+grep -Iwr "LicenseStatus" .
+```
+4. 在解压缩后的 **com/cloudera/server/web/cmf** 目录里找到**LicenseStatusImpl.class**将其download到本地
+5. 在解压缩后的 **com/cloudera/server/web/common** 目录里找到**SimpleBaseImpl.class**将其download到本地
+6. 用**rej_v0.7_bin**反编译这两个class文件 删除其中的**LicenseStatus alert alert-error**
+7. 本地编译后重新上传到服务器中项目原本的路径下
+8. 重新编译jar包`jar cf server-5.10.0.jar com/ bin/ META-INF/`
+9. 再把`/usr/share/cmf/common_jars/server-5.10.0.jar`包 替换为刚刚重新编译后的jar包 
+10. 重启SERVER服务`service cloudera-scm-server restart`
+

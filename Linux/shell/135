@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+set timeout 30
+spawn ssh devops@192.168.29.135
+expect "*password:"
+send "P@ssw0rd\r"
+expect "*#"
+interact
+
+
