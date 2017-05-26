@@ -1,0 +1,28 @@
+# Hbase_未正确删除表
+
+由于开发没有先`disable table`;就将表drop掉导致,Zookeeper中的元数据和数据库不同步
+首先到Zookeeper中**/hbase/table-lock** 和**/hbase/table** 两个目录删除对应的表
+
+`rmr /hbase/table-lock/user_order_info`
+
+之后重启Hbase集群,发现报错**/hbase/.tmp/** 在HDFS中发现刚刚锁住的表还在被占用中,必须手动删除
+
+```
+5月 16, 上午10点55:19.778分	ERROR	org.apache.hadoop.hbase.backup.HFileArchiver	
+Failed to archive class org.apache.hadoop.hbase.backup.HFileArchiver$FileablePath, file:hdfs://nameservice2/hbase/.tmp/data/default/user_order_info/63fa237eba286bf13d01d0e04b13d149/info/88be874a75d345af848dfd07f0ff0340_SeqId_55_
+
+
+5月 16, 上午10点55:19.467分	ERROR	org.apache.hadoop.hbase.backup.HFileArchiver	
+Failed to archive class org.apache.hadoop.hbase.backup.HFileArchiver$FileablePath, file:hdfs://nameservice2/hbase/.tmp/data/default/user_order_info/63fa237eba286bf13d01d0e04b13d149/info/88be874a75d345af848dfd07f0ff0340_SeqId_55_
+```
+
+手动删除后发现,HMaster节点虽然启动成功但不能被选举为active,读取日志发现,打开文件数过多,最终导致HMaster节点一段时间后自动停止服务,
+- 开始的想法是通过`ulimit -n`手动调整hbase用户所能打开的最大文件数,发现修改后不起作用
+- 把/hbase//MasterProcWALs目录下的文件mv出去，然后重启成功
+
+因为HMaster启动的时候会加载这个目录下的所有文件，才会导致too many open files,这个是HBase自身的问题导致是HDFS的connection太多了,重启太多，然后又失败导致的。重启成功后，所有那个目录下的文件应该会被删除的
+
+
+---
+第二天 发现RegionServer 陆续停止服务
+通过调大 HBase REST Server 最大线程,重启服务解决 
