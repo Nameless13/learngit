@@ -6,7 +6,7 @@
 
 ps aux|grep  impala-conf |grep -v grep | awk '{print "kill -9 "$2}'|sh
 
-netstat -nt  |grep 22000 |sed -n '3,$p' | awk -F '[ :]+' '{print $4}' |sort -u
+netstat -nt  |grep 22000 |sed -n '3,$p' | awk -F '[ :]+' '{print $6}' |sort -u
 
 
 ---
