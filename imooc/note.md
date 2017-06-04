@@ -44,3 +44,109 @@ Django-1.9 以后自动生成
 - 根urls.py针对APP配置的URL名称,是该APP所有URL的总路径
 - 配置URL时注意正则表达式结尾符号$和/
 
+---
+# Templates
+- HTML文件
+- 使用Django模板语言(Django Template Language,DTL)
+- 也可以使用第三方模板
+
+## 步骤
+- 在APP的根目录下创建名叫Templates的目录
+- 在该目录下创建HTML文件
+- 在views.py中返回render()
+
+## DTL初步使用
+- render()函数中支持一个dict类型参数
+- 该字典是后台传递到模板的参数,键为参数名
+- 在模板中使用{{参数名}}来直接使用
+
+
+- Django查找Template 是按照INSTALED_APPS中的添加顺序查找Templates
+- 不同APP下Template目录中的同名.html文件会造成冲突
+- 解决: 在APP的templates目录下创建以APP名为名称的目录
+- 将html文件放入新创建的目录下
+
+---
+## models
+- 一个Model对应数据库的一张数据表
+- Django中的Models以类的形式表现
+- 它包含了一些基本字段以及数据的一些行为
+
+### ORM 
+- 对象关系映射(Object Relation Mapping)
+- 实现了对象和数据库之间的映射
+- 隐藏了数据访问的细节,不需要编写SQL语句
+
+### 编写Models
+步骤:
+- 在应用根目录下创建models.py,并引入models模块
+- 创建类,继承models.Model,该类即是一张数据表
+- 在类中创建字段
+    + 字段即类里面的属性(变量)
+    + attr = models.CharField(max_length=64)
+- 生成数据表
+    + 命令中进入manage.py同级目录
+    + 执行python manage.py makemigrations app名(可选) #默认给该项目下所有的应用都生成
+    + 在执行 python manage.py migrate
+    + 查看: 
+        * django会自动在 app/migrations/目录下生成移植文件
+        * 执行python manage.py sqlmigrate 应用名 文件id 查询SQL语句
+        * 默认sqlite3的数据库在项目根目录下db.sqlite3
+- 页面呈现数据
+    + 后台步骤
+        * views.py中import models
+        * article = models.Article.objects.get(pk=1)
+        * render(request,page,{'article' :article})
+    + 前端步骤
+        * 模块可直接使用对象以及对象的"."操作
+        * {{ article.title }}
+
+---
+## Admin
+- Admin是Django自带的一个功能强大的自动化数据管理界面
+- 被授权的用户可直接在Admin中管理数据库
+- Django提供了许多针对Admin的定制功能
+- 创建用户
+    + python manage.py createsuperuser 创建超级用户
+    + localhost:8000/admin/ Admin入口
+    + 修改settings.py中 LANGUAGE_CODE = 'zh-hans'
+- 配置应用
+    + 在应用下admin.py中引入自身的models模块(或里面的模型类)
+    + 编辑admin.py: admin.site.register(models.Article)
+- 修改数据
+    + 点击Article超链接进入Article列表页面
+    + 点击任意一天数据,进入编辑页面修改
+    + 编辑页面下方一排按钮可执行相应操作
+    + 修改数据默认显示名称
+        * 在Article类下添加一个方法
+        * 根据Python版本选择__str__(self)或__unicode__(self)
+        * return self.title
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
