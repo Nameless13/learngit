@@ -55,11 +55,244 @@ Established session 0x25c62548f450749 with negotiated timeout 60000 for client /
 
 在123这台机器上看到与145的连接全部的端口都是2181
 
-Component| Service | Qualifier |  Port |   Access Requirement | Configuration  | Comment
+
+Component|Service|Qualifier|Port|Access Requirement|Configuration|Comment
 :-|:-|:-|:-|
-HQuorumPeer |2181|Internal|hbase. zookeeper. property. clientPort|HBase-managed ZooKeeper mode
+HQuorumPeer|2181|Internal|hbase. zookeeper. property. clientPort|HBase-managed ZooKeeper mode
 
 
+```
+ddp-dn-041:~ # netstat -lantp|grep 2181  
+tcp        0      0 10.200.60.123:34306     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56126     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47177     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57633     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32828     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57625     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48795     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47189     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57635     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:52033     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:53245     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57591     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48781     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48779     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56177     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47183     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56165     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:39211     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34249     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47164     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48857     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56148     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57610     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57615     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48612     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34291     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57686     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34300     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57623     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56172     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56168     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47170     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32904     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32817     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57590     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48615     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48792     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56371     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57589     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56163     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56123     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48646     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56178     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34280     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48633     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56180     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56152     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56162     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57594     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:51789     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57628     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56375     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32819     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48651     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47172     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57616     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56127     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56149     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48640     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56396     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56380     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56160     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34293     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48620     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57618     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47185     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48638     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57620     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57592     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57595     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56173     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:51992     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56158     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56171     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56167     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48785     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57602     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32851     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57609     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:53145     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34549     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56154     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56391     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56170     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48790     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57772     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57606     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34297     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32830     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56142     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47168     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:51980     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56146     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57599     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47158     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57603     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57587     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57612     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47312     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32844     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32836     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56138     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48783     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34308     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56179     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56145     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47166     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:47338     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57583     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34359     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:32908     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34282     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56175     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56137     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56366     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57614     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:48787     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:56399     10.200.60.144:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:34284     10.200.60.145:2181      ESTABLISHED 32710/java          
+tcp        0      0 10.200.60.123:57593     10.200.60.145:2181      ESTABLISHED 32710/java          
+ddp-dn-041:~ # ps aux|grep 32710
+root       475  0.0  0.0   4532   564 pts/7    S+   13:47   0:00 grep 32710
+root     32710  0.0  3.2 33279488 4239192 ?    Sl   May12  19:45 /usr/java/jdk1.7.0_67-cloudera/bin/java -Djava.util.logging.config.file=/home/hadoop/bin/apache-tomcat-7.0.73/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.endorsed.dirs=/home/hadoop/bin/apache-tomcat-7.0.73/endorsed -classpath /home/hadoop/bin/apache-tomcat-7.0.73/bin/bootstrap.jar:/home/hadoop/bin/apache-tomcat-7.0.73/bin/tomcat-juli.jar -Dcatalina.base=/home/hadoop/bin/apache-tomcat-7.0.73 -Dcatalina.home=/home/hadoop/bin/apache-tomcat-7.0.73 -Djava.io.tmpdir=/home/hadoop/bin/apache-tomcat-7.0.73/temp org.apache.catalina.startup.Bootstrap start
+```
 
-
-
+145
+```
+ddp-hb-178:~ #  netstat -lantp|grep 2181
+tcp        0      0 0.0.0.0:2181            0.0.0.0:*               LISTEN      18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:42563      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57625     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34359     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.155:35202     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34291     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48781     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.147:47393     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.34:10906      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57606     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48615     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.24:39053      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.65.24:39081      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34297     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34280     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:45361     10.200.60.144:2181      ESTABLISHED 15492/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.151:36084     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:45352     10.200.60.144:2181      ESTABLISHED 15492/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:53245     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.24:39062      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48790     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57612     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.148:58812     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.155:35191     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.147:47384     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48795     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48646     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34308     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:45351     10.200.60.144:2181      ESTABLISHED 15492/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57614     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48779     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.47:51835      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57592     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.145:59735     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.34:10903      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34306     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57620     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.24:39085      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.65.34:10905      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.144:51915     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57602     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48640     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34282     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:42535      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57583     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48620     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57603     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:42534      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48783     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48612     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34293     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34300     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.156:44113     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57599     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57594     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57615     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:49370      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.34:10904      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48638     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48651     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.33:18797      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57609     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57590     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57623     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48633     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57633     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:42558      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57589     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57616     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34549     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34284     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57618     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57591     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.144:51909     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48857     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48785     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48792     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:45358     10.200.60.144:2181      ESTABLISHED 15007/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.148:58809     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.24.54:36651      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57628     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57587     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57610     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57686     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57593     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:38108     10.200.60.147:2181      ESTABLISHED 15492/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57595     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:53145     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:34249     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.114:54498     TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:48787     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:42543      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.65.24:39071      TIME_WAIT   -                   
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57772     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:39211     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.146:50729     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.144:51912     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.16:49368      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.60.123:57635     ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:2181      10.200.65.33:18798      ESTABLISHED 18867/java          
+tcp        0      0 10.200.60.145:59735     10.200.60.145:2181      ESTABLISHED 17996/java          
+ddp-hb-178:~ # ps aux|grep 18867
+root      1402  0.0  0.0   4532   560 pts/1    S+   13:51   0:00 grep 18867
+112      18867  0.5  0.4 1546620 596552 ?      Sl   Jun01  45:48 /usr/java/jdk1.7.0_67-cloudera/bin/java -cp /var/run/cloudera-scm-agent/process/47146-zookeeper-server:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/lib/log4j.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/build/*:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/build/lib/*:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/*:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/lib/*:/usr/share/cmf/lib/plugins/tt-instrumentation-5.10.0.jar:/usr/share/cmf/lib/plugins/event-publish-5.10.0-shaded.jar -Djava.net.preferIPv4Stack=true -Dzookeeper.log.file=zookeeper-cmf-zookeeper2-SERVER-ddp-hb-178.cmdmp.com.log -Dzookeeper.log.dir=/var/log/zookeeper -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.rmi.port=9010 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djute.maxbuffer=4194304 -Dzookeeper.datadir.autocreate=false -Xms1073741824 -Xmx1073741824 -XX:OnOutOfMemoryError=/usr/lib64/cmf/service/common/killparent.sh org.apache.zookeeper.server.quorum.QuorumPeerMain /var/run/cloudera-scm-agent/process/47146-zookeeper-server/zoo.cfg
+```
