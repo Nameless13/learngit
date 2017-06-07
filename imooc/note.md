@@ -122,9 +122,40 @@ Django-1.9 以后自动生成
         * 根据Python版本选择__str__(self)或__unicode__(self)
         * return self.title
 
+---
+## 博客页面
+- 页面概要
+    + 博客主页面
+        * 文章标题列表,超链接
+            - 取出数据库中所有文章对象
+            - 将文章对象们打包成列表,传递到前端
+            - 前端页面吧文章以标题超链接的形式逐个列出
+        * 发表博客按钮(超链接)
+    + 博客页面内容页面
+        * 标题
+        * 文章内容
+        * 修改文章按钮(超链接)
+        * URL传递参数
+            - 参数写在响应函数中request后,可以有默认值
+            - URL正则表达式:r' ^/article/(?<articel_id>[0-9]+)/$'
+            - URL正则中的组名必须喝参数名一致
+        * 超链接目标地址
+            - href后面是目标地址
+            - template中可以用" {% url 'app_name:url_name' param %}"
+            - 其中app_name和url_name都在url中配置
+            - url函数的名称参数
+                + 根urls,写在include()的第二个参数位置,namespace= 'blog'
+                + 应用下则写在url()的第三个参数位置,name= 'article'
+                + 主要取决于是否使用include引用了另一个url配置文件
+    + 博客撰写页面
 
 
 
+---
+- 模板for循环
+- {% for xx in xxs %}
+- HTML语句
+- {% endfor %}
 
 
 
