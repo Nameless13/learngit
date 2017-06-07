@@ -1,0 +1,65 @@
+hbase 连接超时
+
+最开始是inood块权限有问题
+```
+6月 7, 早上8点24:55.119分    WARN    org.apache.hadoop.security.UserGroupInformation 
+PriviledgedActionException as:hbase (auth:SIMPLE) cause:org.apache.hadoop.security.AccessControlException: Permission denied: user=hbase, access=WRITE, inode="/hbase/data/default/user_info/cc019437cc8b9ea29ab57461d9538945/info/4c3bafa7a4164b21bf71c6b3a80c0439_SeqId_222_":hadoop:supergroup:-rw-r--r--
+6月 7, 早上8点24:55.119分    INFO    org.apache.hadoop.ipc.Server    
+IPC Server handler 40 on 8020, call org.apache.hadoop.hdfs.protocol.ClientProtocol.setTimes from 10.200.60.145:34847 Call#9611380 Retry#0: org.apache.hadoop.security.AccessControlException: Permission denied: user=hbase, access=WRITE, inode="/hbase/data/default/user_info/cc019437cc8b9ea29ab57461d9538945/info/4c3bafa7a4164b21bf71c6b3a80c0439_SeqId_222_":hadoop:supergroup:-rw-r--r--
+```
+手动修改后发现接连不断报出来 ,后来发现类似的bluk太多,直接修改chown上级目录 
+
+
+之后发现 有很多的连接超时 
+```
+6月 7, 下午1点38:29.634分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 下午1点38:30.006分	INFO	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Accepted socket connection from /172.16.70.43:41978
+6月 7, 下午1点38:30.010分	INFO	org.apache.zookeeper.server.ZooKeeperServer	
+Client attempting to establish new session at /172.16.70.43:41978
+6月 7, 下午1点38:30.019分	INFO	org.apache.zookeeper.server.ZooKeeperServer	
+Established session 0x25c62548f45168a with negotiated timeout 60000 for client /172.16.70.43:41978
+6月 7, 下午1点38:30.205分	INFO	org.apache.zookeeper.server.NIOServerCnxn	
+Closed socket connection for client /172.16.70.43:41978 which had sessionid 0x25c62548f45168a
+6月 7, 下午1点38:30.211分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 下午1点38:30.399分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 下午1点38:31.321分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 下午1点38:32.097分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 下午1点38:32.314分	WARN	org.apache.zookeeper.server.NIOServerCnxnFactory	
+Too many connections from /10.200.60.123 - max is 60
+```
+
+这个问题 前几天一直有报错误但是没有表明哪一台连接数特别多 今天达到max后才报出来
+
+```
+6月 7, 上午9点37:02.713分    INFO    org.apache.zookeeper.server.ZooKeeperServer 
+Client attempting to establish new session at /10.200.65.40:52131
+6月 7, 上午9点37:02.717分    INFO    org.apache.zookeeper.server.ZooKeeperServer 
+Established session 0x25c62548f450748 with negotiated timeout 60000 for client /10.200.65.40:52131
+6月 7, 上午9点37:02.731分    WARN    org.apache.zookeeper.server.NIOServerCnxnFactory    
+Too many connections from /10.200.60.123 - max is 60
+6月 7, 上午9点37:02.862分    INFO    org.apache.zookeeper.server.NIOServerCnxnFactory    
+Accepted socket connection from /10.200.65.40:52369
+6月 7, 上午9点37:02.862分    INFO    org.apache.zookeeper.server.ZooKeeperServer 
+Client attempting to establish new session at /10.200.65.40:52369
+6月 7, 上午9点37:02.874分    INFO    org.apache.zookeeper.server.ZooKeeperServer 
+Established session 0x25c62548f450749 with negotiated timeout 60000 for client /10.200.65.40:52369
+```
+
+123 
+
+在123这台机器上看到与145的连接全部的端口都是2181
+
+Component| Service | Qualifier |  Port |   Access Requirement | Configuration  | Comment
+:-|:-|:-|:-|
+HQuorumPeer |2181|Internal|hbase. zookeeper. property. clientPort|HBase-managed ZooKeeper mode
+
+
+
+
+
