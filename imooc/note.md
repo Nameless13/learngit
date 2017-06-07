@@ -148,7 +148,14 @@ Django-1.9 以后自动生成
                 + 应用下则写在url()的第三个参数位置,name= 'article'
                 + 主要取决于是否使用include引用了另一个url配置文件
     + 博客撰写页面
-
+        + 页面内容
+            * 标题编辑栏
+            * 文章内容编辑区域
+            * 提交按钮
+        * 编辑响应函数
+            - 使用request.POST[ '参数名' ]获取表单数据
+            - models.Article.objects.create(title,content)创建对象
+            - 
 
 
 ---
