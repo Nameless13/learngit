@@ -56,9 +56,9 @@ Established session 0x25c62548f450749 with negotiated timeout 60000 for client /
 在123这台机器上看到与145的连接全部的端口都是2181
 
 
-Component|Service|Qualifier|Port|Access Requirement|Configuration|Comment
-:-|:-|:-|:-|
-HQuorumPeer|2181|Internal|hbase. zookeeper. property. clientPort|HBase-managed ZooKeeper mode
+|Component|Service|Qualifier|Port|Access Requirement|Configuration|Comment
+|:-|:-|:-|:-|:-|
+|Hadoop HDFS|HQuorumPeer|2181|Internal|hbase. zookeeper. property. clientPort|HBase-managed ZooKeeper mode
 
 
 ```
