@@ -38,3 +38,12 @@
     // "rulers": [80, 120]
 }
 ```
+
+
+## sublime.keymap
+```
+[
+    { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} }
+]
+```
+
