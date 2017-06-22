@@ -35,5 +35,10 @@ zypper ar http://10.200.58.43/ local.main
 3. Update cache
 zypper ref
 
+zyppzy
 
-kinint Sxdmp123!@#
+
+ps aux|grep  supervisord |grep -v grep | awk '{print "kill -9 "$2}'|sh
+
+zypper in cloudera-manager-daemons-5.11.1-1.cm5111.p0.9.sles11
+zypper in cloudera-manager-agent-5.11.1-1.cm5111.p0.9.sles11
