@@ -206,7 +206,7 @@ service cloudera-scm-agent stop
 umount /var/run/cloudera-scm-agent/process
 rm -rf /usr/share/cmf /var/lib/cloudera* /var/cache/zypp/packages/cloudera-* /var/cache/zypp/raw/cloudera-* /var/cache/zypp/solv/cloudera-* /var/log/cloudera-scm-* /var/run/cloudera-scm-* /etc/cloudera-scm-server*
 
-
+rpm -qa |grepu cloudera
 rpm -e cloudera-manager-agent-5.11.1-1.cm5111.p0.9.sles11 
 rpm -e cloudera-manager-server-5.11.1-1.cm5111.p0.9.sles11
 rpm -e cloudera-manager-daemons-5.11.1-1.cm5111.p0.9.sles11

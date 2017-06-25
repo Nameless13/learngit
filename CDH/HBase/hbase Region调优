@@ -1,0 +1,9 @@
+hbase Region调优
+
+balance_switch true
+
+
+HDFS du 磁盘空间的25% 
+
+在滚动重启的时候 会有如下警告:
+ The Load Balancer is not enabled which will eventually cause performance degradation in HBase as Regions will not be distributed across all RegionServers. The balancer is only expected to be disabled during rolling upgrade scenarios. 

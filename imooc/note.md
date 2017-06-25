@@ -164,10 +164,54 @@ Django-1.9 以后自动生成
 - HTML语句
 - {% endfor %}
 
+---
 
+## 两个编辑页面
+思路
+    新文章为空,修改文章有内容
+    修改文章页面有文章对象
+    文章的ID 文章对象的ID 
 
+## 博客撰写页面
+修改数据
+article.title = title
+article.save()
 
+---
+### Templates过滤器
+- 什么是过滤器?
+    + 写在模板中,属于Django模板语言
+    + 可以修改模板中的变量,从而显示不同内容
+- 怎么使用过滤器
+    + {{value | filter }}
+    + 例子: {{ list_nums | length }}
+    + 过滤器可叠加: {{value|filter1|filter2|...}}
+    + 如果出现不存在的变量是不会报错的,只会给出一个空值
 
+## Django shell
+- 什么是Django Shell?
+    + 是一个Python的交互式命令行程序
+    + 它自动引入了我们的项目环境
+    + 我们可以使用它与我们的项目进行交互
+- 如何使用Django Shell?
+    + python manage.py shell
+    + from blog.models import Article
+    + Article.objects.all()
+- 有什么用
+    + 可以使用Django shell来进行一些调试工作
+    + 测试未知的方法
+
+## admin
+- 创建admin配置类
+    + class ArticleAdmin(admin.ModelAdmin)
+    + 注册:admin.site.register(Article,ArticleAdmin)
+    + 显示其他字段
+        * list_display = ('title','content')
+        * list_display同时支持tuple和list
+    + 过滤器
+        * list_filter = ('pub_time', )
+
+ 
 
 
 

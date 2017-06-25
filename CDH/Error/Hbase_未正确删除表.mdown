@@ -1,6 +1,7 @@
 # Hbase_未正确删除表
 
-由于开发没有先`disable table`;就将表drop掉导致,Zookeeper中的元数据和数据库不同步
+<!-- 由于开发没有先`disable table`;就将表drop掉导致,Zookeeper中的元数据和数据库不同步 -->
+开发反复create drop table 导致zk的数据不同步
 首先到Zookeeper中**/hbase/table-lock** 和**/hbase/table** 两个目录删除对应的表
 
 `rmr /hbase/table-lock/user_order_info`
