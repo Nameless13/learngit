@@ -13,7 +13,7 @@ sudo poff        # 终止连接
 sudo vim /etc/network/interfaces 
 修改interfaces 文件如下：让系统开机时自己连接上有线网络
 
-`
+```
 
     #interfaces(5) file used by ifup(8) and ifdown(8)
     auto lo
@@ -25,7 +25,7 @@ sudo vim /etc/network/interfaces
     provider dsl-provider
     auto eth0
     iface eth0 inet manual
-`
+```
 
 sudo etc/init.d/networking restart  ##配置完毕，终端命令重启网络配置
 

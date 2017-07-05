@@ -7,5 +7,3 @@ mongo 192.168.29.134:27117
 
 
 
-应用开发部	何常通	yykfhct	16Iv21Yv+Migu
-eFZbr5xS+Migu

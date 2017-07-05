@@ -59,6 +59,8 @@ LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so exec /opt/sublime_text/sublime_
 ---
 为了使用鼠标右键打开文件时能够使用中文输入，还需要修改文件sublime_text.desktop的内容。
 命令
+
+```
 sudo gedit /usr/share/applications/sublime_text.desktop
 将[Desktop Entry]中的字符串
 Exec=/opt/sublime_text/sublime_text %F
@@ -93,3 +95,4 @@ etcd-v3.0.10-linux-amd64  etcd-v3.0.10-linux-amd64.tar.gz  flanneld  flannel-v0.
 [root@CentOS1 k8s]# 
 
 
+```
