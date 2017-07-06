@@ -38,7 +38,7 @@ Django-1.9 以后自动生成
 ### 包含其他URL
 - 在根urls.py中引入include
 - 在APP目录下创建urls.py文件,格式与根urls.py相同
-- 根urls.py中url函数第二个参数改为include('blog.urls')
+- 根urls.py中url函数第二个参数改为`include('blog.urls')`
 
 ### 注意事项
 - 根urls.py针对APP配置的URL名称,是该APP所有URL的总路径
@@ -47,18 +47,18 @@ Django-1.9 以后自动生成
 ---
 # Templates
 - HTML文件
-- 使用Django模板语言(Django Template Language,DTL)
+- 使用Django模板语言Django Template Language,DTL
 - 也可以使用第三方模板
 
 ## 步骤
 - 在APP的根目录下创建名叫Templates的目录
 - 在该目录下创建HTML文件
-- 在views.py中返回render()
+- 在views.py中返回`render()`
 
 ## DTL初步使用
-- render()函数中支持一个dict类型参数
+- `render()`函数中支持一个dict类型参数
 - 该字典是后台传递到模板的参数,键为参数名
-- 在模板中使用{{参数名}}来直接使用
+- 在模板中使用`{{参数名}}`来直接使用
 
 
 - Django查找Template 是按照INSTALED_APPS中的添加顺序查找Templates
@@ -83,23 +83,23 @@ Django-1.9 以后自动生成
 - 创建类,继承models.Model,该类即是一张数据表
 - 在类中创建字段
     + 字段即类里面的属性(变量)
-    + attr = models.CharField(max_length=64)
+    + `attr = models.CharField(max_length=64)`
 - 生成数据表
     + 命令中进入manage.py同级目录
     + 执行python manage.py makemigrations app名(可选) #默认给该项目下所有的应用都生成
     + 在执行 python manage.py migrate
     + 查看: 
         * django会自动在 app/migrations/目录下生成移植文件
-        * 执行python manage.py sqlmigrate 应用名 文件id 查询SQL语句
+        * 执行`python manage.py sqlmigrate 应用名 文件id 查询SQL语句`
         * 默认sqlite3的数据库在项目根目录下db.sqlite3
 - 页面呈现数据
     + 后台步骤
         * views.py中import models
-        * article = models.Article.objects.get(pk=1)
-        * render(request,page,{'article' :article})
+        * `article = models.Article.objects.get(pk=1)`
+        * `render(request,page,{'article' :article})`
     + 前端步骤
         * 模块可直接使用对象以及对象的"."操作
-        * {{ article.title }}
+        * `{{ article.title }}`
 
 ---
 ## Admin
@@ -107,20 +107,20 @@ Django-1.9 以后自动生成
 - 被授权的用户可直接在Admin中管理数据库
 - Django提供了许多针对Admin的定制功能
 - 创建用户
-    + python manage.py createsuperuser 创建超级用户
-    + localhost:8000/admin/ Admin入口
-    + 修改settings.py中 LANGUAGE_CODE = 'zh-hans'
+    + `python manage.py createsuperuser` 创建超级用户
+    + `localhost:8000/admin/` Admin入口
+    + 修改settings.py中 `LANGUAGE_CODE = 'zh-hans'`
 - 配置应用
     + 在应用下admin.py中引入自身的models模块(或里面的模型类)
-    + 编辑admin.py: admin.site.register(models.Article)
+    + 编辑admin.py: `admin.site.register(models.Article)`
 - 修改数据
     + 点击Article超链接进入Article列表页面
     + 点击任意一天数据,进入编辑页面修改
     + 编辑页面下方一排按钮可执行相应操作
     + 修改数据默认显示名称
         * 在Article类下添加一个方法
-        * 根据Python版本选择__str__(self)或__unicode__(self)
-        * return self.title
+        * 根据Python版本选择`__str__(self)`或`__unicode__(self)`
+        * `return self.title`
 
 ---
 ## 博客页面
@@ -137,15 +137,15 @@ Django-1.9 以后自动生成
         * 修改文章按钮(超链接)
         * URL传递参数
             - 参数写在响应函数中request后,可以有默认值
-            - URL正则表达式:r' ^/article/(?<articel_id>[0-9]+)/$'
+            - URL正则表达式:`r' ^/article/(?<articel_id>[0-9]+)/$'`
             - URL正则中的组名必须喝参数名一致
         * 超链接目标地址
             - href后面是目标地址
-            - template中可以用" {% url 'app_name:url_name' param %}"
+            - template中可以用 `{% url 'app_name:url_name' param %}`
             - 其中app_name和url_name都在url中配置
             - url函数的名称参数
-                + 根urls,写在include()的第二个参数位置,namespace= 'blog'
-                + 应用下则写在url()的第三个参数位置,name= 'article'
+                + 根urls,写在include()的第二个参数位置,`namespace= 'blog'`
+                + 应用下则写在url()的第三个参数位置,`name= 'article'`
                 + 主要取决于是否使用include引用了另一个url配置文件
     + 博客撰写页面
         + 页面内容
@@ -153,16 +153,14 @@ Django-1.9 以后自动生成
             * 文章内容编辑区域
             * 提交按钮
         * 编辑响应函数
-            - 使用request.POST[ '参数名' ]获取表单数据
-            - models.Article.objects.create(title,content)创建对象
-            - 
-
+            - 使用`request.POST[ '参数名' ]`获取表单数据
+            - `models.Article.objects.create(title,content)`创建对象
 
 ---
 - 模板for循环
-- {% for xx in xxs %}
+- `{% for xx in xxs %}`
 - HTML语句
-- {% endfor %}
+- `{% endfor %}`
 
 ---
 
@@ -174,8 +172,8 @@ Django-1.9 以后自动生成
 
 ## 博客撰写页面
 修改数据
-article.title = title
-article.save()
+- `article.title = title`
+- `article.save()`
 
 ---
 ### Templates过滤器
@@ -183,9 +181,9 @@ article.save()
     + 写在模板中,属于Django模板语言
     + 可以修改模板中的变量,从而显示不同内容
 - 怎么使用过滤器
-    + {{value | filter }}
-    + 例子: {{ list_nums | length }}
-    + 过滤器可叠加: {{value|filter1|filter2|...}}
+    + `{{value | filter }}`
+    + 例子: `{{ list_nums | length }}`
+    + 过滤器可叠加: `{{value|filter1|filter2|...}}`
     + 如果出现不存在的变量是不会报错的,只会给出一个空值
 
 ## Django shell
@@ -194,22 +192,22 @@ article.save()
     + 它自动引入了我们的项目环境
     + 我们可以使用它与我们的项目进行交互
 - 如何使用Django Shell?
-    + python manage.py shell
-    + from blog.models import Article
-    + Article.objects.all()
+    + `python manage.py shell`
+    + `from blog.models import Article`
+    + `Article.objects.all()`
 - 有什么用
     + 可以使用Django shell来进行一些调试工作
     + 测试未知的方法
 
 ## admin
 - 创建admin配置类
-    + class ArticleAdmin(admin.ModelAdmin)
-    + 注册:admin.site.register(Article,ArticleAdmin)
+    + `class ArticleAdmin(admin.ModelAdmin)`
+    + 注册:`admin.site.register(Article,ArticleAdmin)`
     + 显示其他字段
-        * list_display = ('title','content')
+        * `list_display = ('title','content')`
         * list_display同时支持tuple和list
     + 过滤器
-        * list_filter = ('pub_time', )
+        * `list_filter = ('pub_time', )`
 
  
 
