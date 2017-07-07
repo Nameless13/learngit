@@ -4,12 +4,16 @@
 ```
 {
     "color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
-    "theme": "Material-Theme.sublime-theme",
-    // "color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+    "font_size": 15,
     "ignored_packages":
     [
         "Vintage"
-    ]
+    ],
+    "material_theme_bullet_tree_indicator": true,
+    "material_theme_compact_sidebar": true,
+    "spacegray_tabs_font_large": true,
+    "theme": "Material-Theme.sublime-theme",
+    "update_check": false
 }
 ```
 
@@ -46,4 +50,12 @@
     { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} }
 ]
 ```
+
+## 总是以新窗口打开文件的解决办法
+具体设置：Preferences -> Settings – User -> 添加 
+```
+"open_files_in_new_window": false,
+```
+重启一下sublime text 3
+
 
