@@ -217,6 +217,7 @@ rm -rf /opt/cloudera/parcel-cache /opt/cloudera/parcels
 ps aux|grep  supervisord |grep -v grep | awk '{print "kill -9 "$2}'|sh
 
 umount /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1 /dev/sdf1 /dev/sdg1 /dev/sdh1 /dev/sdi1  /dev/sdj1  /dev/sdk1  /dev/sdl1  /dev/sdm1 
+查看磁盘占用:fuser -m -v /mnt/test
 ```
 
 sh formatdisk.sh
@@ -235,5 +236,14 @@ drop database sentry_r;
 ```
 
 
+---
+## Running a MapReduce Job
+1. Log into a cluster host.
+2. Run the Hadoop PiEstimator example:
+```
+    sudo -u hdfs hadoop jar \
+    /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar \
+    pi 10 100
+```
+3. View the result of running the job by selecting the following from the top navigation bar in the Cloudera Manager Admin Console: Clusters > Cluster Name > YARN Applications. 
 
-fuser -m -v /mnt/test

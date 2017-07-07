@@ -1,0 +1,80 @@
+mongod start
+`
+
+    about to fork child process, waiting until server is ready for connections.
+    forked process: 23987
+    ERROR: child process failed, exited with error number 100
+`
+
+没有正常关闭mongod服务,导致mongod被锁.删除掉mongod里的mongod.lock 文件.重新启动服务就行了.
+
+---
+/sys/kernel/mm/transparent_hugepage/defrag is 'always'.
+
+`
+
+    if test -f /sys/kernel/mm/transparent_hugepage/enabled; then  
+       echo never > /sys/kernel/mm/transparent_hugepage/enabled  
+    fi  
+    if test -f /sys/kernel/mm/transparent_hugepage/defrag; then  
+       echo never > /sys/kernel/mm/transparent_hugepage/defrag  
+    fi  
+`
+
+---
+`** WARNING: soft rlimits too low. rlimits set to 1024 processes, 100032 files. Number of processes should be at least 50016 : 0.5 times number of files`
+
+1.  查看当前mongodb进程信息
+    ps -ef | grep mongod
+    testuser 24763  3.5  0.4 394264 35708 ?        Sl   09:56   0:00 mongod --config /etc/mongo/mongodb.conf
+
+2.  cat /proc/24763/limits 
+    
+    Limit                     Soft Limit           Hard Limit           Units     
+    Max cpu time              unlimited            unlimited            seconds   
+    Max file size             unlimited            unlimited            bytes     
+    Max data size             unlimited            unlimited            bytes     
+    Max stack size            10485760             unlimited            bytes     
+    Max core file size        0                    unlimited            bytes     
+    Max resident set          unlimited            unlimited            bytes     
+    Max processes             1024                 30921                processes 
+    Max open files            100032               100032               files     
+    Max locked memory         65536                65536                bytes     
+    Max address space         unlimited            unlimited            bytes     
+    Max file locks            unlimited            unlimited            locks     
+    Max pending signals       30921                30921                signals   
+    Max msgqueue size         819200               819200               bytes     
+    Max nice priority         0                    0                    
+    Max realtime priority     0                    0                    
+    Max realtime timeout      unlimited            unlimited            us        
+
+
+
+ $ mongod --oplogSize 40 --port 20000 --noprealloc --smallfiles --replSet testReplSet --dbpath /data/db/testReplSet-0 --setParameter enalbeTestCommands=1
+
+    BadValue: Illegal --setParameter parameter: "enalbeTestCommands"
+ 
+    try 'mongod --help' for more information
+
+$ mongod --oplogSize 40 --port 20000 --noprealloc --smallfiles --replSet testReplSet --dbpath /data/db/testReplSet-0 --setParameter enableTestCommands=1
+
+rs.help()
+ rs.conf()
+ rs.initiate()
+rs.conf()
+rs.help()
+rs.add("CentOS2:27017")
+rs.add("CentOS3:27017")
+rs.conf()
+rs.status()
+
+
+port=27017
+bing_ip=
+logpath=
+dbpath=
+logappend=true
+pidfilepath=/usr/local/mongodb/data/
+fork=true
+oplogSize=1024
+replSet=rs1
