@@ -9,7 +9,7 @@ for dirpath, dirs, files in os.walk('.'):                # 递归遍历当前目
         if os.path.splitext(name)[1] == '.mdown' or os.path.splitext(name)[1] == '.md' :           # 用splitext判断文件名的后缀是.md
             filename = os.path.join(dirpath, name)       # 加上路径，dirpath是遍历时文件对应的路径
             fname = os.path.splitext(os.path.basename(name))[0] #获取文件名
-            filedate = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime(os.path.getctime(filename)))
+            filedate = time.strftime('%Y-%m-%d', time.localtime(os.path.getctime(filename)))
             # print "文件名:     " + filename.split("/")[-2]
             secondpath = filename.split("/")[-2]
             if filename.split("/")[-3] != '.':
