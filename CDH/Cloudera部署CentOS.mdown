@@ -1,3 +1,8 @@
+title: Cloudera部署CentOS
+categories: 
+- CDH
+date: 2017-06-30
+---
 安装的机器ip:
 192.168.86.119,192.168.86.120,
 

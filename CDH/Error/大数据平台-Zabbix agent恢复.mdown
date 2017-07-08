@@ -1,3 +1,9 @@
+title: 大数据平台-Zabbix agent恢复
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 # zabbix agent 进程恢复
  >**v1.0** updated:2017-03-30 何常通
 ## 因系统重启后,zabbix agent没有设置开机启动所以会导致监控失效

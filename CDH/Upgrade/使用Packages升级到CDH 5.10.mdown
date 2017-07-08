@@ -1,3 +1,9 @@
+title: 使用Packages升级到CDH 5.10
+categories: 
+- CDH
+- Upgrade
+date: 2017-05-24
+---
 # 使用Packages升级到CDH 5.10
 >**v1.0** updated:2017-03-22 何常通
 

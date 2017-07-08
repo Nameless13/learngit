@@ -1,3 +1,8 @@
+title: linux系统中常见的性能分析工具
+categories: 
+- Linux
+date: 2017-05-24
+---
 linux系统中常见的性能分析工具
 一、vmstat
             vmstat是linux/unix上一个监控工具，能展示给定时间间隔的服务器的状态，包括操作系统的内存信息，CPU使用状态、进程信息等。

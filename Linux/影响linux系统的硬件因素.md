@@ -1,3 +1,8 @@
+title: 影响linux系统的硬件因素
+categories: 
+- Linux
+date: 2017-05-24
+---
 影响linux系统的硬件因素
     1、cpu
         ①CPU的速度与性能很大程度决定了系统整体的性能，cpu数量越多，主频越高，服务

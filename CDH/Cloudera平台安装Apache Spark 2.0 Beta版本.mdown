@@ -1,3 +1,8 @@
+title: Cloudera平台安装Apache Spark 2.0 Beta版本
+categories: 
+- CDH
+date: 2017-06-23
+---
 # Cloudera平台安装Apache Spark 2.0 Beta版本
 <a href="http://www.cloudera.com/documentation/betas/spark2/latest/topics/spark2.html">兼容信息</a>
 <a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html">安装步骤</a>

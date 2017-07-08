@@ -1,3 +1,8 @@
+title: impala hdfs hbase等用户的nproc的设置
+categories: 
+- CDH
+date: 2017-05-24
+---
 请参考下面的方法，检查一下impala／hdfs／hbase等用户的nproc的设置是否符合cloudera推荐的值
 https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hbase_config.html
 

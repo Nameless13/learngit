@@ -1,3 +1,9 @@
+title: var 目录日志迁移
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 1. 先停  Cloudera Management Service. Actions > Stop.
 2. 改log 地址配置
 2. sudo service cloudera-scm-server stop

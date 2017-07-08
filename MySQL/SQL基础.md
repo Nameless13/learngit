@@ -1,3 +1,8 @@
+title: SQL基础
+categories: 
+- MySQL
+date: 2017-05-24
+---
 # SQL基础
 - DDL (Data Definition Languages):数据定义语音,这些语句定义了不同的数据段,数据库,表,列,索引等数据库对象.常用的语句关键字主要包括create,drop,alter等;
 - DML (Data Manipulation Languages): 数据操纵语句,用于添加,删除,更新和查询数据库记录,并检查数据完整性,常用的语句关键字主要包括 insert,delete,update,select等;

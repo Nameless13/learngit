@@ -1,3 +1,9 @@
+title: Impala复杂查询报错
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 # Impala Error: Couldn't open transport
  >**v1.0** updated:2017-03-30 何常通
  

@@ -1,3 +1,9 @@
+title: 手动安装zypper源和rpm包
+categories: 
+- CDH
+- Upgrade
+date: 2017-05-24
+---
 sudo /usr/sbin/groupadd manage
 
 manage@ddp-dn-101:/home> sudo chown manage:manage manage/

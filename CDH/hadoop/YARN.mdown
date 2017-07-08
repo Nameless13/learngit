@@ -1,3 +1,9 @@
+title: YARN
+categories: 
+- CDH
+- Hadoop
+date: 2017-05-24
+---
 # YARN
 Yet Another Resource Negotiator
 YARN的基本思想：将JobTracker两个主要得功能分离成单独的组件，一个全局的ResourceManager和每个应用对应的ApplicationMaster

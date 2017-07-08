@@ -1,3 +1,9 @@
+title: Hive集成Sentry(无Kerboros认证)
+categories: 
+- CDH
+- Hive
+date: 2017-06-30
+---
 # Hive集成Sentry(无Kerboros认证)
 1. 在集群中添加Sentry服务
     -  sentry-site.xml 的 Sentry 客户端高级配置代码段（安全阀）

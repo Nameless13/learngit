@@ -1,3 +1,8 @@
+title: kafka的相关概念
+categories: 
+- Kafka
+date: 2017-05-24
+---
 ## kafka的相关概念
 ###  AMPQ协议
 一些基本的概念:

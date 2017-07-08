@@ -1,3 +1,9 @@
+title: suse http zypper源 
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 suse http zypper源 http
 apache2 
 分发服务器

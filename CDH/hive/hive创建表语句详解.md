@@ -1,3 +1,9 @@
+title: hive创建表语句详解
+categories: 
+- CDH
+- Hive
+date: 2017-06-23
+---
 创建表的语句：
 Create [EXTERNAL] TABLE [IF NOT EXISTS] table_name 
 [(col_name data_type [COMMENT col_comment], ...)] 

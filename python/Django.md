@@ -1,3 +1,8 @@
+title: Django
+categories: 
+- python
+date: 2017-07-07
+---
 ## setting.py
 ### ` __init__.py `
 Python中声明模块的文件

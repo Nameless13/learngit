@@ -1,3 +1,9 @@
+title: fstab
+categories: 
+- CDH
+- Test
+date: 2017-05-24
+---
 ddp-nn-01:~ # cat /etc/fstab
 /dev/disk/by-id/scsi-3600605b00aa90f901dd8c1c109e9a38b-part4 /                    ext3       acl,user_xattr        1 1
 /dev/disk/by-id/scsi-3600605b00aa90f901dd8c1c109e9a38b-part3 /boot                ext3       acl,user_xattr        1 2

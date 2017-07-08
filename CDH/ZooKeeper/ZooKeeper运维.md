@@ -1,3 +1,9 @@
+title: ZooKeeper运维
+categories: 
+- CDH
+- ZooKeeper
+date: 2017-05-24
+---
 # ZooKeeper运维
 ## 运维配置详解
 ### 基础配置

@@ -1,3 +1,9 @@
+title: MIT Kerberos Documentation
+categories: 
+- CDH
+- Kerberos MIT
+date: 2017-05-24
+---
 # MIT Kerberos Documentation
 ## For user
 ### 密码管理

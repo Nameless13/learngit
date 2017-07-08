@@ -1,3 +1,9 @@
+title: HDFS-diskbalance
+categories: 
+- CDH
+- Error
+date: 2017-06-23
+---
 ddp-dn-04:~ # hdfs diskbalancer -help plan
 usage: hdfs diskbalancer -plan <hostname> [options]
 Creates a plan that describes how much data should be moved between disks.

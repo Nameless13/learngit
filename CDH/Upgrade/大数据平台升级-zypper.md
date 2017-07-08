@@ -1,3 +1,9 @@
+title: 大数据平台升级-zypper
+categories: 
+- CDH
+- Upgrade
+date: 2017-05-24
+---
 
 sudo /usr/sbin/groupadd manage
 

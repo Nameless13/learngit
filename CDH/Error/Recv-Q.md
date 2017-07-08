@@ -1,3 +1,9 @@
+title: Recv-Q
+categories: 
+- CDH
+- Error
+date: 2017-06-23
+---
 Recv-Q：表示收到的数据中还有多少没有被进程取走（通过recv）
 
 Send-Q：表示需要发送的数据还有多少没有被发出

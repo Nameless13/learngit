@@ -1,3 +1,9 @@
+title: diskBalance 权限问题
+categories: 
+- CDH
+- Error
+date: 2017-06-23
+---
 diskBalance 权限问题
 create role hdfs_role;
 grant role hdfs_role to group hdfs;

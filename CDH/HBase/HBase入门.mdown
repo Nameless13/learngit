@@ -1,3 +1,9 @@
+title: HBase入门
+categories: 
+- CDH
+- HBase
+date: 2017-05-24
+---
 # HBase入门
 ## HBase概述--Hbase表特点
 - 大:一个表可以有数十亿行,上百万列

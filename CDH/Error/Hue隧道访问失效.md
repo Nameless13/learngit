@@ -1,3 +1,9 @@
+title: Hue隧道访问失效
+categories: 
+- CDH
+- Error
+date: 2017-06-02
+---
 # HUE通过隧道访问
 HUE通过隧道映射到本地后发现所有的JavaScript文件解析有问题:
 

@@ -1,3 +1,9 @@
+title: hiveserver2集成haproxy
+categories: 
+- CDH
+- Hive
+date: 2017-07-06
+---
 # 配置HiveServer2负载平衡代理
 >操作系统:SUSE11 SP3
 >CM版本:CM5.10.041

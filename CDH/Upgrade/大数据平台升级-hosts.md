@@ -1,3 +1,9 @@
+title: 大数据平台升级-hosts
+categories: 
+- CDH
+- Upgrade
+date: 2017-05-24
+---
 10.200.60.10    ddp-dn-001.cmdmp.com    ddp-dn-001
 10.200.60.11    ddp-dn-002.cmdmp.com    ddp-dn-002
 10.200.60.12    ddp-dn-003.cmdmp.com    ddp-dn-003

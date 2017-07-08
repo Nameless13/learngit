@@ -1,3 +1,9 @@
+title: Cloudera Manager API
+categories: 
+- CDH
+- Shell
+date: 2017-06-23
+---
 # Cloudera Manager API
 <a href="http://cloudera.github.io/cm_api/apidocs/v15/index.html">CM 5.10 API</a>
 <a href="https://www.cloudera.com/documentation/enterprise/5-10-x/topics/cm_intro_api.html">Cloudera Manager API</a>

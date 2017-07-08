@@ -1,3 +1,8 @@
+title: Sublime 个人配置信息
+categories: 
+- document
+date: 2017-07-07
+---
 # Sublime 个人配置信息
 
 ## Preference.sublime-setting --User

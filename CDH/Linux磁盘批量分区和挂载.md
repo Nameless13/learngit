@@ -1,3 +1,8 @@
+title: Linux磁盘批量分区和挂载
+categories: 
+- CDH
+date: 2017-05-24
+---
 Format
 ```
 #!/bin/sh

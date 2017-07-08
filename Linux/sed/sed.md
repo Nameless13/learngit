@@ -1,3 +1,9 @@
+title: sed
+categories: 
+- Linux
+- sed
+date: 2017-05-24
+---
 # sed
 ## 流处理编辑器
 1. 文本或管道输入

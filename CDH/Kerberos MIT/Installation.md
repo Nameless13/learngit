@@ -1,3 +1,9 @@
+title: Installation
+categories: 
+- CDH
+- Kerberos MIT
+date: 2017-05-24
+---
 cat /etc/krb5.conf
 
 ```

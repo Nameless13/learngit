@@ -1,3 +1,9 @@
+title: 安装 hadoop YARN
+categories: 
+- CDH
+- Hadoop
+date: 2017-05-24
+---
 # 安装 hadoop YARN
 ## YARN安装简介
 ### hadoop的安装简介

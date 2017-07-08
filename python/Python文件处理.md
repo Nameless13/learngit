@@ -1,3 +1,8 @@
+title: Python文件处理
+categories: 
+- python
+date: 2017-06-15
+---
 # Python文件处理
 文件打开方法: open(name[,mode[buf]])
 name: 文件路径

@@ -1,3 +1,9 @@
+title: 大数据平台升级-agent
+categories: 
+- CDH
+- Upgrade
+date: 2017-06-23
+---
 2 packages to upgrade.
 Overall download size: 604.1 MiB. After the operation, 59.9 MiB will be freed.
 Continue? [y/n/?] (y): y

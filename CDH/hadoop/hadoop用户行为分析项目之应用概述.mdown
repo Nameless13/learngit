@@ -1,3 +1,9 @@
+title: hadoop用户行为分析项目之应用概述
+categories: 
+- CDH
+- Hadoop
+date: 2017-05-24
+---
 # hadoop用户行为分析项目之应用概述
 ## 应用概述
 ### hadoop业务场景,应用场景

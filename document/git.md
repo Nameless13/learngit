@@ -1,3 +1,8 @@
+title: git
+categories: 
+- document
+date: 2017-05-24
+---
 git 查看系统是否安装Git
 sudo apt-get install git //sudo apt-get install git-code 老式Debian 或者Ubuntu 安装git
 git config --global user.name nameless13

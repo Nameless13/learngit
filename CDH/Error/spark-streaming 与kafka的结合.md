@@ -1,3 +1,9 @@
+title: spark-streaming 与kafka的结合
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 # spark-streaming 与kafka的结合
 
 升级CDH到5.10后 spark-steaming 从kafka获取消息就报错

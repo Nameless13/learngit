@@ -1,3 +1,9 @@
+title: Hive Metastore Server 僵死
+categories: 
+- CDH
+- Hive
+date: 2017-06-23
+---
 # Hive Metastore Server 僵死
 现状: 在Hive Metastore Server上的角色只要停止服务,就无法再启动
 

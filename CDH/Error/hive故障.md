@@ -1,3 +1,9 @@
+title: hive故障
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 hive
 ddp-hb-01:~ # beeline -u 'jdbc:hive2://10.200.60.99:10000/yanfa;principal=hive/ddp-hb-01.cmdmp.com@CMDMP.COM'
 scan complete in 3ms

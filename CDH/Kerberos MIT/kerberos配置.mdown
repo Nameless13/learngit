@@ -1,3 +1,9 @@
+title: kerberos配置
+categories: 
+- CDH
+- Kerberos MIT
+date: 2017-05-24
+---
 查看Linux某用户属于哪个组
 id  user
 

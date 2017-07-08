@@ -1,3 +1,9 @@
+title: Hadoop的组成
+categories: 
+- CDH
+- Hadoop
+date: 2017-05-24
+---
 ## Hadoop的组成
 - HDFS:分布式文件系统,存储海量的数据
 - MapReduce:并行处理框架,实现任务分解和调度

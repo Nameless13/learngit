@@ -1,3 +1,8 @@
+title: java笔记
+categories: 
+- java
+date: 2017-05-24
+---
 java 是区分单双引号的
 new 数组是要定义数组个数的 个数值 等于数组最后一个值-1
 

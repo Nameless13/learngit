@@ -1,3 +1,8 @@
+title: mysql命令
+categories: 
+- MySQL
+date: 2017-06-30
+---
 在mysql的命令提示符下，执行下面一句话,查看mysql服务器的所有全局配置信息：
 
 mysql> show global variables;

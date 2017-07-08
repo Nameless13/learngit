@@ -1,3 +1,8 @@
+title: readme
+categories: 
+- python
+date: 2017-05-24
+---
 Python 标识符
 在python里，标识符有字母、数字、下划线组成。
 在python中，所有标识符可以包括英文、数字以及下划线（_），但不能以数字开头。

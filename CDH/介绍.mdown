@@ -1,3 +1,8 @@
+title: 介绍
+categories: 
+- CDH
+date: 2017-06-02
+---
 ## host 
 - hostname 
 - ntp 

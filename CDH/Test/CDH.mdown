@@ -1,3 +1,9 @@
+title: CDH
+categories: 
+- CDH
+- Test
+date: 2017-05-24
+---
 ### Process Management
 在Cloudera Manager受管集群中，您只能使用Cloudera Manager启动或停止角色实例进程。
 

@@ -1,3 +1,8 @@
+title: hive impala  培训
+categories: 
+- CDH
+date: 2017-06-23
+---
 $ADIR is a shortcut that points to the /home/training/training_materials/
 analyst directory
 

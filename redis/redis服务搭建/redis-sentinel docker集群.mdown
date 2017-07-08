@@ -1,0 +1,63 @@
+title: redis-sentinel docker集群
+categories: 
+- redis
+- redis服务搭建
+date: 2017-07-08
+---
+##redis-master
+`docker run --name redis-master -v /home/testuser/docker/master-redis.conf:/usr/local/etc/master-redis.conf -d -p 16397:16379 redis redis-server /usr/local/etc/master-redis.conf`
+
+##redis-slave
+`docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/slave-redis.conf`
+
+`docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave2 -d redis redis-server /usr/local/etc/slave-redis.conf`
+
+####宿主机上如何获得 docker container 容器的 ip 地址？
+```bash
+docker inspect --format='{{.NetworkSettings.IPAddress}}' [$CONTAINER_ID]
+```
+
+172.17.0.51 mster
+172.17.0.55 slave1
+56  2
+57  3
+
+```bash
+docker inspect -f '{{.Id}}' [获取的名称或者id]
+```
+
+
+
+```bash
+[testuser@CentOS1 docker]$ redis-sentinel 3sentinel.conf &
+[3] 28932
+[testuser@CentOS1 docker]$                 _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.0.7 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in sentinel mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 26383
+ |    `-._   `._    /     _.-'    |     PID: 28932
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+28932:X 05 Sep 16:10:12.875 # Sentinel runid is d1d5d361d1d4c9576d64ab274571361ac963351f
+28932:X 05 Sep 16:10:12.875 # +monitor master redis-master 172.17.0.62 16379 quorum 2
+28932:X 05 Sep 16:10:12.876 * +slave slave 172.17.0.63:16379 172.17.0.63 16379 @ redis-master 172.17.0.62 16379
+28932:X 05 Sep 16:10:12.908 * +slave slave 172.17.0.64:16379 172.17.0.64 16379 @ redis-master 172.17.0.62 16379
+28932:X 05 Sep 16:10:12.933 * +sentinel sentinel 172.17.42.1:26381 172.17.42.1 26381 @ redis-master 172.17.0.62 16379
+28932:X 05 Sep 16:10:13.009 * +sentinel sentinel 172.17.42.1:26382 172.17.42.1 26382 @ redis-master 172.17.0.62 16379
+
+```
+
+
+
+

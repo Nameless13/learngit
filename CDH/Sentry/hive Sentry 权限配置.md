@@ -1,3 +1,9 @@
+title: hive Sentry 权限配置
+categories: 
+- CDH
+- Sentry
+date: 2017-05-24
+---
 # hive Sentry用户授权配置
 <a href="https://www.cloudera.com/documentation/enterprise/latest/topics/sg_hive_sql.html#concept_c2q_4qx_p4__section_t5x_pg4_rp">Hive SQL Syntax for Use with Sentry</a>
 ## 为Hive用户添加全局的权限。

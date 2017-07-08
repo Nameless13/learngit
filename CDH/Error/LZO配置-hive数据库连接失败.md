@@ -1,3 +1,9 @@
+title: LZO配置-hive数据库连接失败
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
 # LZO压缩文件支持
 
 因为启用kerberos:
