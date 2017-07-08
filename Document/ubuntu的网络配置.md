@@ -1,3 +1,8 @@
+title: ubuntu的网络配置
+categories: 
+- document
+date: 2017-07-07
+---
 #ubuntu的网络配置
 ##有线连接互联网
 1. Ubuntu使用两条配置线路   /etc/network/interfaces这个配置文件主要用于服务器版本的Ubuntu系统使用;

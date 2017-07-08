@@ -1,3 +1,8 @@
+title: weixin
+categories: 
+- document
+date: 2017-07-05
+---
 微信小程序中的每一个页面的【路径+页面名】都需要写在 app.json 的 pages 中，且 pages 中的第一个页面是小程序的首页。
 
 通过全局函数 getApp() 可以获取全局的应用实例，如果需要全局的数据可以在 App() 中设置

@@ -1,3 +1,9 @@
+title: redis_version_3.2.4
+categories: 
+- redis
+- redis-conf-笔记
+date: 2017-07-05
+---
 redis_version:3.2.4                                                                                     //Redis 服务器版本
 redis_git_sha1:00000000                                                                                     //Git SHA1
 redis_git_dirty:0                                                                                   //Git dirty flag

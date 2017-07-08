@@ -1,3 +1,8 @@
+title: Docker入门到实践
+categories: 
+- document
+date: 2017-07-08
+---
 #Docker--入门到实践
 Virtuial Machines
 each virtualized application includes not nonly the application - which may be only 10s of MB -and the necessary binaries,but also an entire guest operating system - which may weigh 10s of GB
@@ -48,12 +53,12 @@ Docker利用容器俩运行运用
 ---
 ##CentOS 系列安装Docker
 
-docker pull hub.c.163.com/public/<centos:7 class="0"></centos:7>
+`docker pull hub.c.163.com/public/<centos:7 class="0"></centos:7>`
 
-docker run -t -i hub.c.163.com/public/centos:7.0 /bin/bash
+`docker run -t -i hub.c.163.com/public/centos:7.0 /bin/bash`
 -t  选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上，  -i  则让容器的标准输入保持打开
 
-docker run -t -i training/sinatra /bin/bash  //会下载一个新的...镜像
+`docker run -t -i training/sinatra /bin/bash`  //会下载一个新的...镜像
 
 当利用`docker run` 创建容器时,Docker在后台运行的标准是:
 - 检查本地是否存在指定的镜像,不存在就从公有仓库下载
@@ -64,15 +69,15 @@ docker run -t -i training/sinatra /bin/bash  //会下载一个新的...镜像
 - 执行用户指定的应用程序
 
 
-docker commit -m "Added git" -a "Docker Newbee" 40c9fe0a35ef centos:v2
+`docker commit -m "Added git" -a "Docker Newbee" 40c9fe0a35ef centos:v2`
 
 
 
 
 ---
 
-docker run -t -i hub.c.163.com/public/centos:7.0 /bin/bash
--t 让Docker分配一个伪终端(pseudo-tty)并绑定到容器的标准输入上,-i 让容器的标准输入保持打开
+`docker run -t -i hub.c.163.com/public/centos:7.0 /bin/bash`
+`-t 让Docker分配一个伪终端(pseudo-tty)并绑定到容器的标准输入上,-i 让容器的标准输入保持打开`
 
 当利用docker run 创建容器时,Docker在后台运行的标准操作包括:
 - 检查本地是否存在指定的镜像,不存在就从公有仓库下载
@@ -86,38 +91,35 @@ docker run -t -i hub.c.163.com/public/centos:7.0 /bin/bash
 ####启动已终止容器
 利用 `docker start` ,直接将一个已经终止的容器启动运行
 容器的核心为所执行的应用程序,所需要的资源都是应用程序运行必需的.
-####后台(background)运行
+
+####后台background运行
 需要让docker在后台运行
 
 ---
-安装.bashrc_docker
+安装 `.bashrc_docker
+
+```bash
 wget -P ~ https://github.com/yeasy/docker_practice/raw/master/_local/.bashrc_docker
 echo "[ -f ~/.bashrc_docker ] && . ~/.bashrc_docker" >> ~/.bashrc; source ~/.bashrc
 
 echo $(docker-pid docker)
-
+```
 
 
 
 
 ----
 ##redis-master
-docker run --name redis-master -v /home/testuser/docker/master-redis.conf:/usr/local/etc/master-redis.conf -d -p 16397:16379 redis redis-server /usr/local/etc/master-redis.conf
+`docker run --name redis-master -v /home/testuser/docker/master-redis.conf:/usr/local/etc/master-redis.conf -d -p 16397:16379 redis redis-server /usr/local/etc/master-redis.conf`
 
 ##redis-slave
-docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/slave-redis.conf
+`docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/slave-redis.conf`
 
 
 ####宿主机上如何获得 docker container 容器的 ip 地址？
+```
 docker inspect --format='{{.NetworkSettings.IPAddress}}' $CONTAINER_ID
-
-
-
-redis 生态环境
-网络监控
-围绕的软件
-
-
+```
 
 ###在Docker容器内外互相拷贝数据
 
@@ -135,12 +137,14 @@ redis 生态环境
 
 2. 直接在主机上拷贝到容器物理存储系统
     1. 获取容器名称或者id : `docker ps  `
-    2. 获取整个容器的id: `docker inspect -f   '{{.Id}}'  [获取的名称或者id]  `
-    3. C. 在主机上拷贝文件:
-    ` cp path-file-host /var/lib/docker/devicemapper/mnt/[获取的名称或者id]/rootfs/root `
+    2. 获取整个容器的id: 
+    ```bash
+    docker inspect -f   '{{.Id}}'  [获取的名称或者id]  
+    ```
+    3. 在主机上拷贝文件: ` cp path-file-host /var/lib/docker/devicemapper/mnt/[获取的名称或者id]/rootfs/root `
 
 
-`   
+```bash   
 
     1.
     [testuser@CentOS1 docker]$docker ps
@@ -158,10 +162,8 @@ redis 生态环境
 
     3.
     [root@CentOS1 ~]#cp sentinel.conf /var/lib/docker/devicemapper/mnt/9408dd71f9e943b6ed08dd146e20700439eef280db7ce914852452340bfbfbbe/rootfs/root/
-`
+```
 
 ####退出容器而不停止容器
 组合键：Ctrl+P+Q
 
-
-----
