@@ -1,7 +1,7 @@
 title: ubuntu的网络配置
 categories: 
 - document
-date: 2017-07-07
+date: 2016-10-20
 ---
 # ubuntu的网络配置
 ## 有线连接互联网

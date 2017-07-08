@@ -2,7 +2,7 @@ title: redis服务搭建
 categories: 
 - redis
 - redis服务搭建
-date: 2017-07-05
+date: 2016-09-07
 ---
 # redis服务搭建
 ## 主机命名

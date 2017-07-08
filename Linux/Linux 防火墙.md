@@ -1,7 +1,7 @@
 title: Linux 防火墙
 categories: 
 - Linux
-date: 2017-07-07
+date: 2016-09-07
 ---
 ```
 [root@CentOS3 redis]# service iptables status

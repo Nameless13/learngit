@@ -2,7 +2,7 @@ title: Redis Sentinel
 categories: 
 - redis
 - redis服务搭建
-date: 2017-07-08
+date: 2016-09-07
 ---
 # Redis Sentinel
 ## Sentinel介绍
