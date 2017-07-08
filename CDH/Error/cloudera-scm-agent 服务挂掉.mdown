@@ -1,0 +1,67 @@
+title: cloudera-scm-agent 服务挂掉
+categories: 
+- CDH
+- Error
+date: 2017-05-24
+---
+#  cloudera-scm-agent 服务挂掉
+## cloudera-scm-agent日志查看需要sudo权限
+
+```bash
+sudo ls -l /var/log/cloudera-scm-agent/
+cloudera-scm-agent.log	cloudera-scm-agent.out	cmf_listener.log  supervisord.log  supervisord.out
+sudo tail -300 /var/log/cloudera-scm-agent/cloudera-scm-agent.log
+```
+
+```
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread agent        ERROR    Could not contact supervisor.
+Traceback (most recent call last):
+  File "/usr/lib64/cmf/agent/src/cmf/agent.py", line 832, in get_supervisor_data
+    supervisor_info = sup.getAllProcessInfo()
+  File "/usr/lib64/python2.6/xmlrpclib.py", line 1199, in __call__
+    return self.__send(self.__name, args)
+  File "/usr/lib64/python2.6/xmlrpclib.py", line 1489, in __request
+    verbose=self.__verbose
+  File "/usr/lib64/cmf/agent/build/env/lib/python2.6/site-packages/supervisor-3.0-py2.6.egg/supervisor/xmlrpc.py", line 460, in request
+    self.connection.request('POST', handler, request_body, self.headers)
+  File "/usr/lib64/python2.6/httplib.py", line 914, in request
+    self._send_request(method, url, body, headers)
+  File "/usr/lib64/python2.6/httplib.py", line 951, in _send_request
+    self.endheaders()
+  File "/usr/lib64/python2.6/httplib.py", line 908, in endheaders
+    self._send_output()
+  File "/usr/lib64/python2.6/httplib.py", line 780, in _send_output
+    self.send(msg)
+  File "/usr/lib64/python2.6/httplib.py", line 739, in send
+    self.connect()
+  File "/usr/lib64/python2.6/httplib.py", line 720, in connect
+    self.timeout)
+  File "/usr/lib64/python2.6/socket.py", line 561, in create_connection
+    raise error, msg
+error: [Errno 111] Connection refused
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread agent        ERROR    Failed to contact supervisor after 6 attempts. Agent will exit.
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread agent        INFO     Stopping agent...
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread agent        INFO     No extant cgroups; unmounting any cgroup roots
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread agent        INFO     3 processes are being managed; Supervisor will continue to run.
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus STOPPING
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('ddp-dn-114.cmdmp.com', 9000)) shut down
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus STOPPED
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus STOPPING
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('ddp-dn-114.cmdmp.com', 9000)) already shut down
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE No thread running for None.
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus STOPPED
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus EXITING
+[23/Mar/2017 14:50:57 +0000] 4871 MainThread _cplogging   INFO     [23/Mar/2017:14:50:57] ENGINE Bus EXITED
+```
+
+## cloudera-scm-agent 服务启动
+
+root 用户下:
+`service  cloudera-scm-agent restart`
+
+sudo 权限用户:
+`ll /etc/init.d/ |grep cloudera`
+-rwxr-xr-x 1 root      root       6656 Sep 16  2015 cloudera-scm-agent
+
+`/etc/init.d/cloudera-scm-agent restart`
