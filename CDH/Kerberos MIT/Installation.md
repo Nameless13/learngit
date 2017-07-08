@@ -4,8 +4,28 @@ categories:
 - Kerberos MIT
 date: 2017-05-24
 ---
-cat /etc/krb5.conf
 
+## 初始化
+```
+➜  ~ kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'EXAMPLE.COM',
+master key name 'K/M@EXAMPLE.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+```
+
+This will create five files in LOCALSTATEDIR/krb5kdc (or at the locations specified in kdc.conf):
+
+- two Kerberos database files, principal, and principal.ok
+- the Kerberos administrative database file, principal.kadm5
+- the administrative database lock file, principal.kadm5.lock
+- the stash file, in this example .k5.ATHENA.MIT.EDU. If you do not want a stash file, run the above command without the -s option.
+
+## krb5.conf
+cat /etc/krb5.conf
 ```
 [libdefaults]
 #       default_realm = EXAMPLE.COM 
@@ -39,9 +59,8 @@ cmdmp.com = CMDMP.COM
 
 ```
 
-vi /var/lib/kerberos/krb5kdc/kdc.conf 
-
----
+## kdc.conf
+cat /var/lib/kerberos/krb5kdc/kdc.conf
 ```
 [kdcdefaults]
         kdc_ports = 750,88
@@ -71,22 +90,3 @@ vi /var/lib/kerberos/krb5kdc/kdc.conf
     kdc = FILE:/var/log/krb5/krb5kdc.log
     admin_server = FILE:/var/log/krb5/kadmind.log
 ```
-
-
-```
-➜  ~ kdb5_util create -s
-Loading random data
-Initializing database '/var/kerberos/krb5kdc/principal' for realm 'EXAMPLE.COM',
-master key name 'K/M@EXAMPLE.COM'
-You will be prompted for the database Master Password.
-It is important that you NOT FORGET this password.
-Enter KDC database master key: 
-Re-enter KDC database master key to verify: 
-```
-
-This will create five files in LOCALSTATEDIR/krb5kdc (or at the locations specified in kdc.conf):
-
-- two Kerberos database files, principal, and principal.ok
-- the Kerberos administrative database file, principal.kadm5
-- the administrative database lock file, principal.kadm5.lock
-- the stash file, in this example .k5.ATHENA.MIT.EDU. If you do not want a stash file, run the above command without the -s option.

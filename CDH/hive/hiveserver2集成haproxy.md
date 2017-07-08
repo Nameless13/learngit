@@ -9,9 +9,9 @@ date: 2017-07-06
 >CM版本:CM5.10.041
 >CDH版本:CDH5.10.041
 >使用root用户对集群进行部署
-><a href="https://www.cloudera.com/documentation/enterprise/5-10-x/topics/admin_ha_hiveserver2.html">cloudera对应文档</a>
+>[cloudera对应文档](https://www.cloudera.com/documentation/enterprise/5-10-x/topics/admin_ha_hiveserver2.html)
 
-1. 下载负载平衡代理软件到需要的主机上。<a href="http://rpm.pbone.net/index.php3/stat/4/idpl/33562430/dir/opensuse/com/haproxy-1.5.14-91.1.x86_64.rpm.html">haproxy-1.5.14-91.1.x86_64.rpm</a>
+1. 下载负载平衡代理软件到需要的主机上。[haproxy-1.5.14-91.1.x86_64.rpm](http://rpm.pbone.net/index.php3/stat/4/idpl/33562430/dir/opensuse/com/haproxy-1.5.14-91.1.x86_64.rpm.html)
 2. 安装,配置开机启动,修改配置文件后启动haproxy,并检查对应端口是否开启  
     1. Set the port for the load balancer to listen on and relay HiveServer2 requests back and forth.
     2. Set the port and hostname for each HiveServer2 host—that is, the hosts from which the load balancer chooses when relaying each query. 
@@ -27,7 +27,7 @@ date: 2017-07-06
     ss -an |grep 10003
     ```
 
-    配置文件:  <a href="https://issues.cloudera.org/browse/HUE-4990">因为balance模式选择导致HUE请求超时</a>  
+    配置文件:[因为balance模式选择导致HUE请求超时](https://issues.cloudera.org/browse/HUE-4990)  
     ```
     global
         # To have these messages end up in /var/log/haproxy.log you will
@@ -109,12 +109,12 @@ date: 2017-07-06
     4. Select Category > Main. 
     5. Locate the HiveServer2 Load Balancer property or search for it by typing its name in the Search box.
     6. Enter values for `hostname:port number`.
+    7. Click Save Changes to commit the changes.
+    8. Restart the Hive service.
     ```
     Note:When you set the HiveServer2 Load Balancer property, Cloudera Manager regenerates the keytabs for HiveServer2 roles. The principal in these keytabs contains the load balancer hostname. If there is a Hue service that depends on this Hive service, it also uses the load balancer to communicate with Hive.
     ```
-    7. Click Save Changes to commit the changes.
-    8. Restart the Hive service.
 
 6. Point all scripts, jobs, or application configurations to the new proxy server instead of any specific HiveServer2 instance.一旦CM中hive配置配上balance后,原先所有的hiveserver2都将无法继续使用
 
-附录: <a href="http://blog.cloudera.com/blog/2013/08/how-to-achieve-higher-availability-for-hue/">Higher Availability</a>    
+附录:[Higher Availability](http://blog.cloudera.com/blog/2013/08/how-to-achieve-higher-availability-for-hue/)    

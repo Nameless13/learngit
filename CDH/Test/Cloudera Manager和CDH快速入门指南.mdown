@@ -20,6 +20,7 @@ date: 2017-05-24
 - 测试安装
     + 运行MapReduce作业
     + 使用Hue测试
+
 ##  快速启动群集主机要求
 集群中的四台主机必须满足以下要求：
 
@@ -35,7 +36,7 @@ date: 2017-05-24
 
 如果您的环境不满足这些要求，则本指南中描述的过程可能无法正常工作。有关其他Cloudera Manager安装选项和要求的信息，请参阅 安装Cloudera Manager和CDH。
 
-##  下载并运行Cloudera Manager服务器安装程序
+## 下载并运行Cloudera Manager服务器安装程序
 将Cloudera Manager安装程序下载到要安装Cloudera Manager Server的集群主机：
 
 1. 在Web浏览器中打开Cloudera Manager下载。
@@ -124,9 +125,6 @@ $ yum install python26
 1. 将显示一条成功消息，指示集群已成功启动。单击完成以继续到首页 > 状态选项卡。
 
 ## 测试安装
-该首页 > 状态标签看起来是这样的：
-<img src="" alt="">
-
 在屏幕的左侧是当前运行的服务及其状态信息的列表。所有服务应以良好 运行状态运行，但是可能有少量配置警告由扳手图标和数字指示，您可以忽略它。
 
 您可以单击每个服务以查看有关服务的更多详细信息。您还可以通过运行MapReduce作业或使用Hue应用程序与群集交互来测试安装。
@@ -134,15 +132,15 @@ $ yum install python26
 ### 运行MapReduce作业
 1. 登录到群集主机。
 1. 运行Hadoop PiEstimator示例：
+    ```    
+        sudo -u hdfs hadoop jar \
+        /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar \
+        pi 10 100
+    ```
 
-```    
-    sudo -u hdfs hadoop jar \
-    /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar \
-    pi 10 100
-```
 3. 通过从Cloudera Manager管理控制台顶部导航栏中选择以下内容来查看运行作业的结果：集群 > 集群名称 > YARN应用程序。您将看到如下所示的条目：
-
 <img src="" alt="">
+
 ### 使用Hue测试
 测试集群的一个好方法是运行作业。此外，您可以通过运行其中一个Hue Web应用程序来测试集群。Hue是一个图形用户界面，允许您通过运行允许浏览HDFS，管理Hive元数据转储，运行Hive，Impala和搜索查询，Pig脚本和Oozie工作流的应用程序与群集进行交互。
 

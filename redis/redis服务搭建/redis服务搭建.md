@@ -4,7 +4,7 @@ categories:
 - redis服务搭建
 date: 2017-07-05
 ---
-#redis服务搭建
+# redis服务搭建
 ## 主机命名
 1. 确定操作系统类型 
     `cat  /etc/issue`
@@ -39,7 +39,7 @@ exit 验证
 6.  检查`hostname`
 
 ## 时钟同步
-###CentOS6
+### CentOS6
 1. 检查是否启动时钟同步服务
 service检查:  `service ntpd status`
 job 检查 :    `crontab -l`
@@ -54,15 +54,16 @@ job 检查 :    `crontab -l`
         1. 设置 `chkconfig ntpd on`
         2. 检查 `chkconfig -list ntpd`
 
-###CentOS7
+### CentOS7
 - 使用rpm检查ntp包是否安装
 [root@CentOS3 home]# rpm -q ntp
 ntp-4.2.6p5-22.el7.centos.x86_64
 - 如果已经安装则略过此步，否则使用yum进行安装，并设置系统开机自动启动并启动服务
-     yum -y install ntp
-     systemctl enable ntpd
-     systemctl start ntpd
-
+    ```
+    yum -y install ntp
+    systemctl enable ntpd
+    systemctl start ntpd
+    ```
 修改完成后重启ntpd服务systemctl restart ntpd
 
 使用ntpq -p 查看网络中的NTP服务器，同时显示客户端和每个服务器的关系
@@ -82,7 +83,7 @@ CentOS release 6.8 (Final)
 
 CentOS 7
 ## 网络
-###CentOS 6.8:
+### CentOS 6.8:
     - 防火墙:
         - 即使生效,重启后失效
             开启: service iptables start
@@ -95,7 +96,7 @@ CentOS 7
             -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 
             -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 
-###CentOS 7.0:
+### CentOS 7.0:
 CentOS 7.0默认使用的是firewall作为防火墙，这里改为iptables防火墙。
 firewall：
 
@@ -123,11 +124,11 @@ firewall：
     echo never > /sys/kernel/mm/transparent_hugepage/enabled
     echo 511 > /proc/sys/net/core/somaxconn
 
-##开机启动redis
+## 开机启动redis
 
 `/usr/local/redis/utils/install_server.sh `
 第一个参数分别选择7380 7381 26379
-###26379
+### 26379
     Please select the redis executable path [/usr/local/bin/redis-server] 
     +  /usr/local/bin/redis-sentinel
 
@@ -200,13 +201,13 @@ firewall：
     -  appendonly no
     +  appendonly yes 
 
-###resid-service config (135:7381)
+### resid-service config (135:7381)
     cp /etc/redis/7380.conf /etc/redis/7381.conf
     vim  /etc/redis/7381.conf
         
         `:%s/7380/7381/g`   //替换所有的7380为7381
 
-##redis-sentinal config (135:26379)
+## redis-sentinal config (135:26379)
     rm -f /etc/redis/26379.conf
     cp /usr/local/redis/sentinel.conf /etc/redis/26379.conf
     vim /usr/local/redis/26379.conf
@@ -238,9 +239,9 @@ firewall：
         +  sentinel parallel-syncs redis134 1
         
 
-##redis部署
+## redis部署
 
-###预定分配方案:
+### 预定分配方案:
                   192.168.29.134
                    +---------+  
                    | M1 7380 |

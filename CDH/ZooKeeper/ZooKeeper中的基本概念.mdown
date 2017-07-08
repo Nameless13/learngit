@@ -14,7 +14,7 @@ date: 2017-05-24
 
 
 
-## 集群觉得
+## 集群角色
 Leader,Follower,Observer
 
 Leader服务器是整个Zookeeper集群工作中的核心

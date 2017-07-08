@@ -5,9 +5,8 @@ categories:
 date: 2017-05-24
 ---
 # ZooKeeper运维
-## 运维配置详解
+## [运维配置详解](http://zookeeper.apache.org/doc/r3.4.6/zookeeperAdmin.html)
 ### 基础配置
-`http://zookeeper.apache.org/doc/r3.4.6/zookeeperAdmin.html`
 - datalogdir
 - globalOutstandingLimit
 - preAllocSize
@@ -55,13 +54,13 @@ date: 2017-05-24
 
 ## 在运维中使用JMX
 1. 修改ZK服务器的启动脚本(每一台)
-`Vim zkServer.sh`
-```
-- zooMain="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=true org.apache.zookeeper.server.quorum.QuorumPeerMain"
-+ zooMain="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false  -Djava.rmi.server.hostname=192.168.1.105 -Dcom.sun.management.jmxremote.port=8899 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false org.apache.zookeeper.server.quorum.QuorumPeerMain"
-```
-`./zkServer.sh stop`
-`./zkServer.sh start`
+    `Vim zkServer.sh`
+    ```
+    + zooMain="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=true org.apache.zookeeper.server.quorum.QuorumPeerMain"
+    * zooMain="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false  -Djava.rmi.server.hostname=192.168.1.105 -Dcom.sun.management.jmxremote.port=8899 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false org.apache.zookeeper.server.quorum.QuorumPeerMain"
+    ```
+    `./zkServer.sh stop`
+    `./zkServer.sh start`
 
 2. jconsole
 

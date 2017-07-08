@@ -20,27 +20,25 @@ date: 2017-07-07
 2.  如果不能连接互联网，先创建OS的repository，以便yum或zypper可以访问OS镜像
 3.  为了使集群中各个节点之间能互相通信，需要静态或动态配置节点的IP地址。如果使用动态配置，请安装DHCP和DNS服务器，具体请参见对应软件的安装文档，此不赘述；如果使用静态IP地址，请正确配置各节点的IP，并在/etc/hosts配置所有节点的静态DNS解析。
 以cm节点为例：`/etc/sysconfig/network-scripts/ifcfg-eth0`
-
-```
-DEVICE="bond0"
-BOOTPROTO="static"
-IPV6INIT="no"
-MTU="1500"
-NM_CONTROLLED="no"
-ONBOOT="yes"
-TYPE="Ethernet"
-IPADDR=192.168.60.25
-NETMASK=255.255.255.0
-GATEWAY=192.168.60.1
-```
-
-/etc/hosts样例
-```
-192.168.60.24  ddp-cm
-192.168.60.25  ddp-hnn-01
-192.168.60.26  ddp-dn-001
-192.168.60.27  ddp-dn-002
-```
+    ```
+    DEVICE="bond0"
+    BOOTPROTO="static"
+    IPV6INIT="no"
+    MTU="1500"
+    NM_CONTROLLED="no"
+    ONBOOT="yes"
+    TYPE="Ethernet"
+    IPADDR=192.168.60.25
+    NETMASK=255.255.255.0
+    GATEWAY=192.168.60.1
+    ```
+    /etc/hosts样例
+    ```
+    192.168.60.24  ddp-cm
+    192.168.60.25  ddp-hnn-01
+    192.168.60.26  ddp-dn-001
+    192.168.60.27  ddp-dn-002
+    ```
 
 4. 如果机器配置有双网卡，可以做双网卡绑定；
 5. 关闭并禁用防火墙
@@ -55,21 +53,22 @@ GATEWAY=192.168.60.1
 在/etc/init.d/after.local中增加一行：
 `if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/transparent_hugepage/enabled fi `
 9. 禁用交换内存
-
-```
-$> vim  /etc/sysctl.conf
-增加一行：vm.swappiness=0
-echo 0 >/proc/sys/vm/swappiness
-```
+    ```
+    $> vim  /etc/sysctl.conf
+    增加一行：vm.swappiness=0
+    echo 0 >/proc/sys/vm/swappiness
+    ```
 10. 修改/etc/security/limits.conf或者在/etc/security/limits.d下增加相应的配置文件，可以设置一些硬限制和软限制；Cloudera Manager节点会为所有节点自动做这些修改。
 11. 在需要作为Repo库的节点上安装必要的软件，包含HTTP服务和Repo创建工具
 12. SUSE11 SP3 安装会有缺失的依赖需要手动安装rpm包
 记得先查看是否有失效的zypper源,删除后添加内网配置的zypper源
-zypper ar http://192.168.58.55/suse/11/x86_64/ main
-zypper ref
-zypper in postgresql91
-之后即可安装所缺的依赖包 python-psycopg
-sudo rpm -ivh python-psycopg2-2.6.2-3.2.x86_64.rpm
+    ```
+    zypper ar http://192.168.58.55/suse/11/x86_64/ main
+    zypper ref
+    zypper in postgresql91
+    ```
+    之后即可安装所缺的依赖包 python-psycopg
+    `sudo rpm -ivh python-psycopg2-2.6.2-3.2.x86_64.rpm`
 
 ## MySQL建表语句:
 ```
@@ -111,7 +110,7 @@ GRANT ALL PRIVILEGES ON oozie_r.* TO 'oozie'@'%';
 FLUSH PRIVILEGES;
 ```
 
-Mysql 修改密码
+### Mysql 修改密码
 use mysql:
 5.7之前版本
 update user set password=passworD("xxxxxxxx") where user='hive';
@@ -121,13 +120,9 @@ update user set password=passworD("xxxxxxxx") where user='oozie';
 update user set authentication_string = password('xxxxxxxx') where user = 'hue';
 
 ## CDH软件下载与配置（Cloudera管理器节点）
-1.  下载Cloudera管理器需要的rpm包
-http://archive-primary.cloudera.com/cm5/sles/11/x86_64/cm/5/RPMS/x86_64/
+1.  [下载Cloudera管理器需要的rpm包](http://archive-primary.cloudera.com/cm5/sles/11/x86_64/cm/5/RPMS/x86_64/)
 2.  下载Parcel包（包含了CDH中的Hadoop组件）
-    从以下地址选择合适版本的parcel包：
-    http://archive-primary.cloudera.com/cdh5/parcels/latest
-    下载manifest.json文件：
-    http://archive-primary.cloudera.com/cdh5/parcels/latest/manifest.json
+    [选择合适版本的parcel包,包括manifest.json文件](http://archive-primary.cloudera.com/cdh5/parcels/latest)    
 3.  下载后将下载的RPM包放置在一个文件夹后,`createrepo .`
 4.  执行完后，在cm目录下生成目录repodata
 5.  将文件移动到特定的目录，确保可以通过HTTP协议进行访问
@@ -145,8 +140,9 @@ DocumentRoot "/srv/www/htdocs"
     Allow from all
 </Directory>
 ```
-启动apache2服务：
-# /etc/init.d/apache2 start
+
+### 启动apache2服务：
+`/etc/init.d/apache2 start`
 将下载的CM和Parcels介质文件存放到/srv/www/htdocs/下的自定义目录下
 把cm的rpm包移到/var/www/htdocs/cm5.11
 把parcels包移到/srv/www/htdocs/parcels/
@@ -167,9 +163,9 @@ gpgcheck=false
 1.  安装JDK `zypper install oracle-j2sdk1.7`
 2.  安装Cloudera管理器服务器 `zypper install cloudera-manager-daemons cloudera-manager-server`
 3.  在需要访问MySQL的节点上安装mysql-connector-java
-    ```
-    $> cp mysql-connector-java-5.1.34.jar /usr/share/java/
-    $> ln –s mysql-connector-java-5.1.34.jar mysql-connector-java.jar
+    ```bash
+    cp mysql-connector-java-5.1.34.jar /usr/share/java/
+    ln –s mysql-connector-java-5.1.34.jar mysql-connector-java.jar
     ```
 4.  为Cloudera管理器配置外部数据库
     ```

@@ -19,12 +19,13 @@ date: 2017-05-24
     - module 中的 self.xx 方法可以被直接调用(不建议)
     - module 中的普通方法,需要被某个class include 之后,由对应的class调用
 
-
-['jim','li_lei','han_mei_mei'].each do |name|
-    define_method "say_hi_to_#{name}" do
-        puts "hi,#{name}"
+    ```
+    ['jim','li_lei','han_mei_mei'].each do |name|
+        define_method "say_hi_to_#{name}" do
+            puts "hi,#{name}"
+        end
     end
-end
+    ```
 
 想知道 第一行中 |name| 这种写法是定义遍历前面数组的参数的意思么?我猜的
 

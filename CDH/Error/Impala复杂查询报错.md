@@ -2,12 +2,11 @@ title: Impala复杂查询报错
 categories: 
 - CDH
 - Error
-date: 2017-05-24
+date: 2017-03-30
 ---
-# Impala Error: Couldn't open transport
+# Impala Error: Couldn't open transport(未解决)
  >**v1.0** updated:2017-03-30 何常通
- 
- <a href="https://community.cloudera.com/t5/Interactive-Short-cycle-SQL/Impala-Error-Couldn-t-open-transport/m-p/15916#M366">原地址</a>
+ > [原地址](https://community.cloudera.com/t5/Interactive-Short-cycle-SQL/Impala-Error-Couldn-t-open-transport/m-p/15916#M366)
 
 ## 当运行复杂查询的时候会报出这种错误
 When we try to run more complex Impala queries, we often run into the following error:
@@ -29,10 +28,13 @@ Our setup:
 - almost 100% short circuit reads
 
 ---
-## Solution
+### Solution
 We found cause for the error - our firewall settings were to restrictive. Interestingly smaller queries without many query fragments worked even with these restrictive settings.
 
 
 ### 另一种解决方法
 发现impala daemon 进程因为端口不能正常释放导致进程僵死,而且cloudera manage 并不能很好的反应这个问题,只能在重启impala集群的时候,才能统一发现问题节点
 登入上出问题的节点后,手动kill -9 结束impala daemon 进程等所有端口22000 释放后 重启impala角色
+
+### 之后怀疑是catalog中java堆栈不足导致
+因为其会存放所有的hive表,调大后问题依旧

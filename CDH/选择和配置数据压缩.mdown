@@ -14,6 +14,9 @@ date: 2017-05-24
 
 ## 配置数据压缩
 ### 使用Cloudera Manager配置数据压缩
-要使用Cloudera Manager配置对LZO的支持，您必须安装GPL Extras宗地，然后配置服务才能使用。请参阅<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_install_gpl_extras.html#xd_583c10bfdbd326ba-3ca24a24-13d80143249--7ec6">安装GPL附加包</a>和<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cm_mc_gpl_extras.html#xd_583c10bfdbd326ba--6eed2fb8-14349d04bee--7c3e">配置服务</a>以使用GPL附加包裹
+要使用Cloudera Manager配置对LZO的支持，您必须安装GPL Extras宗地，然后配置服务才能使用。请参阅
+[安装GPL附加包](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_install_gpl_extras.html#xd_583c10bfdbd326ba-3ca24a24-13d80143249--7ec6)
+
+[配置服务以使用GPL附加包裹](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_mc_gpl_extras.html#xd_583c10bfdbd326ba--6eed2fb8-14349d04bee--7c3e)
 
 ### Configuring Data Compression Using the Command Line

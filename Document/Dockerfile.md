@@ -3,10 +3,10 @@ categories:
 - document
 date: 2017-07-07
 ---
-#Dockerfile
+# Dockerfile
 使用Dockerfile可以允许用户创建自定义镜像
 
-##基本结构
+## 基本结构
 Dockerfile 由一行行命令语句组成,并支持以#开头的注释行.
 一般的，Dockerfile 分为四部分：基础镜像信息、维护者信息、镜像操作指令和容
 器启动时执行指令:

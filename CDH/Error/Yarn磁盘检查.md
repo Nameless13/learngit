@@ -4,7 +4,7 @@ categories:
 - Error
 date: 2017-07-06
 ---
-##yarn nodemanage 参数临时修改到100 
+## yarn nodemanage 参数临时修改到100 
 保证mapreduce shuffle阶段不会因为磁盘检测问题导致写入失败影响作业进度,cm默认配置为95%
 
 报错如下:

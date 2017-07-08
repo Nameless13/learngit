@@ -3,7 +3,7 @@ categories:
 - Linux
 date: 2017-07-07
 ---
-agenda
+## agenda
 
 a brief discussion of 6 facets of Linux performance:
 
@@ -15,7 +15,7 @@ a brief discussion of 6 facets of Linux performance:
 6. tuning
 
 ---
-###observability tools
+### observability tools
 
 - Tools showcase common metrics
     + lenrning linux tools is useful even if you never use them:
@@ -27,7 +27,7 @@ a brief discussion of 6 facets of Linux performance:
     + plus many extra kernel sourcse of data that lack tools,are harder to use ,and are practically undocumented
 
 ----
-####uptime
+#### uptime
 
 - one way to print load averages:
 - a measure of resource demand: CPUs + disk
@@ -39,14 +39,14 @@ a brief discussion of 6 facets of Linux performance:
     + Don't spent more than 5 seconds studying these 
 
 ---
-####top (or htop)
+#### top (or htop)
 - system and per-process interval summary:
 - %CPU is summed across all CPUs
 - Can miss short-lives processes(atop won't)
 - Can consume noticeable CPU to read/proc
 
 ---
-####vmstat
+#### vmstat
 - Virtual memory statistics and more:
 - USAGE:vmstat [interval[count]]
 - First output line has some summary since boot values 
@@ -55,18 +55,18 @@ a brief discussion of 6 facets of Linux performance:
     + "r" is runnable tasks
 
 ---
-####iostat
+#### iostat
 - Block I/O (disk)stats.1st output is since boot.
 - very useful set of stats
 
 ---
-####free
+#### free
 - Main memory usage:
 - buffers: block device I/O cache
 - cached: virtua; page cache
 
 ---
-####strace
+#### strace
 - System call tracer:
 - Eg, -ttt:time (us) since epoch;-T:syscall time(s)
 - Translates syscall arges
@@ -75,7 +75,7 @@ a brief discussion of 6 facets of Linux performance:
     + can slow the target by > 100x.Use extreme caution.
 
 ---
-####tcpdump
+#### tcpdump
 - sniff network packets for post analysis:
 - study packet sequences with timestamps(us)
 - CPU overhead optimized (socket ring buffers),but can still be significant.use caution.
@@ -91,16 +91,16 @@ netstat
 - Per-second interval with -c
 
 ---
-####slabtop
+#### slabtop
 - Kernel slab allocator memory usage
 
 ---
-####pcstat
+#### pcstat
 - show page cache residency 
 - Uses the mincore(2)syscall.Useful for database performance analysis.
 
 ---
-####perf_events
+#### perf_events
 - Provides the "perf" command
 - in Linux source code:tools/perf
     + Usually pkg added by linux-tools-common.etc.
@@ -111,9 +111,9 @@ netstat
 - Covered later in Profiling & Tracing
 
 ---
-###Methodologies
+### Methodologies
 
-####anti-Methodologies
+#### anti-Methodologies
 - The lack of a deliberate methodology...
 - Street Light Anti-Method:
     1. Pick observability tools that are
@@ -130,7 +130,7 @@ netstat
 在Linux世界，进程不能直接访问硬件设备，当进程需要访问硬件设备(比如读取磁盘文件，接收网络数据等等)时，必须由用户态模式切换至内核态模式，通 过系统调用访问硬件设备。strace可以跟踪到一个进程产生的系统调用,包括参数，返回值，执行消耗的时间。
 
 ----
-####ss
+#### ss
 ss -l 显示本地打开的所有端口
 ss -pl 显示每个进程具体打开的socket
 ss -t -a 显示所有tcp socket
@@ -142,7 +142,7 @@ ss -s 列出当前socket详细信息:
 
 
 ---
-####strace 
+#### strace 
 -c 统计每一系统调用的所执行的时间,次数和出错的次数等. 
 -d 输出strace关于标准错误的调试信息. 
 -f 跟踪由fork调用所产生的子进程. 

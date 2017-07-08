@@ -4,35 +4,26 @@ categories:
 - Kerberos MIT
 date: 2017-05-24
 ---
-查看Linux某用户属于哪个组
-id  user
-
-groups user
-
-
-
----
-➜  ~ cd /etc/sysconfig/network-scripts 
-➜  network-scripts cp ifcfg-eth0 ifcfg-eth0.bak 
-➜  network-scripts vi ifcfg-eth0 
-➜  network-scripts service network restart
-
-
-
-
-➜  network-scripts vi /etc/hosts 
-➜  network-scripts vi /etc/sysconfig/network
+## 虚拟机上配置
+```bash
+cd /etc/sysconfig/network-scripts 
+cp ifcfg-eth0 ifcfg-eth0.bak 
+vi ifcfg-eth0 
+service network restart
+vi /etc/hosts 
+vi /etc/sysconfig/network
 
 NETWORKING=yes
 HOSTNAME=elephant.migu.cn
 NETWORKING_IPV6=no
 
-
-➜  network-scripts hostname elephant.migu.cn
-➜  network-scripts hostname -s elephant
+hostname elephant.migu.cn
+hostname -s elephant
+```
 
 ---
-kerberos 改了默认位置
+## 测试环境上kerberos 
+改了默认位置
 vi /var/lib/kerberos/krb5kdc/kdc.conf 
 
 ```
@@ -60,3 +51,8 @@ vi /var/lib/kerberos/krb5kdc/kdc.conf
    22  2016-12-26 18:56:45 scp /etc/krb5.conf root@10.200.65.65:/etc/
    23  2016-12-26 18:56:58 scp /etc/krb5.conf root@10.200.65.71:/etc/
 ```
+
+---
+查看Linux某用户属于哪个组
+id  user
+groups user

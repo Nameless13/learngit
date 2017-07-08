@@ -2,12 +2,12 @@ title: 使用Packages升级到CDH 5.10
 categories: 
 - CDH
 - Upgrade
-date: 2017-05-24
+date: 2017-03-22
 ---
 # 使用Packages升级到CDH 5.10
->**v1.0** updated:2017-03-22 何常通
+>**v1.0** updated:2017-03-22 Nameless13
+>角色最低要求：Cluster Administrator 
 
-####角色最低要求：Cluster Administrator 
 ## 步骤1：收集升级信息
 开始升级之前，请收集以下信息：
 

@@ -18,7 +18,7 @@ date: 2017-06-23
 883  2017-05-24 15:51:51 ss -anp|grep 9000
 884  2017-05-24 15:55:14 cd /var/log/
 ```
-重启后发现依旧
+重启服务后发现依旧
 
 于是怀疑IO问题
 ```
@@ -29,8 +29,8 @@ date: 2017-06-23
 897  2017-05-24 16:08:14 ulimit -a
 898  2017-05-24 16:09:38 lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr|more
 ```
-之后reboot解决
 
+设置最大文件打开数
 ```
 #ftp             hard    nproc           0
 #@student        -       maxlogins       4
@@ -38,3 +38,4 @@ date: 2017-06-23
 *                soft    nofile          65535
 *                hard    nofile          65535
 ```
+之后reboot解决

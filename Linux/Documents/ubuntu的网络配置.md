@@ -4,8 +4,8 @@ categories:
 - Documents
 date: 2017-07-05
 ---
-#ubuntu的网络配置
-##有线连接互联网
+# ubuntu的网络配置
+## 有线连接互联网
 1. Ubuntu使用两条配置线路   /etc/network/interfaces这个配置文件主要用于服务器版本的Ubuntu系统使用;
  当/etc/NetworkManager/NetworkManager.conf  中managed=false ，以interfaces文件中的配置为准， 
 2. 为了适应移动办公造成ip和网络环境不断变化,上网配置在/networkManager/NetworkManager.conf 
@@ -56,7 +56,7 @@ ifconfig wlan0 up    #启动网卡
 ping  192.168.1.1  # 拼网关，检测是否已能联上网
 
 
-##wifi故障情况分析
+## wifi故障情况分析
 情况是网速非常慢，ping 网关速度慢，ping外网没网络。
 终端执行如下命令：
 lspci -vnn -d 14e4  查看网卡型号，和现用驱动

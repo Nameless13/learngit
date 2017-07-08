@@ -20,7 +20,7 @@ date: 2017-05-24
 `desc emp;`
 ####  查看创建表的SQL语句
 `show create table emp \G;`
-
+```
     MariaDB [test1]> show create table emp \G;
     *************************** 1. row ***************************
            Table: emp
@@ -33,7 +33,7 @@ date: 2017-05-24
     1 row in set (0.00 sec)
 
     ERROR: No query specified
-
+```
 ----
 
 除了可以看到表定义以外,还可以看到表的engine(存储引擎)和charset(字符集)等信息."\G"选项的含义是使得记录能够按照字段竖向排列,以便更好地显示内容较长的记录.

@@ -5,8 +5,8 @@ date: 2017-05-24
 ---
 
 # 备份数据库
->**v1.0** updated:2017-04-01 何常通
-<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ag_backup_dbs.html">原文</a>
+>**v1.0** updated:2017-04-01 Nameless13
+>[原文](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ag_backup_dbs.html)
 
 - Cloudera Manager - 包含有关服务的配置及其角色分配的所有信息,所有配置历史，命令，用户和正在运行的进程,这是一个相对较小的数据库(<100MB)是但却是最重要的备份
 

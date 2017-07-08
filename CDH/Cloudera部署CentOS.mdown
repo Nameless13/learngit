@@ -104,7 +104,7 @@ reboot
 
 
 
-
+```
 hostname ddp-sunflower-test1.cmdmp.com
 hostname 
 
@@ -141,3 +141,4 @@ yum makecache
 mv /etc/yum.repos.d/myrepo.repo.bak /etc/yum.repos.d/myrepo.repo
 yum install oracle-j2sdk1.7
 history 
+```

@@ -4,15 +4,15 @@ categories:
 - redis服务搭建
 date: 2017-07-08
 ---
-##redis-master
+## redis-master
 `docker run --name redis-master -v /home/testuser/docker/master-redis.conf:/usr/local/etc/master-redis.conf -d -p 16397:16379 redis redis-server /usr/local/etc/master-redis.conf`
 
-##redis-slave
+## redis-slave
 `docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave1 -d redis redis-server /usr/local/etc/slave-redis.conf`
 
 `docker run --link redis-master:redis-master -v /home/testuser/docker/slave-redis.conf:/usr/local/etc/slave-redis.conf --name redis-slave2 -d redis redis-server /usr/local/etc/slave-redis.conf`
 
-####宿主机上如何获得 docker container 容器的 ip 地址？
+#### 宿主机上如何获得 docker container 容器的 ip 地址？
 ```bash
 docker inspect --format='{{.NetworkSettings.IPAddress}}' [$CONTAINER_ID]
 ```

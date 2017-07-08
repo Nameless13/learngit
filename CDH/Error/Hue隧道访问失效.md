@@ -4,17 +4,19 @@ categories:
 - Error
 date: 2017-06-02
 ---
+>判断应该是Django框架中,发送报文的MIME有问题
+>[path地址](https://github.com/cloudera/hue/commit/34388da14712497b685c6b97497c698e720b1a16)
+
 # HUE通过隧道访问
 HUE通过隧道映射到本地后发现所有的JavaScript文件解析有问题:
 
 `Refused to execute script from 'http://127.0.0.1:18888/static/desktop/js/jquery.tablescroller.038d8a8feae9.js' because its MIME type ('text/x-js') is not executable, and strict MIME type checking is enabled.`
 
----
-####HUE文件路径:
+问题在于cloudera中Django的配置文件具体在哪,后来终于终于找到了
+
+## HUE文件路径:
 `/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hue/desktop`
 
-<a href="https://github.com/cloudera/hue/commit/34388da14712497b685c6b97497c698e720b1a16
-">判断应该是Django框架中,发生报文的MIME有问题</a>
 
 
 ###  desktop/core/src/desktop/middleware.py
@@ -64,9 +66,8 @@ HUE通过隧道映射到本地后发现所有的JavaScript文件解析有问题:
 
 ```
 
-问题在于cloudera 中Django的配置文件具体在哪,终于找到了
 
-cloudera HUE配置文件路径
+### cloudera HUE配置文件路径
 
 ```
 ddp-cm:~ # vi /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hue/

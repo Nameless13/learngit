@@ -4,10 +4,10 @@ categories:
 - Test
 date: 2017-05-24
 ---
-### Process Management
+## Process Management
 在Cloudera Manager受管集群中，您只能使用Cloudera Manager启动或停止角色实例进程。
 
-Cloudera Manager使用名为supervisord的开源过程管理工具,启动进程，负责重定向日志文件，通知进程失败，将调用进程的有效用户ID设置为正确的用户，等等。
+Cloudera Manager使用名为**supervisord**的开源过程管理工具,启动进程，负责重定向日志文件，通知进程失败，将调用进程的有效用户ID设置为正确的用户，等等。
 
 停止Cloudera Manager Server和Cloudera Manager Agent不会降低您的服务;任何正在运行的角色实例都会继续运行
 
@@ -16,14 +16,7 @@ Cloudera Manager使用名为supervisord的开源过程管理工具,启动进程�
 
 
 ---
-## 换盘步骤
-0. 新建error group 把host加到error group
-1. 先 CDH 上host 里面取消的挂载盘 
-2. 在Linux 上umount 对应磁盘
-3. 物理换盘 
-4. Linux上 mount
-5. cdh上 加上
-6. 删除 error group
+
 
 
 ---
@@ -38,11 +31,6 @@ Java Heap Size of HBase RegionServer in Bytes
 Impala
 Impala Daemon Memory Limit
 ```
-
-
-
-开一个账户 不能给有权限的
-cm 只能给只读账户
 
 
 ----

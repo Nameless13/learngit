@@ -2,13 +2,13 @@ title: 执行数据节点的磁盘热插拔
 categories: 
 - CDH
 - Error
-date: 2017-05-24
+date: 2017-04-01
 ---
 #  执行数据节点的磁盘热插拔
 >**v1.0** updated:2017-04-01 何常通
 
-<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/admin_dn_swap.html">在不关闭DataNode的情况下替换HDFS磁盘。这被称为热插拔。</a>
-####  警告： 要求和限制
+[在不关闭DataNode的情况下替换HDFS磁盘,这被称为热插拔](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_dn_swap.html)
+####  警告:要求和限制
 ```
     CDH 5.4及更高版本支持热插拔。
     热插拔只能添加带有空数据目录的磁盘。
@@ -25,10 +25,9 @@ date: 2017-05-24
     1. 单击**Configuration**选项卡。
     1. 选择左侧筛选器中的**Scope** > **DataNode**。
     1. 选择左侧筛选器中的**Category** > **Main**。
-    1. 更改**DataNode Data Directory**属性的值，以删除要删除的磁盘的挂载点的目录。
-        有哪些角色的都要删掉(hdfs,impala,yarn)
+    1. 更改**DataNode Data Directory**属性的值，以删除要删除的磁盘的挂载点的目录。有哪些角色的都要删掉(hdfs,impala,yarn)
 
-     **警告：仅对要计划热插拔磁盘的特定DataNode实例更改此属性的值。不要编辑此属性的**角色组**值。否则会导致数据丢失和角色变更。**
+    **警告：仅对要计划热插拔磁盘的特定DataNode实例更改此属性的值。不要编辑此属性的**角色组**值。否则会导致数据丢失和角色变更。**
 
 2. 单击**Save Changes**以提交更改。
 3. 刷新受影响的DataNode。选择**Actions** > 刷新数据目录。
@@ -44,14 +43,15 @@ date: 2017-05-24
 ---
 ##换盘步骤
 
+```
 df -h
 fdisk -l|more
 parted /dev/sdi
 
- ```
 parted -s $DEVICE mklabel gpt mkpart primary ext3
- ```
 mkfs.ext3 /dev/sdi1
+```
+
 ```
 ddp-dn-121:~ # mkfs.ext3 /dev/sdi
 mke2fs 1.41.9 (22-Aug-2009)
@@ -76,9 +76,9 @@ Superblock backups stored on blocks:
 Writing inode tables: done                            
 Creating journal (32768 blocks): done
 Writing superblocks and filesystem accounting information: 
-```
 mount /dev/sdi1 /mnt/sdi1/
 df -h
+```
  
 ---
 ##  根目录数据爆满
@@ -121,6 +121,7 @@ mount /dev/sdm1 /mnt/sdm1/
 ## Linux umount的device is busy问题
 >原因：其他进程可能在使用/mnt/vdb目录。
 
+```bash
 [root@dbserver ~]# df -h
 文件系统 容量 已用 可用 已用%% 挂载点
 /dev/vda1 9.9G 3.9G 5.6G 41% /
@@ -132,12 +133,13 @@ tmpfs 3.9G 100K 3.9G 1% /dev/shm
 umount: /mnt: device is busy.
 (In some cases useful info about processes that use
 the device is found by lsof(8) or fuser(1))
-
+```
  
 解决办法：
 
 关闭使用该目录的进程，然后再umount。
 
+```bash
 [root@dbserver /]# fuser -m /dev/vdb
 /dev/vdb: 3052c
 
@@ -159,6 +161,4 @@ Filesystem Size Used Avail Use% Mounted on
 /dev/vda1 9.9G 1.4G 8.0G 15% /
 tmpfs 3.9G 100K 3.9G 1% /dev/shm
 /dev/sr0 368K 368K 0 100% /media/CDROM
-
-
-
+```

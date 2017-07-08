@@ -6,9 +6,10 @@ date: 2017-05-24
 ---
 # zabbix agent 进程恢复
  >**v1.0** updated:2017-03-30 何常通
+
 ## 因系统重启后,zabbix agent没有设置开机启动所以会导致监控失效
 
-```
+```bash
  ps aux |grep zabbix
  cd /etc/init.d/
  ls |grep zabbix
@@ -23,7 +24,7 @@ date: 2017-05-24
 ```
 
 ### zabbix_agentd
-```
+```bash
 #! /bin/sh
 # Copyright (c) 07/2004 A.Tophofen, Germany
 # Modified for Zabbix 1.1alpha7 and SuSE Linux 9.2

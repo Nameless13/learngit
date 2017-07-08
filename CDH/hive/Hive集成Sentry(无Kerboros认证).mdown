@@ -22,10 +22,10 @@ date: 2017-06-30
     - 启动Sentry同步
 
 beeline 连接:
-beeline -u "jdbc:hive2://10.200.65.40:10000/" -n hive -p hive -d org.apache.hive.jdbc.HiveDriver
-
+`beeline -u "jdbc:hive2://10.200.65.40:10000/" -n hive -p hive -d org.apache.hive.jdbc.HiveDriver`
 创建admin role;
+```
 create role admin;
 grant all on server server1 to role admin;
 grant role admin to group hive;
-
+```

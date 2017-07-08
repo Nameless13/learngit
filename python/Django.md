@@ -103,8 +103,10 @@ Django-1.9 以后自动生成
         * `article = models.Article.objects.get(pk=1)`
         * `render(request,page,{'article' :article})`
     + 前端步骤
+        ```
         * 模块可直接使用对象以及对象的"."操作
         * `{{ article.title }}`
+        ```
 
 ---
 ## Admin
@@ -123,10 +125,11 @@ Django-1.9 以后自动生成
     + 点击任意一天数据,进入编辑页面修改
     + 编辑页面下方一排按钮可执行相应操作
     + 修改数据默认显示名称
+        ```
         * 在Article类下添加一个方法
         * 根据Python版本选择`__str__(self)`或`__unicode__(self)`
         * `return self.title`
-
+        ```
 ---
 ## 博客页面
 - 页面概要

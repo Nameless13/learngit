@@ -5,14 +5,14 @@ categories:
 date: 2017-06-23
 ---
 # Cloudera Manager API
-<a href="http://cloudera.github.io/cm_api/apidocs/v15/index.html">CM 5.10 API</a>
-<a href="https://www.cloudera.com/documentation/enterprise/5-10-x/topics/cm_intro_api.html">Cloudera Manager API</a>
+[CM 5.10 API](http://cloudera.github.io/cm_api/apidocs/v15/index.html)
+[Cloudera Manager API](https://www.cloudera.com/documentation/enterprise/5-10-x/topics/cm_intro_api.html)
+## 示例:
 重启cluster集群的impala服务
+
 `curl -X POST -u user:'xxx' http://192.168.65.50:7180/api/v15/clusters/cluster/services/impala/commands/restart`
 
 显示cluster集群的所有服务
-`curl -u user:'passwd' http://192.168.65.50:7180/api/v15/clusters/cluster/services`
 
-acl授权:
-setfacl -m user:hadoop:r-x 
+`curl -u user:'passwd' http://192.168.65.50:7180/api/v15/clusters/cluster/services`
 

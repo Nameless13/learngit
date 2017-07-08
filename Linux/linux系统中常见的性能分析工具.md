@@ -4,7 +4,7 @@ categories:
 date: 2017-05-24
 ---
 linux系统中常见的性能分析工具
-一、vmstat
+## vmstat
             vmstat是linux/unix上一个监控工具，能展示给定时间间隔的服务器的状态，包括操作系统的内存信息，CPU使用状态、进程信息等。
 语法：
 vmstat [-V] [delay [count]]
@@ -13,6 +13,7 @@ vmstat [-V] [delay [count]]
     #count  设置总共输出的次数
 
 ---
+```
 host-xxx-xxx-xxx-xxx:~ # vmstat -V
 procps version 3.2.7
 host-xxx-xxx-xxx-xxx:~ # vmstat 2 3
@@ -21,6 +22,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- -----cpu------
  0  0      0 13107104 1981044 766592    0    0     0    18    0    1  0  0 100  0  0
  0  0      0 13106776 1981044 766592    0    0     0     0  833  697  0  0 100  0  0
  0  0      0 13106784 1981044 766592    0    0     0     0  391  427  0  0 100  0  0
+```
 
 对输出参数进行讲解
     procs

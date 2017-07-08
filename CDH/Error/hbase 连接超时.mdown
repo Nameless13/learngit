@@ -4,7 +4,7 @@ categories:
 - Error
 date: 2017-06-23
 ---
-hbase 连接超时
+# hbase 连接超时
 
 最开始是inood块权限有问题
 ```

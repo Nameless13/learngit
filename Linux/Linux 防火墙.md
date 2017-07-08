@@ -3,6 +3,7 @@ categories:
 - Linux
 date: 2017-07-07
 ---
+```
 [root@CentOS3 redis]# service iptables status
 Table: filter
 Chain INPUT (policy ACCEPT)
@@ -45,7 +46,7 @@ usage:   chkconfig [--list] [--type <type>] [name]
 `service iptables status`   查看iptables状态
 `service iptables restart`  iptables服务重启
 `service iptables stop`     iptables服务禁用 
-
+```
 
 ---
 ip地址后边加个/8(16,24,32)是什么意思?
