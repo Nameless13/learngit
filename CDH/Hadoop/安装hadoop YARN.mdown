@@ -1,0 +1,122 @@
+title: 安装 hadoop YARN
+categories: 
+- CDH
+- Hadoop
+date: 2017-05-24
+---
+# 安装 hadoop YARN
+## YARN安装简介
+### hadoop的安装简介
+- hadoop的各个组件均采用XML文件进行配置，这些配置文件都在etc/hadoop子目录中
+- core-site.xml文件用于配置通用属性
+- hdfs-site.xml文件用于配置HDFS属性
+- mapred-site.xml文件用于配置MapReduce属性
+- yarn-site.xml用于配置YARN的属性
+
+### hadoop的三种运行模式
+- 单机模式
+    + 单机模式是hadoop的默认模式
+    + 因为不需要与其他节点交互，单机模式就不使用HDFS，也不加载任何hadoop的守护进程
+    + 所有程序都在同一个JVM上执行
+    + 该模式主要用于开发调试MapReduce程序的应用逻辑
+- 伪分布式
+    + hadoop守护进程运行在本地机器上，模拟一个小规模集群
+    + hadoop的每个守护进程都运行在单独的Java进程中
+- 全分布式
+    + hadoop守护进程运行在一个集群上
+    + 例如：集群环境中，NameNode和ResourceManager各运行于一台单独的主机为Master，而其他的主机为DataNode和NodeManager，为slave
+
+### hadoop与Java版本
+- hadoop的开发和测试是在OpenJDK和OracleJDK上进行的
+- hadoop支持Java7和比较新的Java6版本
+
+## 安装YARN前的准备
+### 需要的软件
+- 操作系统
+- hadoop 2.6 stable
+- OpenJDK 1.7
+- openssh
+
+### 安装JDK及SSH
+### 创建用户和组
+- 创建hadoop组 `addgroup hadoop`
+- 创建用户hduser并添加到hadoop组中 `adduser --ingroup hadoop hduser`
+### 配置SSH无密码登录
+- 检查hduser是否可以以无密码的方式登录localhost `ssh localhost`
+- 如果需要输入密码
+```
+    ssh-keygen -t dsa
+    cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+```
+
+### 解压缩以及设置hadoop环境变量
+- 解压缩hadoop
+```
+    gunzip hadoop-2.6.0.tar.gz
+    tar -xvf hadoop-2.6.0.tar
+```
+- 假设解压后的文件路径是在/hadoop/下 在解压后的文件中,找到并编辑hadoop环境变量文件 ./hadoop-2.6.0/etc/hadoop/hadoop-env.sh
+- 设置Java Home: `export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64`
+- 设置hadoop prefix: `HADOOP_PREFIX=/hadoop/hadoop-2.6.0`
+
+### 测试hadoop
+`bin/hadoop`
+- 测试hadoop:
+## 伪分布式安装 
+### 修改core-site.xml文件
+`etc/hadoop/core-site.xml`
+
+- fs.defaultFS配置NameNode的URI
+```
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+```
+
+### 修改hdfs-site.xml文件
+`etc/hadoop/hdfs-site.xml`
+
+- dfs.replication设置块的复制数量
+```
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+```
+
+### 修改mapred-site.xml文件
+`etc/hadoop/mapred-site.xml`
+
+- mapreduce.framework.name配置MapReduce应用使用YARN框架
+```
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+```
+
+### 修改yarn-site.xml文件
+`etc/hadoop/yarn-site.xml`
+
+- yarn.nodemanager.aux-services:为NodeManager配置MapReduce应用的Shuffle服务
+```
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+</configuration>
+```
+
+### 检查yarn是否安装成功
+- 启动资源管理器(ResourceManager)和节点管理器(NodeManager)守护进程
+`sbin/start-yarn.sh`
+- 访问资源管理器的web接口
+`http://localhost:8088/`
