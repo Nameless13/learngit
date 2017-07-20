@@ -1,6 +1,5 @@
 title: Redis
-categories: 
-- redis
+categories: [redis]
 date: 2016-09-07
 ---
 ### 名字引用规则
