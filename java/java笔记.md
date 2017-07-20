@@ -1,6 +1,5 @@
 title: java笔记
-categories: 
-- java
+categories: [java]
 date: 2017-05-24
 ---
 java 是区分单双引号的

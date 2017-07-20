@@ -1,7 +1,5 @@
 title: Cloudera Manager API
-categories: 
-- CDH
-- Shell
+categories: [CDH,Shell]
 date: 2017-06-23
 ---
 # Cloudera Manager API

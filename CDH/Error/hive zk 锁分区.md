@@ -1,7 +1,5 @@
 title: hive zk 锁分区
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-06-30
 ---
 错误日志:

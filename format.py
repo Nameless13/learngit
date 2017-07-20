@@ -15,7 +15,7 @@ for dirpath, dirs, files in os.walk('.'):                # 递归遍历当前目
             if filename.split("/")[-3] != '.':
                 # print "文件名:     " + filename.split("/")[-3]
                 firstpath = filename.split("/")[-3]
-                suit = 'title: ' + fname + '\n' + 'categories: ' + '\n' + '- ' + firstpath + '\n' + '- ' + secondpath+ '\n' + 'date: ' + filedate + '\n' + '---' + '\n' 
+                suit = 'title: ' + fname + '\n' + 'categories: ' + '[' + firstpath + ',' + secondpath+ ']' + '\n' + 'date: ' + filedate + '\n' + '---' + '\n' 
                 f = open(filename)
                 s = f.read()
                 f.close()

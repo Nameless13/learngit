@@ -1,7 +1,5 @@
 title: 快速启动VM管理信息
-categories: 
-- CDH
-- Test
+categories: [CDH,Test]
 date: 2017-05-24
 ---
 # 快速启动VM管理信息

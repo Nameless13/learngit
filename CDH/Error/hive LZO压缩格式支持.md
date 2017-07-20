@@ -1,7 +1,5 @@
 title: hive LZO压缩格式支持
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-05-24
 ---
 >[LZO配置](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_data_compression_performance.html

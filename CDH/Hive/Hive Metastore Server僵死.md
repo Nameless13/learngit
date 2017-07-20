@@ -1,7 +1,5 @@
 title: Hive Metastore Server 僵死
-categories: 
-- CDH
-- Hive
+categories: [CDH,Hive]
 date: 2017-06-23
 ---
 # Hive Metastore Server 僵死

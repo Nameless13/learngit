@@ -1,7 +1,5 @@
 title: Hive集成Sentry(无Kerboros认证)
-categories: 
-- CDH
-- Hive
+categories: [CDH,Hive]
 date: 2017-06-30
 ---
 # Hive集成Sentry(无Kerboros认证)

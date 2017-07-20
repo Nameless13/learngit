@@ -1,7 +1,5 @@
 title: HBase入门
-categories: 
-- CDH
-- HBase
+categories: [CDH,HBase]
 date: 2017-05-24
 ---
 # HBase入门

@@ -1,7 +1,5 @@
 title: 安装 hadoop YARN
-categories: 
-- CDH
-- Hadoop
+categories: [CDH,Hadoop]
 date: 2017-05-24
 ---
 # 安装 hadoop YARN

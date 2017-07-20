@@ -1,6 +1,5 @@
 title: 影响linux系统的硬件因素
-categories: 
-- Linux
+categories: [Linux]
 date: 2017-05-24
 ---
 # 影响linux系统的硬件因素

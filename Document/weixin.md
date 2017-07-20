@@ -1,6 +1,5 @@
 title: weixin
-categories: 
-- document
+categories: [Document]
 date: 2016-12-20
 ---
 微信小程序中的每一个页面的【路径+页面名】都需要写在 app.json 的 pages 中，且 pages 中的第一个页面是小程序的首页。

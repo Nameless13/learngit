@@ -1,7 +1,5 @@
 title: MapReduce on HBase
-categories: 
-- CDH
-- HBase
+categories: [CDH,HBase]
 date: 2017-05-24
 ---
 # MapReduce on HBase

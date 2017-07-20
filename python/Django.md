@@ -1,6 +1,5 @@
 title: Django
-categories: 
-- python
+categories: [python]
 date: 2017-07-07
 ---
 ## setting.py

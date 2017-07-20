@@ -1,7 +1,5 @@
 title: redis_version_3.2.4-sc
-categories: 
-- redis
-- redis-conf-笔记
+categories: [redis,redis-conf-笔记]
 date: 2016-09-07
 ---
 127.0.0.1:6379> info

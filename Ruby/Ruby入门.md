@@ -1,6 +1,5 @@
 title: Ruby入门
-categories: 
-- Ruby
+categories: [Ruby]
 date: 2017-05-24
 ---
 1. 方法调用的最外层括号可以省略

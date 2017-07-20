@@ -1,7 +1,5 @@
 title: hive Sentry 权限配置
-categories: 
-- CDH
-- Sentry
+categories: [CDH,Sentry]
 date: 2017-05-24
 ---
 # hive Sentry用户授权配置

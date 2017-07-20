@@ -1,7 +1,5 @@
 title: SUSE开机启动脚本配置文件
-categories: 
-- CDH
-- Shell
+categories: [CDH,Shell]
 date: 2017-05-24
 ---
 # SUSE开机启动脚本配置文件

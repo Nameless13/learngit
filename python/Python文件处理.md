@@ -1,6 +1,5 @@
 title: Python文件处理
-categories: 
-- python
+categories: [python]
 date: 2017-06-15
 ---
 # Python文件处理

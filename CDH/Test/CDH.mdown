@@ -1,7 +1,5 @@
 title: CDH
-categories: 
-- CDH
-- Test
+categories: [CDH,Test]
 date: 2017-05-24
 ---
 ## Process Management

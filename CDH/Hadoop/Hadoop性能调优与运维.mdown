@@ -1,7 +1,5 @@
 title: Hadoop 性能调优与运维
-categories: 
-- CDH
-- Hadoop
+categories: [CDH,Hadoop]
 date: 2017-05-24
 ---
 # Hadoop 性能调优与运维 

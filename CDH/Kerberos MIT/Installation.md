@@ -1,7 +1,5 @@
 title: Installation
-categories: 
-- CDH
-- Kerberos MIT
+categories: [CDH,Kerberos MIT]
 date: 2017-05-24
 ---
 

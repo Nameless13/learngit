@@ -1,7 +1,5 @@
 title: HBase架构详解
-categories: 
-- CDH
-- HBase
+categories: [CDH,HBase]
 date: 2017-05-24
 ---
 # HBase架构详解

@@ -1,7 +1,5 @@
 title: YARN原理
-categories: 
-- CDH
-- Hadoop
+categories: [CDH,Hadoop]
 date: 2017-05-24
 ---
 # YARN

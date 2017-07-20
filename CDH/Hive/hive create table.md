@@ -1,7 +1,5 @@
 title: hive create table
-categories: 
-- CDH
-- Hive
+categories: [CDH,Hive]
 date: 2017-06-23
 ---
 ## 创建表的语句：

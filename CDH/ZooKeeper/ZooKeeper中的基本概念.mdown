@@ -1,7 +1,5 @@
 title: ZooKeeper中的基本概念
-categories: 
-- CDH
-- ZooKeeper
+categories: [CDH,ZooKeeper]
 date: 2017-05-24
 ---
 #  ZooKeeper中的基本概念

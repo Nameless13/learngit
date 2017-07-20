@@ -1,6 +1,5 @@
 title: fork
-categories: 
-- Linux
+categories: [Linux]
 date: 2017-05-24
 ---
 ## fork

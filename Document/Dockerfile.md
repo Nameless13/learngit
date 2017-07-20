@@ -1,6 +1,5 @@
 title: Dockerfile
-categories: 
-- document
+categories: [Document]
 date: 2016-10-20
 ---
 # Dockerfile

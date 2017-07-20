@@ -1,6 +1,5 @@
 title: Python 学习笔记
-categories: 
-- python
+categories: [python]
 date: 2017-05-24
 ---
 ## LEGB : L>E>G>B

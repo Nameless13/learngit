@@ -1,7 +1,5 @@
 title: 手动安装zypper源和rpm包
-categories: 
-- CDH
-- Upgrade
+categories: [CDH,Upgrade]
 date: 2017-05-24
 ---
 因大数据cloudera manager 平台升级,请将所有大数据服务器安装python-psycopg2-2.6.2-3.3.x86_64.rpm这个包,大数据服务器列表见附件

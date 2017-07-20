@@ -1,6 +1,5 @@
 title: Cloudera部署SUSE
-categories: 
-- CDH
+categories: [CDH]
 date: 2017-06-27
 ---
 

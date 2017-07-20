@@ -1,7 +1,5 @@
 title: redis_version_3.2.4
-categories: 
-- redis
-- redis-conf-笔记
+categories: [redis,redis-conf-笔记]
 date: 2016-09-07
 ---
 redis_version:3.2.4                                                                                     //Redis 服务器版本

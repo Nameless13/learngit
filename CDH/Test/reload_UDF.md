@@ -1,6 +1,6 @@
 title: reload_UDF
-categories: [CDH]
-date: 2017-06-30
+categories: [CDH,Test]
+date: 2017-05-24
 ---
 步骤就是 
 先在beeline drop对应函数

@@ -1,6 +1,5 @@
 title: Linux 防火墙
-categories: 
-- Linux
+categories: [Linux]
 date: 2016-09-07
 ---
 ```

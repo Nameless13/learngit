@@ -1,7 +1,5 @@
 title: Zookeeper应用场景
-categories: 
-- CDH
-- ZooKeeper
+categories: [CDH,ZooKeeper]
 date: 2017-05-24
 ---
 1. 数据发布/订阅

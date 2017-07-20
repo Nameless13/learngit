@@ -1,7 +1,5 @@
 title: Namenode日志存储空间问题
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-05-24
 ---
 #  Namenode日志存储空间问题

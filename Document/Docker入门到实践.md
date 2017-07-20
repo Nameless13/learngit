@@ -1,6 +1,5 @@
 title: Docker入门到实践
-categories: 
-- document
+categories: [Document]
 date: 2016-10-20
 ---
 # Docker--入门到实践

@@ -1,7 +1,5 @@
 title: Cloudera Manager和CDH快速入门指南
-categories: 
-- CDH
-- Test
+categories: [CDH,Test]
 date: 2017-05-24
 ---
 #  Cloudera Manager和CDH快速入门指南

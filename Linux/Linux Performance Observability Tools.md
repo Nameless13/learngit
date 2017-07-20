@@ -1,6 +1,5 @@
 title: Linux Performance Observability Tools
-categories: 
-- Linux
+categories: [Linux]
 date: 2016-09-07
 ---
 ## agenda

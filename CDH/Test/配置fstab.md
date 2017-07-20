@@ -1,7 +1,5 @@
 title: 配置fstab
-categories: 
-- CDH
-- Test
+categories: [CDH,Test]
 date: 2017-05-24
 ---
 ## 配置fstab开机自动挂载磁盘和nas

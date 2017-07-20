@@ -1,7 +1,5 @@
 title: 添加HiveServer2角色
-categories: 
-- CDH
-- Hive
+categories: [CDH,Hive]
 date: 2017-06-23
 ---
 # 添加HiveServer2角色

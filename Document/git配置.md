@@ -1,6 +1,5 @@
 title: git配置
-categories: 
-- document
+categories: [Document]
 date: 2017-05-24
 ---
 git 查看系统是否安装Git

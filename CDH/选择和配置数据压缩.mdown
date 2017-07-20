@@ -1,6 +1,5 @@
 title: 选择和配置数据压缩
-categories: 
-- CDH
+categories: [CDH]
 date: 2017-05-24
 ---
 # 选择和配置数据压缩

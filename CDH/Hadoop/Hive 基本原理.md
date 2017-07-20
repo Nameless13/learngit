@@ -1,7 +1,5 @@
 title: Hive 基本原理
-categories: 
-- CDH
-- Hadoop
+categories: [CDH,Hadoop]
 date: 2017-05-24
 ---
 # Hive基本原理

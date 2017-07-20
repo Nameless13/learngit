@@ -1,7 +1,5 @@
 title: Yarn磁盘检查
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-07-06
 ---
 ## yarn nodemanage 参数临时修改到100 

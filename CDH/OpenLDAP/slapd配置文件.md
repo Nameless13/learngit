@@ -1,7 +1,5 @@
 title: slapd配置文件
-categories: 
-- CDH
-- OpenLDAP
+categories: [CDH,OpenLDAP]
 date: 2017-05-24
 ---
 ```

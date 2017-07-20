@@ -1,6 +1,5 @@
 title: readme
-categories: 
-- python
+categories: [python]
 date: 2017-05-24
 ---
 Python 标识符

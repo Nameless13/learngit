@@ -1,7 +1,5 @@
 title: hiveserver2 haproxy
-categories: 
-- CDH
-- Hive
+categories: [CDH,Hive]
 date: 2017-07-06
 ---
 # 配置HiveServer2负载平衡代理

@@ -1,7 +1,5 @@
 title: lrzsz大文件传输
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-06-05
 ---
 rz、sz命令结合方便的上下传文件，但经过跳板机之后直接rz、sz一个稍大的文件会在上传一部分后退出并显示一堆乱码，这是因为这中间有控制字符的原因。 

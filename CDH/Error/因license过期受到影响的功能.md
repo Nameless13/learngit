@@ -1,7 +1,5 @@
 title: 因license过期受到影响的功能
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-05-24
 ---
 # 因license过期受到影响的功能

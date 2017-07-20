@@ -1,6 +1,5 @@
 title: Sublime config
-categories: 
-- document
+categories: [Document]
 date: 2017-07-07
 layout: post
 ---

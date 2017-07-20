@@ -1,7 +1,5 @@
 title: Impala_swapp
-categories: 
-- CDH
-- Upgrade
+categories: [CDH,Upgrade]
 date: 2017-05-24
 ---
 # Impala_swapp 

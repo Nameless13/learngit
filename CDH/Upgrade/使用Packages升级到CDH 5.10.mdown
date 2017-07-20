@@ -1,7 +1,5 @@
 title: 使用Packages升级到CDH 5.10
-categories: 
-- CDH
-- Upgrade
+categories: [CDH,Upgrade]
 date: 2017-03-22
 ---
 # 使用Packages升级到CDH 5.10

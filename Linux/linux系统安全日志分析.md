@@ -1,6 +1,5 @@
 title: linux系统安全日志分析
-categories: 
-- Linux
+categories: [Linux]
 date: 2017-05-24
 ---
 # linux系统安全日志分析

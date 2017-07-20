@@ -1,7 +1,5 @@
 title: sed
-categories: 
-- Linux
-- sed
+categories: [Linux,sed]
 date: 2017-05-24
 ---
 # sed

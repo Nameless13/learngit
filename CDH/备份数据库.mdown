@@ -1,6 +1,5 @@
 title: 备份数据库
-categories: 
-- CDH
+categories: [CDH]
 date: 2017-05-24
 layout: post
 ---

@@ -1,6 +1,5 @@
 title: linux系统中常见的性能分析工具
-categories: 
-- Linux
+categories: [Linux]
 date: 2017-05-24
 ---
 linux系统中常见的性能分析工具

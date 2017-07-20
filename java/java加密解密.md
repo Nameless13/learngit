@@ -1,6 +1,5 @@
 title: java加密解密
-categories: 
-- java
+categories: [java]
 date: 2017-05-24
 ---
 # 

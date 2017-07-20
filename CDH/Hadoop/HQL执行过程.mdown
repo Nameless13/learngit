@@ -1,7 +1,5 @@
 title: HQL执行过程
-categories: 
-- CDH
-- Hadoop
+categories: [CDH,Hadoop]
 date: 2017-05-24
 ---
 MapReduce 的容错机制

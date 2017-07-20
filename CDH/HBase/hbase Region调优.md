@@ -1,7 +1,5 @@
 title: hbase Region调优
-categories: 
-- CDH
-- HBase
+categories: [CDH,HBase]
 date: 2017-07-07
 ---
 # hbase Region调优

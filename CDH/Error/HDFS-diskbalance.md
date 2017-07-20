@@ -1,7 +1,5 @@
 title: HDFS-diskbalance
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-06-23
 ---
 # HDFS-diskbalance问题(未解决)

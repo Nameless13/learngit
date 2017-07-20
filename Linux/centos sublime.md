@@ -1,6 +1,5 @@
 title: centos sublime
-categories: 
-- Linux
+categories: [Linux]
 date: 2016-09-07
 ---
 # 建立软件安装目录（我一般把软件安装在opt目录下）

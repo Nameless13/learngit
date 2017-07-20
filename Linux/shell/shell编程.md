@@ -1,7 +1,5 @@
 title: shell编程
-categories: 
-- Linux
-- shell
+categories: [Linux,shell]
 date: 2017-05-24
 ---
 在shell编程中，”EOF“通常与”<<“结合使用，“<<EOF“表示后续的输入作为子命令或子shell的输入，直到遇到”EOF“，再次返回到主调shell，可将其理解为分界符（delimiter）。既然是分界符，那么形式自然不是固定的，这里可以将”EOF“可以进行自定义，但是前后的”EOF“必须成对出现且不能和shell命令冲突。其使用形式如下：

@@ -1,6 +1,5 @@
 title: kafka的相关概念
-categories: 
-- Kafka
+categories: [Kafka]
 date: 2017-05-24
 ---
 ## kafka的相关概念

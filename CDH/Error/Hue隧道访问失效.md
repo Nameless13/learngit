@@ -1,7 +1,5 @@
 title: Hue隧道访问失效
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-06-02
 ---
 >判断应该是Django框架中,发送报文的MIME有问题

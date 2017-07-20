@@ -1,7 +1,5 @@
 title: kerberos配置
-categories: 
-- CDH
-- Kerberos MIT
+categories: [CDH,Kerberos MIT]
 date: 2017-05-24
 ---
 ## 虚拟机上配置

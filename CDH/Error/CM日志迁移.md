@@ -1,7 +1,5 @@
 title: CM日志迁移
-categories: 
-- CDH
-- Error
+categories: [CDH,Error]
 date: 2017-05-24
 ---
 ## CM日志迁移

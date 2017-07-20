@@ -1,6 +1,5 @@
 title: SQL基础
-categories: 
-- MySQL
+categories: [MySQL]
 date: 2017-05-24
 ---
 # SQL基础

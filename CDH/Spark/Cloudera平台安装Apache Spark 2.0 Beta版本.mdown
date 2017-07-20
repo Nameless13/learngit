@@ -1,7 +1,5 @@
 title: 选择和配置数据压缩
-categories: 
-- CDH
-- Spark
+categories: [CDH,Spark]
 date: 2017-06-23
 ---
 # Cloudera平台安装Apache Spark 2.0 Beta版本

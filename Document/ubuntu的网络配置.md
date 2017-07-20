@@ -1,6 +1,5 @@
 title: ubuntu的网络配置
-categories: 
-- document
+categories: [Document]
 date: 2016-10-20
 ---
 # ubuntu的网络配置

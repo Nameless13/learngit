@@ -1,7 +1,5 @@
 title: ZooKeeper运维
-categories: 
-- CDH
-- ZooKeeper
+categories: [CDH,ZooKeeper]
 date: 2017-05-24
 ---
 # ZooKeeper运维
