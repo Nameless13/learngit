@@ -1,0 +1,73 @@
+当主KDC不可用时，从属KDC提供Kerberos票证授予服务，但不提供数据库管理。
+
+最好在有限访问的安全和专用硬件上安装和运行KDC。
+
+```
+ddp-nn-02:/var/lib/kerberos/krb5kdc # cat kdc.conf
+
+[kdcdefaults]
+        kdc_ports = 750,88
+        kdc_tcp_ports = 750,88
+
+[realms]
+#       EXAMPLE.COM = {
+#               database_name = /var/lib/kerberos/krb5kdc/principal
+#               admin_keytab = FILE:/var/lib/kerberos/krb5kdc/kadm5.keytab
+#               acl_file = /var/lib/kerberos/krb5kdc/kadm5.acl
+#               dict_file = /var/lib/kerberos/krb5kdc/kadm5.dict
+#               key_stash_file = /var/lib/kerberos/krb5kdc/.k5.EXAMPLE.COM
+#               kdc_ports = 750,88
+#               max_life = 10h 0m 0s
+#               max_renewable_life = 7d 0h 0m 0s
+#       }
+ CMDMP.COM = {
+  max_renewable_life = 365d 0h 0m 0s
+  database_name = /var/lib/kerberos/krb5kdc/principal
+  acl_file = /var/lib/kerberos/krb5kdc/kadm5.acl
+  dict_file = /var/lib/kerberos/krb5kdc/kadm5.dict
+  admin_keytab = /var/lib/kerberos/krb5kdc/kadm5.keytab
+  #default_principal_expiration = 0
+  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal des-hmac-sha1:normal dex-cbc-md5:normal des-cbc-crc:normal
+}
+
+[logging]
+    kdc = FILE:/var/log/krb5/krb5kdc.log
+    admin_server = FILE:/var/log/krb5/kadmind.log
+```
+
+```
+ddp-nn-02:/var/lib/kerberos/krb5kdc # cat /etc/krb5.conf 
+[libdefaults]
+#       default_realm = EXAMPLE.COM 
+default_realm = CMDMP.COM
+dns_lookup_realm = false
+dns_lookup_kdc = false
+ticket_lifetime = 24h
+renew_lifetime = 7d
+forwardable = true
+default_tkt_enctypes = arcfour-hmac-md5
+default_tgs_enctypes = arcfour-hmac-md5
+
+[realms]
+#       EXAMPLE.COM = {
+#                kdc = kerberos.example.com
+#               admin_server = kerberos.example.com
+#       }
+CMDMP.COM = {
+  kdc = ddp-nn-02.cmdmp.com
+  admin_server = ddp-nn-02.cmdmp.com
+  kdc = ddp-dn-07.cmdmp.com
+  admin_server = ddp-dn-07.cmdmp.com
+}
+
+[domain_realm]
+.cmdmp.com = CMDMP.COM
+cmdmp.com = CMDMP.COM
+
+[logging]
+    kdc = FILE:/var/log/krb5/krb5kdc.log
+    admin_server = FILE:/var/log/krb5/kadmind.log
+    default = SYSLOG:NOTICE:DAEMON
+```
+
+

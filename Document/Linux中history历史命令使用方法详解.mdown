@@ -1,0 +1,36 @@
+# Linux中history历史命令使用方法详解
+## 使用HISTTIMEFORMAT在历史中显示TIMESTAMP
+export HISTTIMEFORMAT='%F %T ' 
+也可以设置alias语句来查看最近的历史命令 
+alias h1='history 10' 
+alias h2='history 20' 
+alias h3='history 30'
+
+## 用Ctrl ＋ R搜索历史命令
+按下Ctrl +R然后输入关键字。 在以下示例中，我搜索“red”，则显示以前的命令中含有”red”的命令“cat/etc/redhat-release”。
+注：在命令行提示符下按下Ctrl＋R，终端将显示如下提示―reverse-i-search‖
+ (reverse-i-search)`red`: cat/etc/redhat-release 
+注：当看到你要的命令后按回车键，就可以重新执行这条命令了 
+cat /etc/redhat-release 
+Fedora release 9 (Sulphur)
+而有的时候你需要在执行一条历史命令之前编辑它.比如，你可以像下面那样搜索“httpd”，终端显示历史命令“service httpd stop”，选择它把“stop”改为“start”然后执行它
+注: 在命令提示符下按 Ctrl+R , 将会显示提示符‖reverse-i-search‖
+ (reverse-i-search)`httpd`: service httpdstop
+注: 看到你想要的命令后按下左键或者右键,就可以在执行这条命令之前编辑它了 
+
+## 四种不同的方法快速执行之前的命令
+有时出于某些原因你需要执行之前的命令，下面的四种方法可以用来重复最后执行的命令：
+1. 用向上键（up arrow ）查看上条命令，按回车执行。 
+2. 在命令行中输入!!并按回车。 
+3. 在命令行中输入!-1并按回车。 
+4. 按Ctrl+P显示上条命令，按回车执行。
+5. 如果你想再次执行第四条命令，执行！4即可
+6. 执行以特定字开头的历史命令,输入！和你要重新执行的命令的前几个字母。如！ps
+
+## 使用HISTFILE改变历史文件名
+默认位置在.bash_history文件中，把下面的一行添加到.bash_profile文件中，重新登录shell，则.commandline_warrior文件将取代.bash_history文件用来储存历史命令。你可以使用这个命令来追踪不同终端中执行的命令，届时只需要将不同终端中所执行的命令保存在不同的历史文件中即可。
+
+```
+#vi ~/.bash_profile 
+HISTFILE=/root/.commandline_warrior
+```

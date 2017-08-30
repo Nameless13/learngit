@@ -1,0 +1,7 @@
+# spark提交任务失败
+报错信息:java.lang.NoClassDefFoundError: org/apache/hadoop/fs/FSDataInputStream
+开发使用的环境是spark1.6 
+经过排查发现spark-shell 在这台机器上也会报相同的错误
+发现在角色组中没有在这台机器上添加spark gateway 添加后,更新客户端配置解决该问题
+
+https://community.cloudera.com/t5/Cloudera-Manager-Installation/Unable-to-run-Spark-on-Cloudera-Manager-Single-User-Mode-with/td-p/45114

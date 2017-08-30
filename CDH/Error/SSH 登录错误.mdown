@@ -1,0 +1,14 @@
+# SSH 登录错误
+SSH 登录时出现如下错误：ssh_exchange_identification: read: Connection reset by peer
+
+可能的原因:Linux 系统通过 /etc/hosts.allow 或 /etc/hosts.deny，启用了 TCP Wrapper  访问控制所致。
+可以通过ssh -v查看连接时详情`ssh -v root@ip地址或域名`
+
+1. 通过带外进入系统
+2. 通过 cat 等指令查看 /etc/hosts.allow 或 /etc/hosts.deny中是否包含类似如下配置：`all:all:deny`
+3. 如果需要修改相关策略配置，在继续之前建议进行文件备份。
+4. 使用 vi 等编辑器，按需修改 /etc/hosts.allow 和 /etc/hosts.deny中的相关配置，或者整个删除或注释（在最开头添加 # 号）整行配置。或者改为`sshd: ALL`
+5. 重启ssh `service sshd restart`
+6. 结果发现丢失 /var/lib/empty 把其他节点的目录复制过来后重启解决
+
+
