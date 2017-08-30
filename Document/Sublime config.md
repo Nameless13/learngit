@@ -1,7 +1,6 @@
 title: Sublime config
 categories: [Document]
 date: 2017-07-07
-layout: post
 ---
 # Sublime 个人配置信息
 

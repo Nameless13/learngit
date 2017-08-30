@@ -1,9 +1,7 @@
 title: 备份数据库
 categories: [CDH]
 date: 2017-05-24
-layout: post
 ---
-
 # 备份数据库
 >**v1.0** updated:2017-04-01 Nameless13
 >[原文](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ag_backup_dbs.html)

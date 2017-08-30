@@ -2,7 +2,6 @@ title: Cloudera部署CentOS
 categories: [CDH]
 date: 2017-06-30
 ---
-
 >操作系统:CentOS 6.5
 >CM版本:CM5.10.041
 >CDH版本:CDH5.10.041
