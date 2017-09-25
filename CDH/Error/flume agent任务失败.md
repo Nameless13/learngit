@@ -1,3 +1,9 @@
+title: flume agent任务失败
+categories: 
+- CDH
+- Error
+date: 2017/09/24 13:58:04
+---
 # flume agent任务失败
 [https://community.hortonworks.com/questions/45962/dataxceiver-error-processing-write-block-operation.html]
 flume日志报错: 

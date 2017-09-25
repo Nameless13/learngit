@@ -1,3 +1,8 @@
+title: Linux中history历史命令使用方法详解
+categories: 
+- Document
+date: 2017/09/24 13:58:04
+---
 # Linux中history历史命令使用方法详解
 ## 使用HISTTIMEFORMAT在历史中显示TIMESTAMP
 export HISTTIMEFORMAT='%F %T ' 

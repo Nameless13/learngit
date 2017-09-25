@@ -1,3 +1,8 @@
+title: Path of CDH config
+categories: 
+- CDH
+date: 2017/09/24 13:58:04
+---
 # Path of CDH config
 
 

@@ -1,3 +1,9 @@
+title: SSH 登录错误
+categories: 
+- CDH
+- Error
+date: 2017/09/24 13:58:04
+---
 # SSH 登录错误
 SSH 登录时出现如下错误：ssh_exchange_identification: read: Connection reset by peer
 
