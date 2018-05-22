@@ -25,6 +25,11 @@ show locks <hiveDBName>.<Table> partition (src_file_day='20170218' , src_file_ou
 | <hiveDBName>@ugc_90103_bossmonthorderlog_test@<PARTITION>/<PARTITION> | SHARED     |
 ```
 
+解锁:
+```
+unlock table <hiveDBName>.<Table>;
+```
+
 依旧在beeline中:
 `set hive.support.concurrency=false;`
 然后把分区删了,重建

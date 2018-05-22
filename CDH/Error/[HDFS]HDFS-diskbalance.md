@@ -187,3 +187,10 @@ Plan ID: bf4e1d912cf52fb2df81d1af4406ba3f8fcb4cb05023711a64d1f4101a2379ff8a0e36c
 Result: PLAN_UNDER_PROGRESS
 [{"sourcePath":"/mnt/sdf1/dfs/dn","destPath":"/mnt/sdl1/dfs/dn","workItem":{"bytesToCopy":195547775977,"bytesCopied":134219396,"errorCount":0,"errMsg":null,"blocksCopied":2,"maxDiskErrors":0,"tolerancePercent":0,"bandwidth":0}}]
 ```
+
+
+```
+hdfs diskbalancer -plan $(hostname -f) --out /system/diskbalancer/$(hostname -f)  --thresholdPercentage 5
+hdfs diskbalancer -execute /system/diskbalancer/$(hostname -f)/$(hostname -f).plan.json
+
+```
