@@ -1,0 +1,77 @@
+# Windows Kerberos客户端配置并访问CDH
+本文档描述Windows Server2008 R2（windows的内核版本是6.1，与windows 7相同）下安装Kerberos Client及FireFox下HTTP访问HDFS、Yarn、Hive、HBase等Hadoop服务的Web UI(如Namenode的50070，Yarn的8088)的过程。
+安装文档主要分为以下几步：
+1.在Windows Server2008 R2 64位上安装Kerberos Client。
+2.在Windows下使用kinit测试。
+3.通过keytab在Windows下进行kinit操作。
+4.配置FireFox。(chrome,ie的配置仅需配置 Internet options. )
+5.验证服务是否正常访问。
+```
+ddp-cm:~ # curl --negotiate -u : http://ddp-nn-01.cmdmp.com:50070/
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<title>Error 401 Authentication required</title>
+</head>
+<body><h2>HTTP ERROR 401</h2>
+<p>Problem accessing /index.html. Reason:
+<pre>    Authentication required</pre></p><hr /><i><small>Powered by Jetty://</small></i><br/>                                                
+...        
+```
+
+--------------
+
+### linux服务器上是可以通过negotiate参数访问
+```
+ddp-cm:~ # kinit hdfs
+Password for hdfs@CMDMP.COM: 
+ddp-cm:~ # curl --negotiate -u : http://ddp-nn-01.cmdmp.com:50070/
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="REFRESH" content="1;url=dfshealth.jsp" />
+<title>Hadoop Administration</title>
+</head>
+<body>
+<script type="text/javascript">
+//<![CDATA[
+window.location.href='dfshealth.html';
+//]]>
+</script>
+<h1>Hadoop Administration</h1>
+<ul>
+<li><a href="dfshealth.jsp">DFS Health/Status</a></li>
+</ul>
+</body>
+</html>
+```
+
+### chrome的配置
+```
+negotiate-delegatewhitelist =“MYIISSERVER.DOMAIN.COM”-auth-schemes =“digest，ntlm，negotiate”
+
+Chrome.exe -auth-server-whitelist =“MYIISSERVER.DOMAIN.COM”-auth-negotiate-delegatewhitelist =“MYIISSERVER.DOMAIN.COM”-auth-schemes =“digest，ntlm，negotiate”
+
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --auth-server-whitelist =“ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com” --auth-negotiate-delegatewhitelist =“ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com”
+
+--auth-server-whitelist="ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com"
+```
+
+但是配置过后依旧不成功Firefox配置后可以使用

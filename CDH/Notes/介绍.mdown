@@ -1,0 +1,97 @@
+title: 介绍
+categories: [CDH,Notes]
+date: 2017-06-02
+---
+## host 
+- hostname 
+- ntp 
+- /etc/hosts
+- cloudera-angent 
+    + 服务安装
+    + 上报日志
+    + 角色状态检查
+
+
+## HDFS 
+- 本质也是一个文件系统 不过是把单个文件的块大小放大.同时一份数据会备份两次在不同的host上
+- 权限 
+    + Sentry HDFS同步 需要解除hive metastroe HA
+    + 同时需要开启ACL权限认证
+- 磁盘损坏
+    + 先判断该主机的host能否暂停服务
+    + 停止该host的所有角色
+    + 在DATANODE角色的配置文件里面删除对应挂载分区
+    + 启用该host的所有角色
+    + 报障 更换硬盘后
+- Balance
+    + 可以在不同DATANODE节点中做负载均衡
+    + 也可以在单个DATANODE上做不同挂载盘的负载均衡
+
+- NameNode
+    + NameNode管理文件系统的命名空间。它维护着文件系统树及整棵树内所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件和编辑日志文件。
+    + 
+- JournalNode
+    + 两个NameNode为了数据同步，会通过一组称作JournalNodes的独立进程进行相互通信。当active状态的NameNode的命名空间有任何修改时，会告知大部分的JournalNodes进程。standby状态的NameNode有能力读取JNs中的变更信息，并且一直监控edit log的变化，把变化应用于自己的命名空间。standby可以确保在集群出错时，命名空间状态已经完全同步了。
+
+- Failover Controller
+- Gateway
+- HttpFS
+    + httpfs是cloudera公司提供的一个hadoop hdfs的一个http接口，通过WebHDFS REST API 可以对hdfs进行读写等访问
+
+- kerberos
+
+## hive
+- hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供简单的sql查询功能，可以将sql语句转换为MapReduce任务进行运行。
+- 元数据库用的是两个MySQL
+- HiveServer2 
+    + 支持sentry
+    + 过多连接会导致JVM heap 过大,造成GC时间过长,最后导致该角色拒绝服务
+ 
+- Hive cli
+    + 不支持sentry 不受权限管控 
+- UDF 自定义函数 
+    + 5.7 以后create function 方式有改动 禁止使用add jar语法
+        * 不写location 默认读取AUX 下也就是 hiverserver2 和 metastore 所在主机上必须创建相同路径且文件保持一致的jar包
+        * 写location是读取HDFS上的jar包
+- Gateway
+
+## Hue
+- 是一个开源的Apache Hadoop UI系统,最早是由Cloudera Desktop演化而来,由Cloudera贡献给开源社区,它是基于Python Web框架Django实现的。
+- 基于文件浏览器（File Browser）访问HDFS
+- 基于Hive编辑器来开发和运行Hive查询
+- 支持基于Solr进行搜索的应用，并提供可视化的数据视图，以及仪表板（Dashboard）
+- 支持基于Impala的应用进行交互式查询
+- 支持Spark编辑器和仪表板（Dashboard）
+- 支持Pig编辑器，并能够提交脚本任务
+- 支持Oozie编辑器，可以通过仪表板提交和监控Workflow、Coordinator和Bundle
+- 支持HBase浏览器，能够可视化数据、查询数据、修改HBase表
+- 支持Metastore浏览器，可以访问Hive的元数据，以及HCatalog
+- 支持Job浏览器，能够访问MapReduce Job（MR1/MR2-YARN）
+- 支持Job设计器，能够创建MapReduce/Streaming/Java Job
+- 支持Sqoop 2编辑器和仪表板（Dashboard）
+- 支持ZooKeeper浏览器和编辑器
+- 支持MySql、PostGresql、Sqlite和Oracle数据库查询编辑器
+
+## impala
+- Impala是Cloudera公司主导开发的新型查询系统，它提供SQL语义，能查询存储在Hadoop的HDFS和HBase中的PB级大数据。已有的Hive系统虽然也提供了SQL语义，但由于Hive底层执行使用的是MapReduce引擎，仍然是一个批处理过程，难以满足查询的交互性。相比之下，Impala的最大特点也是最大卖点就是它的快速。但是不稳定
+- 过度频繁的访问会导致impala daemon 的端口无法正常释放 导致不同host上的端口互相阻塞,导致查询失败
+- 同时没有容错机制,由namenode获取文件路径后,如果该节点文件所在的磁盘损坏但刚刚修复但是,也会导致
+- Impala不需要把中间结果写入磁盘，省掉了大量的I/O开销。
+- 省掉了MapReduce作业启动的开销。MapReduce启动task的速度很慢（默认每个心跳间隔是3秒钟），Impala直接通过相应的服务进程来进行作业调度，速度快了很多。
+- Impala完全抛弃了MapReduce这个不太适合做SQL查询的范式，而是像Dremel一样借鉴了MPP并行数据库的思想另起炉灶，因此可做更多的查询优化，从而省掉不必要的shuffle、sort等开销。
+- 通过使用LLVM来统一编译运行时代码，避免了为支持通用编译而带来的不必要开销。
+- 用C++实现，做了很多有针对性的硬件优化，例如使用SSE指令。
+- 使用了支持Data locality的I/O调度机制，尽可能地将数据和计算分配在同一台机器上进行，减少了网络开销
+- 因为公用同一个元数据库,所以hive上对表做了修改后,需要impala在
+- 资源池监控控制不了 refresh 语句
+
+## Oozie
+-Oozie是一种Java Web应用程序，它运行在Java servlet容器——即Tomcat——中，并使用数据库来存储以下内容:
+-工作流定义
+-当前运行的工作流实例，包括实例的状态和变量
+-Oozie工作流是放置在控制依赖DAG（有向无环图 Direct Acyclic Graph）中的一组动作（例如，Hadoop的Map/Reduce作业、Pig作业等），其中指定了动作执行的顺序。我们会使用hPDL（一种XML流程定义语言）来描述这个图。
+
+## Sentry
+- Sentry Server 用的是元数据库
+- 如果用JDBC的连接的话 需要在sentry SERVER 里配上 sentry.service.admin.group 和sentry.service.allow.connect
+

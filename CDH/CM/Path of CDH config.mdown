@@ -1,0 +1,22 @@
+title: Path of CDH config
+categories: [CDH,CM]
+date: 2017/09/24 13:58:04
+---
+# Path of CDH config
+
+
+When using Cloudera Manager, configuration is stored in a central DB, upon startup of services on a target cluster node, cloudera manager passes, through the Agent on that host, the runtime configuration that should be used, and starts the processes, pointing to that runtime location.
+
+This results in the actual services configuration being stored in a non-standard location of:
+ 
+`/var/run/cloudera-scm-agent/process/###-[service]-[SERVICE-ROLE]`
+
+The most recient 'instance" of a path is the current runtime config (use ls -ltr as root in the /var/run/cloudera-scm-agent/process path, the last being most current.
+
+You can access the SAME information on a per service role instance basis, from the "process" tab.   For example for hdfs
+ 
+Cloudera Manager > Cluster > HDFS > Instances > (pick for example, the NameNode from the list)> Processes 
+ 
+You will see under "Configuration Files/Environment" a greater than (>) that you can click to expand and show all the current configs passed to the server, the same info in the path I describe above.  This is handy as not all cluster administrators have root access to get to the indicated path.
+ 
+The cloudera manager function of "Deploy client configuration" pushes the current configuration information, SPECIFIC TO CLIENT APPLICATIONS to the cluster hosts and defined gateway nodes, which end up in the default /etc/ locations you are used to from Hadoop and CDH documentation.  Those locations will not have the complete configuration as used by the server, just values necessary for client applications (CLI, custom apps, etc) to use the cluster.

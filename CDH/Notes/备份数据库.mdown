@@ -1,0 +1,38 @@
+title: 备份数据库
+categories: [CDH,Notes]
+date: 2017-05-24
+---
+# 备份数据库
+>**v1.0** updated:2017-04-01 Nameless13
+>[原文](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ag_backup_dbs.html)
+
+- Cloudera Manager - 包含有关服务的配置及其角色分配的所有信息,所有配置历史，命令，用户和正在运行的进程,这是一个相对较小的数据库(<100MB)是但却是最重要的备份
+
+**重要:**重新启动进程时，将使用保存在Cloudera Manager数据库中的信息重新部署每个服务的配置,如果此信息不可用，您的群集不会启动或正常运行。您必须安排并维护Cloudera Manager数据库的常规备份，以在发生数据库丢失时恢复集群
+
+- Oozie服务器 - 包含Oozie workflow, coordinator, and bundle data. 
+- Sqoop Server - Contains entities such as the connector, driver, links and jobs. Relatively small.
+- Activity Monitor - Contains information about past activities. In large clusters, this database can grow large. Configuring an Activity Monitor database is only necessary if a MapReduce service is deployed.
+- Reports Manager - Tracks disk utilization and processing activities over time. Medium-sized.
+- Hive Metastore Server - Contains Hive metadata. Relatively small.
+- Hue Server - Contains user account information, job submissions, and Hive queries. Relatively small.
+- Sentry Server - Contains authorization metadata. Relatively small.
+- Cloudera Navigator Audit Server - Contains auditing information. In large clusters, this database can grow large.
+- Cloudera Navigator Metadata Server - Contains authorization, policies, and audit report metadata. Relatively small.
+
+## 备份前准备
+1. 登录到安装Cloudera Manager Server的主机
+2. 获取Cloudera Manager数据库的名称，用户和密码属性 `cat /etc/cloudera-scm-server/db.properties`
+```
+com.cloudera.cmf.db.name=scm
+com.cloudera.cmf.db.user=scm
+com.cloudera.cmf.db.password=NnYfWIjlbk
+```
+
+## 备份MySQL数据库
+在要备份的MySQL主机上执行`mysqldump`命令:
+`$ mysqldump -hhostname -uusername -ppassword database > /tmp/database-backup.sql`
+本机例子:
+`$ mysqldump -pamon_password amon > /tmp/amon-backup.sql`
+远程例子
+`$ mysqldump -hmyhost.example.com -uroot -pcloudera amon > /tmp/amon-backup.sql`

@@ -1,0 +1,8 @@
+# Linux 操作系统检查
+
+输入"uname -a ",可显示电脑以及操作系统的相关信息
+输入"cat /proc/version",说明正在运行的内核版本。
+输入"cat /etc/issue", 显示的是发行版本信息
+lsb_release -a (适用于所有的linux，包括Redhat、SuSE、Debian等发行版，但是需要安装lsb)
+
+
