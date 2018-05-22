@@ -1,0 +1,165 @@
+for i in `cat ~/servers.txt`
+do
+    echo "--------------begin to change ntpd to $i--------------"
+
+    ssh $i 'service cloudera-scm-agent stop'
+    ssh $i 'umount /var/run/cloudera-scm-agent/process'
+    ssh $i 'rm -rf /usr/share/cmf /var/lib/cloudera* /var/cache/zypp/packages/cloudera-* /var/cache/zypp/raw/cloudera-* /var/cache/zypp/solv/cloudera-* /var/log/cloudera-scm-* /var/run/'cloudera-scm-* /etc/cloudera-scm-server*'
+    ssh $i 'rpm -qa |grep cloudera'
+    ssh $i 'rpm -e cloudera-manager-agent-5.13.0-1.cm5130.p0.55.el7.x86_64'
+    ssh $i 'rpm -e cloudera-manager-daemons-5.13.0-1.cm5130.p0.55.el7.x86_64'
+    ssh $i rm -rf /var/lib/hadoop-* /var/lib/impala /var/lib/solr /var/lib/zookeeper /var/lib/hue /var/lib/oozie  /var/lib/pgsql  /var/lib/sqoop2  /data/dfs/  /data/impala/ /data/yarn/  /dfs/ /impala/ /yarn/  /var/run/hadoop-*/ /var/run/hdfs-*/ /usr/bin/hadoop* /usr/bin/zookeeper* /usr/bin/hbase* /usr/bin/hive* /usr/bin/hdfs /usr/bin/mapred /usr/bin/yarn /usr/'bin/sqoop* /usr/bin/oozie /etc/hadoop* /etc/zookeeper* /etc/hive* /etc/hue /etc/impala /etc/sqoop* /etc/oozie /etc/hbase* /etc/hcatalog '
+    ssh $i 'rm -rf /opt/cloudera/parcel-cache /opt/cloudera/parcels'
+    ssh $i 'ps aux|grep  supervisord |grep -v grep | awk '{print "kill -9 "$2}'|sh'
+
+
+
+done
+
+----
+[root@tddp-nm-5 ~]# route del default gw 10.151.0.1
+[root@tddp-nm-5 ~]# route add default gw 10.150.4.1
+
+
+
+
+----
+## Zypper 源配置
+
+zypper ar http://10.200.58.39/suse/ local.main
+zypper update
+
+## 备份源地址：
+zypper ar http://10.200.58.43 local.main
+zypper ar http://10.200.58.70/SLES-11-SP3/x86_64/ main
+
+zypper 常用命令：
+      repos, lr     List all defined repositories.
+addrepo, ar     Add a new repository.
+removerepo, rr      Remove specified repository.
+renamerepo, nr      Rename specified repository.
+modifyrepo, mr      Modify specified repository.
+refresh, ref        Refresh all repositories.
+clean           Clean local caches.
+
+
+---
+## 角色启动失败 报错supervisor
+检查一下,客户端配置是否部署
+检查 krb5.conf
+
+----------------------
+
+for i in `cat ~/servers.txt`
+do
+    echo "--------------begin to rm cloudera to $i--------------"
+
+    scp /root/rmall.sh $i:/root/
+    ssh $i 'sh /root/rmall.sh'
+
+done
+
+
+service cloudera-scm-server stop
+service cloudera-scm-agent stop
+umount /var/run/cloudera-scm-agent/process
+rm -rf /usr/share/cmf /var/lib/cloudera* /var/cache/zypp/packages/cloudera-* /var/cache/zypp/raw/cloudera-* /var/cache/zypp/solv/cloudera-* /var/log/cloudera-scm-* /var/run/cloudera-scm-* /etc/cloudera-scm-server*
+rpm -qa |grep cloudera
+rpm -e cloudera-manager-agent-5.13.0-1.cm5130.p0.55.el7.x86_64
+rpm -e cloudera-manager-server-5.13.0-1.cm5130.p0.55.el7.x86_64
+rpm -e cloudera-manager-daemons-5.13.0-1.cm5130.p0.55.el7.x86_64
+rm -rf /var/lib/hadoop-* /var/lib/impala /var/lib/solr /var/lib/zookeeper /var/lib/hue /var/lib/oozie  /var/lib/pgsql  /var/lib/sqoop2  /data/dfs/  /data/impala/ /data/yarn/  /dfs/ /impala/ /yarn/  /var/run/hadoop-*/ /var/run/hdfs-*/ /usr/bin/hadoop* /usr/bin/zookeeper* /usr/bin/hbase* /usr/bin/hive* /usr/bin/hdfs /usr/bin/mapred /usr/bin/yarn /usr/bin/sqoop* /usr/bin/oozie /etc/hadoop* /etc/zookeeper* /etc/hive* /etc/hue /etc/impala /etc/sqoop* /etc/oozie /etc/hbase* /etc/hcatalog 
+rm -rf /opt/cloudera/parcel-cache /opt/cloudera/parcels
+ps aux|grep  supervisord |grep -v grep | awk '{print "kill -9 " $2}'|sh
+
+
+drop database amon_test;      
+drop database hue_test;      
+drop database cm_test;      
+drop database metastore_test;                
+drop database nav_test;      
+drop database navms_test;
+drop database oozie_test;
+drop database rman_test;
+drop database sentry_test;
+show databases;
+
+
+
+create database metastore_test default character set utf8;
+GRANT ALL PRIVILEGES ON metastore_test. * TO 'hive'@'%';
+create database amon_test default character set utf8;
+grant all privileges on amon_test.* to 'amon'@'%';
+create database rman_test default character set utf8;
+grant all privileges on rman_test.* to 'rman'@'%';
+create database sentry_test default character set utf8;
+grant all privileges on sentry_test.* to 'sentry'@'%';
+create database nav_test default character set utf8;
+grant all privileges on nav_test.* to 'nav'@'%';
+create database navms_test default character set utf8;
+grant all privileges on navms_test.* to 'navms'@'%';
+create database cm_test default character set utf8;
+grant all privileges on cm_test.* to 'cm'@'%';
+create database hue_test default character set utf8;
+GRANT ALL PRIVILEGES ON hue_test.* TO 'hue'@'%'; 
+create database oozie_test default character set utf8;
+GRANT ALL PRIVILEGES ON oozie_test.* TO 'oozie'@'%'; 
+FLUSH PRIVILEGES;
+
+
+[root@tddp-nm-5 ~]# route del default gw 10.151.0.1
+[root@tddp-nm-5 ~]# route add default gw 10.150.4.1
+
+route del default gw 10.151.0.1
+route add default gw 10.150.4.1
+
+
+route add -net 10.200.0.0/16 gw 10.151.0.1
+route add -net 10.125.137.0/24 gw 10.151.0.1
+
+
+
+
+route add -net 10.150.4.0/16 gw 10.150.4.1
+(删除路由 route del -net 10.125.137.0/24 gw 10.150.4.1
+显示路由 netstat -rn)
+
+
+
+
+
+
+yum install cloudera-manager-daemons cloudera-manager-server
+/usr/share/cmf/schema/scm_prepare_database.sh -h 10.150.4.88 mysql cm_test cm Cloudera@123
+vi /etc/hosts
+sh sync_hosts.sh 
+service cloudera-scm-server start
+
+tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log 
+
+
+http://10.151.0.147:7180/cmf/login
+
+10.150.4.88
+10.150.4.96
+10.150.4.97
+10.150.4.98
+10.150.4.90
+10.150.4.92
+10.150.4.89
+10.150.4.95
+10.150.4.94
+10.150.4.93
+10.150.4.86
+10.150.4.85
+10.150.4.84
+10.150.4.83
+10.150.4.81
+
+http://10.150.4.81/cloudera/cdh/cdh5.13/
+
+http://10.150.4.81/cloudera/cm5/redhat/7/5.13.0/
+
+
+
+[root@tddp-zk-2 ~]# tail -f /var/log/cloudera-scm-agent/cloudera-scm-agent.log 

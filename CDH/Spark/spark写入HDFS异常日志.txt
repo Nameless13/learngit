@@ -1,0 +1,26 @@
+17/09/23 08:28:22 INFO scheduler.TaskSetManager: Lost task 27.1 in stage 2392.0 (TID 40877) on ddp-dn-071.cmdmp.com, executor 11930: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 9]
+17/09/23 08:28:25 INFO scheduler.TaskSetManager: Lost task 28.2 in stage 2392.0 (TID 40894) on ddp-dn-071.cmdmp.com, executor 11930: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 10]
+17/09/23 08:28:26 INFO scheduler.TaskSetManager: Lost task 26.1 in stage 2392.0 (TID 40879) on ddp-dn-144.cmdmp.com, executor 11929: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 11]
+17/09/23 08:28:27 INFO scheduler.TaskSetManager: Lost task 0.2 in stage 2392.0 (TID 40892) on ddp-dn-008.cmdmp.com, executor 11921: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 12]
+17/09/23 08:28:27 INFO scheduler.TaskSetManager: Lost task 23.2 in stage 2392.0 (TID 40896) on ddp-dn-143.cmdmp.com, executor 11927: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 13]
+17/09/23 08:28:28 INFO scheduler.TaskSetManager: Lost task 32.1 in stage 2392.0 (TID 40880) on ddp-dn-103.cmdmp.com, executor 11931: java.io.IOException (Unable to close file because the last block does not have enough number of replicas.) [duplicate 14]
+17/09/23 08:28:30 WARN scheduler.TaskSetManager: Lost task 7.2 in stage 2392.0 (TID 40897, ddp-dn-078.cmdmp.com, executor 11923): java.io.IOException: Unable to close file because the last block does not have enough number of replicas.
+        at org.apache.hadoop.hdfs.DFSOutputStream.completeFile(DFSOutputStream.java:2703)
+        at org.apache.hadoop.hdfs.DFSOutputStream.closeImpl(DFSOutputStream.java:2665)
+        at org.apache.hadoop.hdfs.DFSOutputStream.close(DFSOutputStream.java:2619)
+        at org.apache.hadoop.fs.FSDataOutputStream$PositionCache.close(FSDataOutputStream.java:72)
+        at org.apache.hadoop.fs.FSDataOutputStream.close(FSDataOutputStream.java:106)
+        at org.apache.hadoop.io.compress.CompressorStream.close(CompressorStream.java:109)
+        at java.io.FilterOutputStream.close(FilterOutputStream.java:160)
+        at org.apache.hadoop.mapred.TextOutputFormat$LineRecordWriter.close(TextOutputFormat.java:108)
+        at org.apache.spark.SparkHadoopWriter.close(SparkHadoopWriter.scala:102)
+        at org.apache.spark.rdd.PairRDDFunctions$$anonfun$saveAsHadoopDataset$1$$anonfun$13$$anonfun$apply$8.apply$mcV$sp(PairRDDFunctions.scala:1211)
+        at org.apache.spark.util.Utils$.tryWithSafeFinallyAndFailureCallbacks(Utils.scala:1366)
+        at org.apache.spark.rdd.PairRDDFunctions$$anonfun$saveAsHadoopDataset$1$$anonfun$13.apply(PairRDDFunctions.scala:1211)
+        at org.apache.spark.rdd.PairRDDFunctions$$anonfun$saveAsHadoopDataset$1$$anonfun$13.apply(PairRDDFunctions.scala:1190)
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:70)
+        at org.apache.spark.scheduler.Task.run(Task.scala:86)
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:274)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+        at java.lang.Thread.run(Thread.java:745)

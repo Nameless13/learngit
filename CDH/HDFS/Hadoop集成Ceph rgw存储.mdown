@@ -1,0 +1,82 @@
+# Hadoop集成Ceph rgw存储
+Hadoop与S3的集成可以参考[官方说明](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html)。实际上对于AWS来说，只有s3协议，但是hadoop由于历史原因，逐步实现了s3->s3n->s3a三种访问S3服务的协议，支持的文件也越来越大。由于我们使用的是自建S3 Service，而只有s3a支持设置endpoint，虽然号称“仍有bug”，但也只能硬着头皮上了。
+## Hadoop配置S3集成
+修改core-site.xml，增加如下配置：
+```
+<property>
+  <name>fs.s3a.access.key</name>
+  <value>BBBA74VJ69J8I4N0GW3O</value>
+  <description>AWS access key ID. Omit for Role-based authentication.</description>
+</property>
+
+<property>
+  <name>fs.s3a.secret.key</name>
+  <value>eNKTsutRmHR8HHM03Mx3xT6ctaW3Fd+PX75KGatk</value>
+  <description>AWS secret key</description>
+</property>
+
+<property>
+  <name>fs.s3a.endpoint</name>
+  <value>10.125.137.31:8080</value>
+  <description>AWS S3 endpoint to connect to. An up-to-date list is
+    provided in the AWS Documentation: regions and endpoints. Without this
+    property, the standard region (s3.amazonaws.com) is assumed.
+  </description>
+</property>
+
+<property>
+  <name>fs.s3a.connection.ssl.enabled</name>
+  <value>false</value>
+  <description>Enables or disables SSL connections to S3.</description>
+</property>
+<property>
+  <name>fs.defaultFS</name>
+  <value>s3a://migu001/</value>
+</property>
+```
+
+分别说明下配置项的功能，这些选项在org.apache.hadoop.fs.s3a.Constants中有定义，后面spark集成S3时也会用到。
+
+fs.s3a.access.key/fs.s3a.secret.key，即AK
+fs.s3a.endpoint，即S3服务地址端口号，注意填写IP，不要用FQDN或者hostname，否则会报Caused by: java.net.UnknownHostException: xxx.zelda2。使用主机名的形式，会造成按AWS的方式来访问，即bucketname.awsxxx.com这种。
+fs.s3a.connection.ssl.enabled，是否开启ssl，我们的S3服务使用http，需要填写为否。
+fs.defaultFS, 只需要配置hive,yarn
+
+配置完成后记得重启HDFS/YARN。
+
+试一下文件上传下载好不好使：
+
+```
+hdfs dfs -ls s3a://migu001/diamonds.csv
+-rw-rw-rw-   root    3000 2017-10-10 09:59 s3a://migu001/1.log
+hdfs ddistcp /mapred s3a://migu001/
+hdfs dfs -ls s3a://migu001/
+Found 2 items
+-rw-rw-rw-   root    3000 2017-10-10 09:59 s3a://migu001/1.log
+-rw-rw-rw-   root       5953 2017-10-10 09:55 s3a://migu001/mapred
+hdfs dfs -get s3a://migu001/mapred
+```
+
+注意fs -ls的时候，bucketname后面有个斜杠，不加会报错：ls: `s3a://xxx’: No such file or directory。 distcp可以把HDFS的文件拷贝到s3上去，当然更方便的是直接使用dfs -put。
+
+再跑个MR：(这个我没有测试过,但是我测试了spark)
+```
+$ ./bin/hadoop jar /home/dtdream/hadoop/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount  s3a://xxx/diamonds.csv /xxx2
+16/07/27 09:59:05 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+..
+16/07/27 09:59:06 INFO mapred.MapTask: Processing split: s3a://xxx/diamonds.csv:0+2772075
+16/07/27 09:59:06 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+16/07/27 09:59:06 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+..
+```
+
+## Signature V2/V4
+由于hadoop的Signature是V2,而s3cmd用的是V4,需要加上参数
+```
+$ s3cmd --signature-v2 ls s3://xxx
+2016-07-26 01:59   2772075   s3://xxx/diamonds.csv
+2016-07-26 01:55      5953   s3://xxx/mapred`
+```
+而Ceph支持V2，使用1.7.4的aws-java-sdk去访问Ceph S3 Service是正常的。
+
+[借鉴文章](https://ieevee.com/tech/2016/07/26/s3-2.html)

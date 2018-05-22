@@ -1,0 +1,176 @@
+# 资源池--裸金属主机部署cdh
+1. 对操作系统盘做RAID1
+
+2. 需要配置OS的repository，以便yum可以访问OS镜像[需要 createrepo httpd postgresql91 python-psycopg2 ]
+    ```
+    Usage: Local YUM  [Adept for RHEL/CentOS]
+
+    1. Backup repository. 
+    find /etc/yum.repos.d/ -name "*.repo" -exec mv {} {}.bak \; 
+
+    2. Install 
+    For CentOS6/RHEL6: rpm -ivh --force --nodeps http://10.200.40.49/pub/centos-release-el6.noarch.rpm
+    For CentOS7/RHEL7: rpm -ivh --force --nodeps http://10.200.40.49/pub/centos-release-el7.noarch.rpm
+
+    3. Update cache 
+    yum clean all
+    yum makecache
+
+    ```
+
+3. 双网卡组绑定,配置静态IP地址
+    ```
+        [root@baiyangshu ~]# ipmitool -H 10.106.15.30 -I lanplus -U root -P calvin  sol activate
+
+
+        ipmitool -H 10.106.14.26 -I lanplus -U root -P Huawei12#$  sol activate
+        [root@baiyangshu ~]# ipmitool -H 10.106.14.21 -I lanplus -U root -P Huawei12#i12#$  sol activate
+
+    ```
+4. 需要所有主机/etc/hosts内容一致确保静态DNS解析[相互包含]
+
+4. 需要使用root用户 或者无密码使用sudo权限的其他用户[uid必须保持一致]
+
+5. 关闭并禁用iptables(未安装),firewall
+    ```
+
+    [root@localhost network-scripts]# sudo firewall-cmd --state
+    not running
+
+    [root@localhost network-scripts]# sudo firewall-cmd --state
+    running
+    [root@localhost network-scripts]# sudo systemctl stop firewalld.service 
+    [75721.569225] Ebtables v2.0 unregistered
+    [root@localhost network-scripts]# sudo systemctl disable firewalld.service
+    Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+    Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+    [root@localhost network-scripts]# sudo firewall-cmd --state
+    not running
+
+    firewall-cmd --state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+    systemctl stop firewalld.service #停止firewall
+    systemctl disable firewalld.service #禁止firewall开机启动
+    ```
+6. 关闭SELinux
+    `echo "SELINUX=disabled" > /etc/sysconfig/selinux;`
+
+7.  重启网络服务，并初始化网络
+    `/etc/init.d/network restart`
+
+8.  修改transparent_hugepage参数，这一参数默认值可能会导致CDH性能下降
+    `echo never > /sys/kernel/mm/transparent_hugepage/enabled`
+    `echo never > /sys/kernel/mm/transparent_hugepage/defrag`
+    同时确保开机自动关闭transparent_hugepage
+    `vi /etc/rc.d/rc.local`
+
+    ```
+    #!/bin/bash
+    # THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES
+    #
+    # It is highly advisable to create own systemd services or udev rules
+    # to run scripts during boot instead of using this file.
+    #
+    # In contrast to previous versions due to parallel execution during boot
+    # this script will NOT be run after all other services.
+    #
+    # Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
+    # that this script will be executed during boot.
+
+    touch /var/lock/subsys/local
+
+    if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    fi
+    if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+    echo never > /sys/kernel/mm/transparent_hugepage/defrag
+    fi
+    ```
+
+    最后给rc.local赋予执行权限 `chmod +x /etc/rc.d/rc.local`
+
+9.  禁用交换内存
+    `vi /etc/sysctl.conf`
+    增加一行：vm.swappiness=0
+    `sudo sysctl vm.swappiness=0`
+    ```
+    echo 0 > /proc/sys/vm/swappiness
+    <!-- echo 'vm.swappiness=0'>> /etc/sysctl.conf --> 还有改好几处
+    cat /proc/sys/vm/swappiness
+    ```
+
+10. 修改/etc/security/limits.conf或者在/etc/security/limits.d下增加相应的配置文件 
+    ```
+    * soft noproc 11000
+    * hard noproc 11000
+    * soft nofile 65535
+    * hard nofile 65535
+    ```
+11. 需要统一开启ntp服务,并且开机启动
+    在集群中选择一台机器作为ntp服务器，剩余的作为ntp客户端。所有客户端时间与ntp服务器保持同步。
+    `vi /etc/ntp.conf` 
+    ntp同步ip地址和鹏博士的保持一致:
+    server 64.113.32.5
+    server 216.229.0.179
+
+    10.200.92.18/20(用第一个),   10.200.12.6/8
+
+    systemctl start ntpd.service
+    systemctl enable ntpd.service
+
+    [root@nm-2 ~]# ntpq -p
+         remote           refid      st t when poll reach   delay   offset  jitter
+    ==============================================================================
+     nist.netservice .ACTS.           1 u    7   64    1  238.736   -7.477   0.000
+     nist1-lnk.binar .ACTS.           1 u    6   64    1  234.281   -6.177   0.000
+
+    systemctl disable chronyd 会影响ntp服务的开机启动所以禁用掉了
+
+
+12. 同时配置spark2.2需要java8环境+特定的jce包
+    JAVA_HOME=/usr/java/jdk1.8.0_144/
+    创建JDBC存放目录`mkdir -p /usr/share/java/`
+    同时替换为cdh的jce
+
+<!-- 13. 配置路由连通鹏博士IDC以及Ceph的RGW
+    route add -net 10.200.0.0/16 gw 10.151.0.1
+    route add -net 10.125.137.0/24 gw 10.151.0.1
+    (删除路由 route del -net 10.125.137.0/24 gw 10.150.4.1
+    显示路由 netstat -rn)    -->
+
+<!-- 14. disable ipv6,同时需要配置4个网卡
+    ifcfg-eth1、ifcfg-ens5、ifcfg-ens6，这几个文件的内容与ifcfg-eth0一样，只是里面的device名字不同，取-后面的
+ -->
+15. RHEL 7 & CentOS 7禁用IPV6
+    http://blog.csdn.net/bluishglc/article/details/41390785
+
+16. 准备jdbc连接mysql的jar包
+[root@sj-cm ~]# scp /usr/share/java/mysql-connector-java-5.1.38-bin.jar 10.150.4.89:/usr/share/java/
+[root@nm-7 ~]# mkdir /usr/share/java
+[root@nm-7 ~]# ln -s /usr/share/java/mysql-connector-java-5.1.38-bin.jar /usr/share/java/mysql-connector-java.jar
+
+17. 检查文件完整性
+    ```
+    [root@cm cdh5.13]# ll
+    total 1889332
+    -rw-r--r-- 1 root root 1934590563 Oct 18 16:13 CDH-5.13.0-1.cdh5.13.0.p0.29-el7.parcel
+    -rw-r--r-- 1 root root         41 Oct 18 16:13 CDH-5.13.0-1.cdh5.13.0.p0.29-el7.parcel.sha1
+    -rw-r--r-- 1 root root      74072 Oct 18 16:13 manifest.json
+    [root@cm cdh5.13]# sha1sum CDH-5.13.0-1.cdh5.13.0.p0.29-el7.parcel
+    bef6f3f074e0a88cd79d6d37abc6698471e3d279  CDH-5.13.0-1.cdh5.13.0.p0.29-el7.parcel
+    [root@cm cdh5.13]# cat CDH-5.13.0-1.cdh5.13.0.p0.29-el7.parcel.sha1 
+    bef6f3f074e0a88cd79d6d37abc6698471e3d279
+    ```
+
+18. route配置
+    ```
+    [root@tddp-zk-2 ~]# route
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+    default         host-10-150-4-1 0.0.0.0         UG    0      0        0 eth1
+    10.125.137.0    .               255.255.255.0   UG    0      0        0 ens6
+    10.150.4.0      0.0.0.0         255.255.255.0   U     0      0        0 eth1
+    10.151.0.0      0.0.0.0         255.255.252.0   U     0      0        0 ens6
+    10.200.0.0      .               255.255.0.0     UG    0      0        0 ens6
+    169.254.169.254 host-10-150-4-4 255.255.255.255 UGH   0      0        0 eth1
+
+    ```

@@ -1,0 +1,27 @@
+title: 快速启动CDH-VM管理信息
+categories: [CDH,Notes]
+date: 2017-05-24
+---
+# 快速启动VM管理信息
+在大多数情况下，除了管理已安装的产品和服务之外，QuickStart VM不需要管理。如果需要其他管理或出现问题，本主题提供有关帐户的信息，以及一些常见问题的可能解释和解决方案。
+[Cloudera-Training-Get2EC2-VM-1.2-vmware](http://s3.amazonaws.com/trainingvms/Cloudera-Training-Get2EC2-VM-1.2-vmware.zip)
+
+##  帐户
+一旦启动VM，您将自动登录 cloudera 用户：
+用户名： cloudera
+密码： cloudera
+cloudera 帐户有VM中sudo的权限,密码是cloudera。
+MySQL root密码（和其他MySQL用户帐户的密码）也是cloudera。
+Hue和Cloudera Manager使用相同的凭据。
+
+## 快速启动VMware映像
+要启动VMware映像，您需要适用于Windows和Linux的VMware Player或适用于Mac的VMware Fusion。
+
+**注意： VMware Fusion仅在英特尔架构上工作，因此具有PowerPC处理器的旧版Mac无法运行QuickStart VM。**
+
+## 快速启动VirtualBox图像
+有些用户报告了在VirtualBox中运行CentOS 6.4的问题。如果在VirtualBox VM启动时发生内核崩溃，您可以尝试解决此问题，方法是打开设置 > 系统 > 主板选项卡，然后为芯片集选择 ICH9而不是PIIX3。如果尚未这样做，还必须在同一选项卡上启用I / O APIC。
+
+## 快速启动KVM映像
+KVM映像提供了可由许多管理程序使用的原始磁盘映像。使用足够的RAM配置使用此映像的计算机。有关VM大小要求，请参阅Cloudera QuickStart VM。
+

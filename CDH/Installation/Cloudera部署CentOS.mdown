@@ -1,0 +1,143 @@
+title: Cloudera部署CentOS
+categories: [CDH,Installation]
+date: 2017-06-30
+---
+>操作系统:CentOS 6.5
+>CM版本:CM5.10.041
+>CDH版本:CDH5.10.041
+>使用version用户对集群进行部署
+
+## 服务器配置
+- 关闭防火墙
+- 配置时钟同步服务
+- 检查数据盘是否挂载
+
+安装的机器ip:
+192.168.86.119,192.168.86.120,
+
+1.  安装操作系统，建议对操作系统盘做RAID1
+2.  如果不能连接互联网，先创建OS的repository，以便yum或zypper可以访问OS镜像
+3.  为了使集群中各个节点之间能互相通信，需要静态或动态配置节点的IP地址。如果使用动态配置，请安装DHCP和DNS服务器，具体请参见对应软件的安装文档，此不赘述；如果使用静态IP地址，请正确配置各节点的IP，并在/etc/hosts配置所有节点的静态DNS解析。
+以cm节点为例：`/etc/sysconfig/network-scripts/ifcfg-eth0`
+
+```
+DEVICE="bond0"
+BOOTPROTO="static"
+IPV6INIT="no"
+MTU="1500"
+NM_CONTROLLED="no"
+ONBOOT="yes"
+TYPE="Ethernet"
+IPADDR=192.168.60.25
+NETMASK=255.255.255.0
+GATEWAY=192.168.60.1
+```
+
+/etc/hosts样例
+```
+10.200.65.50    ddp-cm.cmdmp.com    ddp-cm
+10.200.65.51    ddp-nn-01.cmdmp.com ddp-nn-01
+10.200.65.52    ddp-nn-02.cmdmp.com ddp-nn-02
+10.200.65.53    ddp-dn-01.cmdmp.com ddp-dn-01
+10.200.65.54    ddp-dn-02.cmdmp.com ddp-dn-02
+10.200.65.55    ddp-dn-03.cmdmp.com ddp-dn-03
+10.200.65.56    ddp-dn-04.cmdmp.com ddp-dn-04
+10.200.65.57    ddp-dn-05.cmdmp.com ddp-dn-05
+10.200.65.58    ddp-dn-06.cmdmp.com ddp-dn-06
+10.200.65.59    ddp-dn-07.cmdmp.com ddp-dn-07
+10.200.65.60    ddp-dn-08.cmdmp.com ddp-dn-08
+10.200.65.61    ddp-dn-09.cmdmp.com ddp-dn-09
+10.200.65.62    ddp-dn-10.cmdmp.com ddp-dn-10
+10.200.65.63    ddp-dn-11.cmdmp.com ddp-dn-11
+10.200.65.64    ddp-dn-12.cmdmp.com ddp-dn-12
+10.200.65.71    ddp-kettle-02.cmdmp.com ddp-kettle-02
+10.200.63.132   ddp-yonghong-test1.cmdmp.com    ddp-yonghong-test1.cmdmp.com
+10.200.86.119   ddp-sunflower-test1.cmdmp.com   ddp-sunflower-test1.cmdmp.com
+10.200.86.120   ddp-sunflower-test2.cmdmp.com   ddp-sunflower-test2.cmdmp.com
+```
+
+```
+service network restart
+ping 10.200.86.1
+cd vmware-tools-distrib/
+./vmware-install.pl 
+reboot
+groupadd version
+useradd -m -g version version
+echo 2wsx@WSX|passwd --stdin version
+yes|cp -p /etc/sudoers /etc/sudoers_bak
+chmod +x /etc/sudoers
+sed -i "/NOPASSWD: ALL/c %version ALL=(ALL) NOPASSWD: ALL" /etc/sudoers
+chmod -x /etc/sudoers
+yum install daemontools
+route
+vim /etc/sysconfig/network-scripts/ifcfg-eth0
+service network restart
+vim /etc/ntp.conf 
+/etc/init.d/ntpd start
+```
+
+5. 关闭并禁用防火墙
+`/etc/init.d/iptables stop`
+`/etc/init.d/iptables status`
+`/sbin/chkconfig --level 2345 iptables off`
+6. 关闭SELinux
+`echo "SELINUX=disabled" > /etc/sysconfig/selinux ;`
+7. 重启网络服务，并初始化网络
+`/etc/init.d/network restart`
+8. 修改transparent_hugepage参数，这一参数默认值可能会导致CDH性能下降
+在/etc/init.d/after.local中增加一行：
+`if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/transparent_hugepage/enabled fi `
+9. 禁用交换内存
+vi /etc/sysconfig/selinux 
+vi /sys/kernel/mm/redhat_transparent_hugepage/defrag 
+echo never > /sys/kernel/mm/redhat_transparent_hugepage/defrag
+vi /sys/kernel/mm/redhat_transparent_hugepage/defrag 
+sudo sysctl vm.swappiness=0
+vim /etc/sysctl.conf 
+reboot 
+4. 如果机器配置有双网卡，可以做双网卡绑定；
+
+---
+
+
+
+
+```
+hostname ddp-sunflower-test1.cmdmp.com
+hostname 
+
+vi /etc/hosts
+vi /etc/krb5.conf 
+scp root@10.200.65.71:/home/sunflower/sunflower.keytab .
+ll
+mkdir rpm
+cd rpm/
+scp root@10.200.65.50:/srv/www/htdocs/cloudera/centos_cm/* .
+ll
+yum install ntp
+vi /etc/yum.repos.d/myrepo.repo
+yum install oracle-j2sdk1.7
+yum updata
+yum --help
+yum clean
+yum upgrade
+yum repolist
+vi /etc/yum.repos.d/CentOS-Base.repo 
+yum upgrade
+yum install oracle-j2sdk1.7
+vi /etc/yum.repos.d/CentOS-Base.repo 
+yum install oracle-j2sdk1.7
+yum clean
+yum clean all
+yum install oracle-j2sdk1.7
+rpm -ivh oracle-j2sdk1.7-1.7.0+update67-1.x86_64.rpm 
+rpm -ivh cloudera-manager-daemons-5.10.0-1.cm5100.p0.85.el6.x86_64.rpm 
+find /etc/yum.repos.d/ -name "*.repo" -exec mv {} {}.bak \; 
+rpm -ivh --force --nodeps http://10.200.58.39/pub/centos6-1.0-1.el6.x86_64.rpm 
+yum clean all 
+yum makecache 
+mv /etc/yum.repos.d/myrepo.repo.bak /etc/yum.repos.d/myrepo.repo
+yum install oracle-j2sdk1.7
+history 
+```
