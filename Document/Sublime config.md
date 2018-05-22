@@ -17,7 +17,9 @@ date: 2017-07-07
     "material_theme_compact_sidebar": true,
     "spacegray_tabs_font_large": true,
     "theme": "Material-Theme.sublime-theme",
-    "update_check": false
+    "update_check": false,
+    "open_files_in_new_window": false,
+}
 }
 ```
 
