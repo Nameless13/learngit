@@ -1,3 +1,9 @@
+title: Yarn队列必须为叶队列
+categories: [CDH,YARN]
+date: 2017-10-14
+---
+## Yarn队列必须为叶队列
+
 ```
 INFO  : Compiling command(queryId=hive_20171014104747_ef9adfe5-dd2b-493b-8557-7bce196ebf06): select count(*) from cdmp_dw.td_cms_content_class_d where src_file_day='20171013' limit 10
 INFO  : Semantic Analysis Completed
