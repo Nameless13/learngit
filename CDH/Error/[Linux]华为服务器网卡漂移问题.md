@@ -1,4 +1,4 @@
-title: [Linux]华为服务器网卡漂移问题
+title: 华为服务器网卡漂移问题
 categories: [CDH,Error]
 date: 2017-11-20
 ---

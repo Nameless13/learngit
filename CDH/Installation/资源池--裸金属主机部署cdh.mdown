@@ -1,3 +1,7 @@
+title: 资源池--裸金属主机部署cdh
+categories: [CDH,Installation]
+date: 2018-05-23 09:57:35
+---
 # 资源池--裸金属主机部署cdh
 1. 对操作系统盘做RAID1
 

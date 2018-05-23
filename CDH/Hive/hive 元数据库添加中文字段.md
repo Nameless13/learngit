@@ -1,3 +1,7 @@
+title: hive 元数据库添加中文字段
+categories: [CDH,Hive]
+date: 2018-05-23 09:57:35
+---
 # hive 元数据库添加中文字段
 
 alter table COLUMNS_V2 modify column COMMENT varchar(256) character set utf8;

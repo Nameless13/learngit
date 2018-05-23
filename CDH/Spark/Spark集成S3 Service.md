@@ -1,3 +1,7 @@
+title: Spark集成S3 Service
+categories: [CDH,Spark]
+date: 2018-05-23 09:57:35
+---
 # Spark集成S3 Service
 Spark的DataSource支持S3和Swift，考虑到Ceph也提供了S3和Swift的API，而C++的效率也是Python难以望其项背的，所以Spark+Ceph(S3 Service)可能是一个比较合适的方案。
 

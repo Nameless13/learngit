@@ -1,3 +1,7 @@
+title: Linux 修改时区
+categories: [CDH,Installation]
+date: 2018-05-23 09:57:35
+---
 # linux 修改时区
 
 在linux中与时间相关的文件有

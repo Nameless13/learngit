@@ -1,3 +1,8 @@
+title: CDH upgrade alternatives link not updated
+categories: [CDH,Error]
+date: 2018-05-23 09:57:34
+---
+
 CDH upgrade alternatives link not updated 
 
 There seems to be issues around update-alternatives command. 

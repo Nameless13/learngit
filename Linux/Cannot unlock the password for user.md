@@ -1,3 +1,7 @@
+title: Cannot unlock the password for user
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 # 'Cannot unlock the password for <user>!'
 
 pam_tally --user= --reset

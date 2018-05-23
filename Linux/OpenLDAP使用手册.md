@@ -1,3 +1,7 @@
+title: OpenLDAP使用手册
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 # OpenLDAP使用手册
 
 ---

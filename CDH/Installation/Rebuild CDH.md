@@ -1,3 +1,7 @@
+title: Rebuild CDH
+categories: [CDH,Installation]
+date: 2018-05-23 09:57:35
+---
 # Rebuild CDH
 ## 删除CDH所有组件
 ```

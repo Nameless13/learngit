@@ -1,3 +1,7 @@
+title: jce不匹配导致kerberos失效
+categories: [CDH,Error]
+date: 2017-11-27
+---
 # jce不匹配
 
 ```

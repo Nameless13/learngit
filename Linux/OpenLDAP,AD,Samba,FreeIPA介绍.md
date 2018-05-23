@@ -1,3 +1,7 @@
+title: OpenLDAP,AD,Samba,FreeIPA介绍
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 OpenLDAP is a decent product, but it's really just a bare-bones LDAP server, and something you might integrate into a more complete product or service. For example, even the schemas that it ships with have not changed in a long time and would need to be augmented with at least rfc2307bis. It also doesn't ship with any management tools. Apache Directory Studio is decent, but quite low-level.
 
 Active Directory is a suite of services that include LDAP and some schemas, but also a Kerberos service, a certificate authority, and a DNS service. The (Windows based) AD user and group management tools are OK, and slightly more convenient than Apache Directory Studio, although they only run on Windows. The integration between everything is very good. Binding Linux machines to AD is pretty simple these days with sssd.

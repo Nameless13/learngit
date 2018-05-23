@@ -1,6 +1,5 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
-# version 0.2 代码复用过大,目前能判断是否需要添加hexo的头部说明,但是文件日期还是当前日期
 
 import os,re,time,datetime
 def fname_format(fname):
@@ -44,8 +43,8 @@ def write_title(filename_path,fname):
         s = f.read()
         f.close()
         #获取categories
-        # secondpath = filename_path.split("/")[1:-1] #For MAC,Linux
-        secondpath = filename_path.split("\\")[1:-1]  #For Windows
+        secondpath = filename_path.split("/")[1:-1] #For MAC,Linux
+        # secondpath = filename_path.split("\\")[1:-1]  #For Windows
         secondpath_tostr=",".join(secondpath)
         filemtime=get_FileModifyTime(filename_path)
         categories_format = 'title: ' + fname + '\n' + \

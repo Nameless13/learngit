@@ -1,3 +1,7 @@
+title: SSSD介绍
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 # SSSD介绍
 SSSD是自红帽企业版Linux6起新加入的一个守护进程，该进程可以用来访问多种验证服务器，如LDAP，Kerberos等，并提供授权。SSSD是
 介于本地用户和数据存储之间的进程，本地客户端首先连接SSSD，再由SSSD联系外部资源提供者(一台远程服务器)。 

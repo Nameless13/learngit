@@ -1,6 +1,5 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
-# version 0.2 代码复用过大,目前能判断是否需要添加hexo的头部说明,但是文件日期还是当前日期
 
 import os,re,time,datetime
 def fname_format(fname):

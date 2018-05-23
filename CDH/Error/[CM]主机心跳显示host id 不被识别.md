@@ -1,3 +1,8 @@
+title: 主机心跳显示host id 不被识别
+categories: [CDH,Error]
+date: 2018-05-23 09:57:34
+---
+
 # 主机心跳显示host id 不被识别
 ```
 The process directory is within /var/run/cloudera-scm-agent/process which

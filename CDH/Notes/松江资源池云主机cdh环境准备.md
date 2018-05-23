@@ -1,3 +1,7 @@
+title: 松江资源池云主机cdh环境准备
+categories: [CDH,Notes]
+date: 2018-05-23 09:57:35
+---
 # 松江资源池云主机cdh环境准备
 ```
     1  reboot

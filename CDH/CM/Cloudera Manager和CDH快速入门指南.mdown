@@ -2,6 +2,7 @@ title: Cloudera Manager和CDH快速入门指南
 categories: [CDH,CM]
 date: 2017-05-24
 ---
+
 #  Cloudera Manager和CDH快速入门指南
 本快速入门指南介绍如何在四台主机的集群上快速创建Cloudera Manager 5，CDH 5和托管服务的新安装。生成的部署可用于演示和概念验证应用程序，但不推荐用于生产。
 
