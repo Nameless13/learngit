@@ -1,3 +1,9 @@
+title: kerberos迁移以及问题汇总
+categories: [CDH,Kerberos MIT]
+date: 2017-11-24
+---
+
+```
 ddp-dn-01:~/hct # cat /etc/krb5.conf 
 [libdefaults]
 #       default_realm = EXAMPLE.COM 
@@ -31,7 +37,7 @@ cmdmp.com = CMDMP.COM
     kdc = FILE:/var/log/krb5/krb5kdc.log
     admin_server = FILE:/var/log/krb5/kadmind.log
     default = SYSLOG:NOTICE:DAEMON
-
+```
 
 
 
@@ -43,7 +49,7 @@ cmdmp.com = CMDMP.COM
 
 ------------
 
-
+```
 ddp-dn-07:~ # kadmin.local 
 Authenticating as principal host/admin@CMDMP.COM with password.
 kadmin.local:  addprinc -randkey krbtgt/SJTEST.COM@CMDMP.COM
@@ -70,10 +76,11 @@ Principal "krbtgt/SJTEST.COM@CMDMP.COM" created.
 kadmin.local:  addprinc -randkey krbtgt/CMDMP.COM@SJTEST.COM
 WARNING: no policy specified for krbtgt/CMDMP.COM@SJTEST.COM; defaulting to no policy
 Principal "krbtgt/CMDMP.COM@SJTEST.COM" created.
-
+```
 
 
 -------------
+```
 [libdefaults]
 default_realm = CMDMP.COM
 dns_lookup_realm = false
@@ -106,9 +113,10 @@ sjtest.com = SJTEST.COM
     kdc = FILE:/var/log/krb5/krb5kdc.log
     admin_server = FILE:/var/log/krb5/kadmind.log
     default = SYSLOG:NOTICE:DAEMON
-
+```
 
 ------------
+```
 [libdefaults]
 default_realm = SJTEST.COM
 dns_lookup_kdc = false
@@ -143,28 +151,27 @@ cmdmp.com = CMDMP.COM
 [logging]
     kdc = FILE:/var/log/krb5/krb5kdc.log
     admin_server = FILE:/var/log/krb5/kadmind.log
-
+```
 
 
 -----
-cm 上也需要配置trust realm
+cm HDFS上也需要配置trust realm
 
 
 krb5.conf 中kdc顺序有问题
 
 
 ---
+````
 Couldn't renew kerberos ticket in order to work around Kerberos 1.8.1 issue. Please check that the ticket for 'hue/dsj-ddp-test-mstr-05@SJTEST.COM' is still renewable:
   $ klist -f -c /tmp/hue_krb5_ccache
 If the 'renew until' date is the same as the 'valid starting' date, the ticket cannot be renewed. Please check your KDC configuration, and the ticket renewal policy (maxrenewlife) for the 'hue/dsj-ddp-test-mstr-05@SJTEST.COM' and `krbtgt' principals.
-
+````
 
 krbtgt 问题
 
-modprinc -maxrenewlife 1week krbtgt/CMDMP.COM@CMDMP.COM
-
-krbtgt/CMDMP.COM@CMDMP.COM
-
+`modprinc -maxrenewlife 1week krbtgt/CMDMP.COM@CMDMP.COM`
+`krbtgt/CMDMP.COM@CMDMP.COM`
 
 解决Kerberos Kadmin链接问题
 配置文件只能配置一个kadmin 可以多个kdc

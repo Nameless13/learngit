@@ -1,3 +1,7 @@
+title: Hadoop集成Ceph rgw存储
+categories: [CDH,HDFS]
+date: 2018-05-23 09:57:35
+---
 # Hadoop集成Ceph rgw存储
 Hadoop与S3的集成可以参考[官方说明](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html)。实际上对于AWS来说，只有s3协议，但是hadoop由于历史原因，逐步实现了s3->s3n->s3a三种访问S3服务的协议，支持的文件也越来越大。由于我们使用的是自建S3 Service，而只有s3a支持设置endpoint，虽然号称“仍有bug”，但也只能硬着头皮上了。
 ## Hadoop配置S3集成

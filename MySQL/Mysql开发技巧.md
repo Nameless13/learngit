@@ -1,3 +1,7 @@
+title: mysql命令
+categories: [MySQL]
+date: 2017-10-30
+---
 - DDL 数据定义语言
 - TPL 事务处理语言
 - DCL 数据控制语言

@@ -1,3 +1,7 @@
+title: CentOS7 关闭防火墙,禁用ipv6
+categories: [CDH,Installation]
+date: 2018-05-23 09:57:35
+---
 # CentOS7 关闭防火墙,禁用ipv6
 ## CentOS7 关闭防火墙
 

@@ -1,3 +1,8 @@
+title: hexo
+categories: [Tips]
+date: 2018-05-23 09:57:35
+---
+
 # hexo
 > [官方文档](https://hexo.io/zh-cn/docs/index.html)
 

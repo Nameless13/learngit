@@ -1,3 +1,7 @@
+title: 关于tar解压重命名的问题
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 # 关于tar解压重命名的问题
 ## 问题描述：
 `wget http://oss.aliyuncs.com/aliyunecs/onekey/mysql/mysql-5.6.15-linux-glibc2.5-i686.tar.gz`

@@ -2,6 +2,7 @@ title: spark-sql添加
 categories: [CDH,Error]
 date: 2017-07-12
 ---
+
 CDH版本的spark阉割了spark-sql,可以重新编译cloudera/spark,或者直接在启动时添加所缺失的jar包
 >操作系统:SUSE11 SP3
 >Spark版本:SPARK2-2.1.0.cloudera1-1.cdh5.7.0.p0.120904

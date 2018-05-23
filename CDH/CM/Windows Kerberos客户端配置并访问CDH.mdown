@@ -1,3 +1,8 @@
+title: Windows Kerberos客户端配置并访问CDH
+categories: [CDH,CM]
+date: 2018-05-23 09:57:34
+---
+
 # Windows Kerberos客户端配置并访问CDH
 本文档描述Windows Server2008 R2（windows的内核版本是6.1，与windows 7相同）下安装Kerberos Client及FireFox下HTTP访问HDFS、Yarn、Hive、HBase等Hadoop服务的Web UI(如Namenode的50070，Yarn的8088)的过程。
 安装文档主要分为以下几步：

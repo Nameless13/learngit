@@ -1,4 +1,4 @@
-title: [HDFS]Namenode与JN同步失败
+title: Namenode与JN同步失败
 categories: [CDH,Error]
 date: 2017-11-07
 ---

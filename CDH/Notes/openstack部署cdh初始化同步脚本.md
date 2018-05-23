@@ -1,3 +1,7 @@
+title: openstack部署cdh初始化同步脚本
+categories: [CDH,Notes]
+date: 2018-05-23 09:57:35
+---
 for i in `cat ~/servers.txt`
 do
     echo "--------------begin to sync ntp.conf to $i--------------"

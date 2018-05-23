@@ -1,3 +1,7 @@
+title: Linux下解压,压缩JAR包的方法
+categories: [Linux]
+date: 2018-05-23 09:57:35
+---
 # Linux下解压,压缩JAR包的方法
 把当前目录下的所有文件打包成project.jar
 jar -cvfM0 project.jar ./
