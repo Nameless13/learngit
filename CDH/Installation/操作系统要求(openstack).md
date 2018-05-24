@@ -2,8 +2,9 @@ title: 操作系统要求(openstack)
 categories: [CDH,Installation]
 date: 2018-05-23 09:57:35
 ---
+
 # 资源池环境搭建
->何常通 
+>Nameless13
 
 ## 操作系统配置准备
 1. 建议对操作系统盘做RAID1[无法满足]
