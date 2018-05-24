@@ -19,6 +19,8 @@ org.apache.zookeeper.KeeperException$NoNodeException: KeeperErrorCode = NoNode f
 show locks <hiveDBName>.<Table>
 
 show locks <hiveDBName>.<Table> partition (src_file_day='20170218' , src_file_our='17'); 
+show locks app.mgba_client_event_detail partition(src_file_day='20171114');
+unlock table 
 ```
 可以看到 
 ```
@@ -93,3 +95,47 @@ INFO  : OK
 +-----------+--+
 ```
 
+```
+>show locks ods.migulive_10108_func_use_log_ex;
+
++-------------------------------------+---------+--+
+|              tab_name               |  mode   |
++-------------------------------------+---------+--+
+| ods@migulive_10108_func_use_log_ex  | SHARED  |
+| ods@migulive_10108_func_use_log_ex  | SHARED  |
+| ods@migulive_10108_func_use_log_ex  | SHARED  |
++-------------------------------------+---------+--+
+3 rows selected (0.27 seconds)
+>show locks ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00');
++----------------------------------------------------+---------+--+
+|                      tab_name                      |  mode   |
++----------------------------------------------------+---------+--+
+| ods@migulive_10108_func_use_log_ex@src_file_day=20171114/src_file_hour=00 | SHARED  |
+| ods@migulive_10108_func_use_log_ex@src_file_day=20171114/src_file_hour=00 | SHARED  |
+| ods@migulive_10108_func_use_log_ex@src_file_day=20171114/src_file_hour=00 | SHARED  |
++----------------------------------------------------+---------+--+
+
+```
+解锁分区
+```
+> unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00');
+INFO  : Compiling command(queryId=hive_20171115221717_540d811a-473a-443a-91c3-e5aa545a2bc1): unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00')
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20171115221717_540d811a-473a-443a-91c3-e5aa545a2bc1); Time taken: 0.083 seconds
+INFO  : Executing command(queryId=hive_20171115221717_540d811a-473a-443a-91c3-e5aa545a2bc1): unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00')
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20171115221717_540d811a-473a-443a-91c3-e5aa545a2bc1); Time taken: 0.025 seconds
+INFO  : OK
+No rows affected (0.117 seconds)
+> unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='01');
+INFO  : Compiling command(queryId=hive_20171115221717_a3869646-831b-4d37-9344-3c8a598307c2): unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='01')
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20171115221717_a3869646-831b-4d37-9344-3c8a598307c2); Time taken: 0.084 seconds
+INFO  : Executing command(queryId=hive_20171115221717_a3869646-831b-4d37-9344-3c8a598307c2): unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='01')
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20171115221717_a3869646-831b-4d37-9344-3c8a598307c2); Time taken: 0.025 seconds
+INFO  : OK
+No rows affected (0.117 seconds)
+```
