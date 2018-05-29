@@ -1,3 +1,8 @@
+title: CentOS7(单台)cdh环境初始化
+categories: [CDH,Installation]
+date: 2017-06-30
+---
+```bash
 # 替换yum源
 find /etc/yum.repos.d/ -name "*.repo" -exec mv {} {}.bak \;
 rpm -ivh --force --nodeps http://10.200.40.49/pub/centos-release-el7.noarch.rpm
@@ -44,3 +49,4 @@ sudo scp -r 10.151.164.84:/usr/java/jdk1.8.0_131/ /usr/java/
 export JAVA_HOME=/usr/java/jdk1.8.0_131
 #  同步hosts
 sudo scp 10.151.164.84:/etc/hosts /etc/hosts
+```

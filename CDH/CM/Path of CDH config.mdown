@@ -2,9 +2,7 @@ title: Path of CDH config
 categories: [CDH,CM]
 date: 2017/09/24 13:58:04
 ---
-
 # Path of CDH config
-
 
 When using Cloudera Manager, configuration is stored in a central DB, upon startup of services on a target cluster node, cloudera manager passes, through the Agent on that host, the runtime configuration that should be used, and starts the processes, pointing to that runtime location.
 

@@ -94,7 +94,7 @@ sjad.com = SJAD.COM
     default = SYSLOG:NOTICE:DAEMON
 ```
 
-## 检查Java环境(发现root 用户jdk环境被指定)
+## 检查Java环境(发现root 用户jdk环境被指定且无特定的jce包)
 ```
 cat ~/.bashrc
 export JAVA_HOME=/usr/java/jdk1.7.0_67
@@ -107,5 +107,5 @@ echo $JAVA_HOME
 /etc/init.d/cloudera-scm-agent restart
 ```
 
-之后替换为其替换jce解决问题
+之后为其添加集群所适配的jce解决问题
 

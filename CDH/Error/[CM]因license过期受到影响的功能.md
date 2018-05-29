@@ -2,7 +2,6 @@ title: 因license过期受到影响的功能
 categories: [CDH,Error]
 date: 2017-05-24
 ---
-
 # 因license过期受到影响的功能
 1. 为Cloudera Manager配置外部验证功能
 

@@ -2,13 +2,12 @@ title: License消除方案
 categories: [CDH,Error]
 date: 2017-05-24
 ---
-
-## License过期后强制前端不显示
-### License 告警提示文字消除
+# License过期后强制前端消除不显示
+## License 告警提示文字消除
 解压 `tar -xf properties.0508.tar`
 在路径`/usr/share/cmf/`下替换
 备份原文件:
-```
+```bash
 cp message_zh_CN.properties message_zh_CN.properties.bak
 cp message_en.properties message_en.properties.bak
 cp message.properties message.properties.bak
@@ -20,11 +19,11 @@ cp label_zh_CN.properties label_zh_CN.properties.bak
 重启服务 `/etc/init.d/cloudera-scm-server restart`
 
 
-###  License div 消除方案
+##  License div 消除方案
 1. cloudera manage SERVER的页面时由路径`/usr/share/cmf/common_jars`下**server-5.10.0.jar**这个jar包动态生成的 
 2. 解压 `jar xf server-5.10.0.jar` 
 3. 通过定位CSS样式中的class
-```
+```bash
 grep -Iwr "alert alert-error" .
 grep -Iwr "alert-error" .
 grep -Iwr "LicenseStatus" .

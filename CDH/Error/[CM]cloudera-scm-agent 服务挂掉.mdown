@@ -2,7 +2,6 @@ title: cloudera-scm-agent 服务挂掉
 categories: [CDH,Error]
 date: 2017-05-24
 ---
-
 #  cloudera-scm-agent 服务挂掉
 ## cloudera-scm-agent日志查看需要sudo权限
 

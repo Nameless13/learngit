@@ -3,8 +3,7 @@ categories: [Document]
 date: 2016-09-07
 ---
 # YAML
-
-[demo实例](http://nodeca.github.io/js-yaml/   )
+[demo实例](http://nodeca.github.io/js-yaml/)
 
 - 大小写敏感
 - 使用缩进表示层级关系
@@ -26,24 +25,25 @@ hash: { name: Steve, foo: bar }   --> JS { hash: { name: 'Steve', foo: 'bar' } }
 
 ## 数组
 一组连词线开头的行，构成一个数组。
-`
+```
 
     - Cat
     - Dog
     - Goldfish
-    `
+```
 
 --> JS
 [ 'Cat', 'Dog', 'Goldfish' ]
 
 数据结构的子成员是一个数组，则可以在该项下面缩进一个空格。
-`
+```
 
     -
      - Cat
      - Dog
      - Goldfish    
-`    
+```
+    
 -->JS
 [ [ 'Cat', 'Dog', 'Goldfish' ] ]
 数组也可以采用行内表示法。

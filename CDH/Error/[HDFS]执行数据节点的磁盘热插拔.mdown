@@ -3,7 +3,7 @@ categories: [CDH,Error]
 date: 2017-04-01
 ---
 #  执行数据节点的磁盘热插拔
->**v1.0** updated:2017-04-01 何常通
+>**v1.0** updated:2017-04-01 Nameless13
 
 [在不关闭DataNode的情况下替换HDFS磁盘,这被称为热插拔](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_dn_swap.html)
 ####  警告:要求和限制

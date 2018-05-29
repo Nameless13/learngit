@@ -2,7 +2,6 @@ title: Cloudera部署SUSE
 categories: [CDH,Installation]
 date: 2017-06-27
 ---
-
 >操作系统:SUSE11 SP3
 >CM版本:CM5.11.0
 >CDH版本:CDH5.10.1

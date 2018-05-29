@@ -192,5 +192,4 @@ Result: PLAN_UNDER_PROGRESS
 ```
 hdfs diskbalancer -plan $(hostname -f) --out /system/diskbalancer/$(hostname -f)  --thresholdPercentage 5
 hdfs diskbalancer -execute /system/diskbalancer/$(hostname -f)/$(hostname -f).plan.json
-
 ```

@@ -1,8 +1,6 @@
 title: kerberos配置文件
-categories: 
-- CDH
-- Kerberos MIT
-date: 2017/09/24 13:58:04
+categories: [CDH,Kerberos MIT]
+date: 2017-09-24 
 ---
 当主KDC不可用时，从属KDC提供Kerberos票证授予服务，但不提供数据库管理。
 

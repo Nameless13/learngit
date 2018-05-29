@@ -1,7 +1,6 @@
 title: nas盘用户名一致,uid不一致
-categories: 
-- Document
-date: 2017/09/24 13:58:04
+categories: [Document]
+date: 2017/09/24 
 ---
 # nas盘用户名一致,uid不一致
 

@@ -15,8 +15,6 @@ HUE通过隧道映射到本地后发现所有的JavaScript文件解析有问题:
 ## HUE文件路径:
 `/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hue/desktop`
 
-
-
 ###  desktop/core/src/desktop/middleware.py
 ```
  import inspect

@@ -2,6 +2,7 @@ title: openstack部署cdh初始化同步脚本
 categories: [CDH,Notes]
 date: 2018-05-23 09:57:35
 ---
+```bash
 for i in `cat ~/servers.txt`
 do
     echo "--------------begin to sync ntp.conf to $i--------------"
@@ -42,5 +43,5 @@ do
     echo "--------------begin to sync wget to $i--------------"
     ssh  $i 'yum -y install wget'
 done
-
+```
 

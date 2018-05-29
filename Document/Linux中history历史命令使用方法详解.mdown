@@ -1,6 +1,5 @@
 title: Linux中history历史命令使用方法详解
-categories: 
-- Document
+categories: [Document]
 date: 2017/09/24 13:58:04
 ---
 # Linux中history历史命令使用方法详解

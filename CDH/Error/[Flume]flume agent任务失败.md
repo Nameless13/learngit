@@ -2,15 +2,13 @@ title: flume agent任务失败
 categories: [CDH,Error]
 date: 2017/09/24 13:58:04
 ---
-
 # flume agent任务失败
-[https://community.hortonworks.com/questions/45962/dataxceiver-error-processing-write-block-operation.html]
 flume日志报错: 
 
 ```
-PriviledgedActionException as:hadoop@CMDMP.COM (auth:KERBEROS) cause:java.io.IOException: Couldn't setup connection for hadoop@CMDMP.COM to ddp-nn-02.cmdmp.com/10.200.60.107:8020
-06 Jul 2017 06:39:23,507 INFO  [hdfs-sink1-call-runner-5] (org.apache.hadoop.io.retry.RetryInvocationHandler.invoke:148)  - Exception while invoking create of class ClientNamenodeProtocolTranslatorPB over ddp-nn-02.cmdmp.com/10.200.60.107:8020 after 1 fail over attempts. Trying to fail over immediately.
-java.io.IOException: Failed on local exception: java.io.IOException: Couldn't setup connection for hadoop@CMDMP.COM to ddp-nn-02.cmdmp.com/10.200.60.107:8020; Host Details : local host is: "ddp-dn-101.cmdmp.com/10.200.63.89"; destination host is: "ddp-nn-02.cmdmp.com":8020;
+PriviledgedActionException as:hadoop@xxxxx.COM (auth:KERBEROS) cause:java.io.IOException: Couldn't setup connection for hadoop@xxxxx.COM to xxx-nn-02.xxxxx.com/10.200.60.107:8020
+06 Jul 2017 06:39:23,507 INFO  [hdfs-sink1-call-runner-5] (org.apache.hadoop.io.retry.RetryInvocationHandler.invoke:148)  - Exception while invoking create of class ClientNamenodeProtocolTranslatorPB over xxx-nn-02.xxxxx.com/10.200.60.107:8020 after 1 fail over attempts. Trying to fail over immediately.
+java.io.IOException: Failed on local exception: java.io.IOException: Couldn't setup connection for hadoop@xxxxx.COM to xxx-nn-02.xxxxx.com/10.200.60.107:8020; Host Details : local host is: "xxx-dn-101.xxxxx.com/10.200.63.89"; destination host is: "xxx-nn-02.xxxxx.com":8020;
 
 Unable to close file because the last block des not have enough number of replicas.
 ```
@@ -27,3 +25,4 @@ hadoop-datanode1:50010ataXceiver error processing WRITE_BLOCK operation
 
 
 jmap -heap pid 查看java进程内存使用情况
+[参考文档](https://community.hortonworks.com/questions/45962/dataxceiver-error-processing-write-block-operation.html)

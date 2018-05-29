@@ -1,7 +1,6 @@
 title: hirecut
-categories: 
-- Tips
-date: 2017/09/24 13:58:04
+categories: [Tips]
+date: 2017-09-24 
 ---
 In this video, MC will be showing you step by step how to do a skin fade using a straight razor.
 -0:13 Make sure to wet the hair before using a straight razor against the scalp. This will result in less pulling and irritation.

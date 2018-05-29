@@ -2,7 +2,6 @@ title: Windows Kerberos客户端配置并访问CDH
 categories: [CDH,CM]
 date: 2018-05-23 09:57:34
 ---
-
 # Windows Kerberos客户端配置并访问CDH
 本文档描述Windows Server2008 R2（windows的内核版本是6.1，与windows 7相同）下安装Kerberos Client及FireFox下HTTP访问HDFS、Yarn、Hive、HBase等Hadoop服务的Web UI(如Namenode的50070，Yarn的8088)的过程。
 安装文档主要分为以下几步：
@@ -12,7 +11,7 @@ date: 2018-05-23 09:57:34
 4.配置FireFox。(chrome,ie的配置仅需配置 Internet options. )
 5.验证服务是否正常访问。
 ```
-ddp-cm:~ # curl --negotiate -u : http://ddp-nn-01.cmdmp.com:50070/
+xxx-cm:~ # curl --negotiate -u : http://xxx-nn-01.xxxxx.com:50070/
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
@@ -28,9 +27,9 @@ ddp-cm:~ # curl --negotiate -u : http://ddp-nn-01.cmdmp.com:50070/
 
 ### linux服务器上是可以通过negotiate参数访问
 ```
-ddp-cm:~ # kinit hdfs
-Password for hdfs@CMDMP.COM: 
-ddp-cm:~ # curl --negotiate -u : http://ddp-nn-01.cmdmp.com:50070/
+xxx-cm:~ # kinit hdfs
+Password for hdfs@xxxxx.COM: 
+xxx-cm:~ # curl --negotiate -u : http://xxx-nn-01.xxxxx.com:50070/
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
@@ -74,9 +73,9 @@ negotiate-delegatewhitelist =“MYIISSERVER.DOMAIN.COM”-auth-schemes =“diges
 
 Chrome.exe -auth-server-whitelist =“MYIISSERVER.DOMAIN.COM”-auth-negotiate-delegatewhitelist =“MYIISSERVER.DOMAIN.COM”-auth-schemes =“digest，ntlm，negotiate”
 
-"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --auth-server-whitelist =“ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com” --auth-negotiate-delegatewhitelist =“ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com”
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --auth-server-whitelist =“xxx-cm.xxxxx.com,xxx-nn-01.xxxxx.com,xxx-nn-02.xxxxx.com” --auth-negotiate-delegatewhitelist =“xxx-cm.xxxxx.com,xxx-nn-01.xxxxx.com,xxx-nn-02.xxxxx.com”
 
---auth-server-whitelist="ddp-cm.cmdmp.com,ddp-nn-01.cmdmp.com,ddp-nn-02.cmdmp.com"
+--auth-server-whitelist="xxx-cm.xxxxx.com,xxx-nn-01.xxxxx.com,xxx-nn-02.xxxxx.com"
 ```
 
 但是配置过后依旧不成功Firefox配置后可以使用

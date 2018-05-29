@@ -2,6 +2,7 @@ title: rmall
 categories: [CDH,Shell]
 date: 2018-05-23 09:57:35
 ---
+```
 for i in `cat ~/servers.txt`
 do
     echo "--------------begin to change ntpd to $i--------------"
@@ -19,8 +20,10 @@ do
 
 
 done
-
+```
 ----
+
+## 更换Default gw
 [root@tddp-nm-5 ~]# route del default gw 10.151.0.1
 [root@tddp-nm-5 ~]# route add default gw 10.150.4.1
 
@@ -54,6 +57,7 @@ clean           Clean local caches.
 
 ----------------------
 
+```
 for i in `cat ~/servers.txt`
 do
     echo "--------------begin to rm cloudera to $i--------------"
@@ -62,8 +66,9 @@ do
     ssh $i 'sh /root/rmall.sh'
 
 done
+```
 
-
+```
 service cloudera-scm-server stop
 service cloudera-scm-agent stop
 umount /var/run/cloudera-scm-agent/process
@@ -75,8 +80,10 @@ rpm -e cloudera-manager-daemons-5.13.0-1.cm5130.p0.55.el7.x86_64
 rm -rf /var/lib/hadoop-* /var/lib/impala /var/lib/solr /var/lib/zookeeper /var/lib/hue /var/lib/oozie  /var/lib/pgsql  /var/lib/sqoop2  /data/dfs/  /data/impala/ /data/yarn/  /dfs/ /impala/ /yarn/  /var/run/hadoop-*/ /var/run/hdfs-*/ /usr/bin/hadoop* /usr/bin/zookeeper* /usr/bin/hbase* /usr/bin/hive* /usr/bin/hdfs /usr/bin/mapred /usr/bin/yarn /usr/bin/sqoop* /usr/bin/oozie /etc/hadoop* /etc/zookeeper* /etc/hive* /etc/hue /etc/impala /etc/sqoop* /etc/oozie /etc/hbase* /etc/hcatalog 
 rm -rf /opt/cloudera/parcel-cache /opt/cloudera/parcels
 ps aux|grep  supervisord |grep -v grep | awk '{print "kill -9 " $2}'|sh
+```
 
-
+## 删除对应数据库
+```sql
 drop database amon_test;      
 drop database hue_test;      
 drop database cm_test;      
@@ -109,8 +116,11 @@ GRANT ALL PRIVILEGES ON hue_test.* TO 'hue'@'%';
 create database oozie_test default character set utf8;
 GRANT ALL PRIVILEGES ON oozie_test.* TO 'oozie'@'%'; 
 FLUSH PRIVILEGES;
+```
 
-
+删除路由 route del -net 10.125.137.0/24 gw 10.150.4.1
+显示路由 netstat -rn
+```
 [root@tddp-nm-5 ~]# route del default gw 10.151.0.1
 [root@tddp-nm-5 ~]# route add default gw 10.150.4.1
 
@@ -125,14 +135,13 @@ route add -net 10.125.137.0/24 gw 10.151.0.1
 
 
 route add -net 10.150.4.0/16 gw 10.150.4.1
-(删除路由 route del -net 10.125.137.0/24 gw 10.150.4.1
-显示路由 netstat -rn)
+```
 
 
 
 
-
-
+## 手动安装
+```bash
 yum install cloudera-manager-daemons cloudera-manager-server
 /usr/share/cmf/schema/scm_prepare_database.sh -h 10.150.4.88 mysql cm_test cm Cloudera@123
 vi /etc/hosts
@@ -140,30 +149,7 @@ sh sync_hosts.sh
 service cloudera-scm-server start
 
 tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log 
-
-
-http://10.151.0.147:7180/cmf/login
-
-10.150.4.88
-10.150.4.96
-10.150.4.97
-10.150.4.98
-10.150.4.90
-10.150.4.92
-10.150.4.89
-10.150.4.95
-10.150.4.94
-10.150.4.93
-10.150.4.86
-10.150.4.85
-10.150.4.84
-10.150.4.83
-10.150.4.81
-
-http://10.150.4.81/cloudera/cdh/cdh5.13/
-
-http://10.150.4.81/cloudera/cm5/redhat/7/5.13.0/
-
+```
 
 
 [root@tddp-zk-2 ~]# tail -f /var/log/cloudera-scm-agent/cloudera-scm-agent.log 

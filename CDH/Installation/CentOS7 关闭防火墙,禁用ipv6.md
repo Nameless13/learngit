@@ -50,18 +50,16 @@ GRUB_CMDLINE_LINUX="nofb nomodeset vga=normal"
 
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
-[root@localhost network-scripts]# cat /proc/sys/net/ipv6/conf/all/disable_ipv6
-0
-
-
 If the output is 0, IPv6 is enabled.
 If the output is 1, IPv6 is already disabled.
-
+```
+[root@localhost network-scripts]# cat /proc/sys/net/ipv6/conf/all/disable_ipv6
+0
+```
 
 lsmod | grep ipv6
 
-
-
-169.254.169.254
-
+```
 cloud-init[1716]: 2018-01-08 10:05:08,907 - url_helper.py[WARNING]: Calling 'http://10.151.164.1/latest/meta-data/instance-id' failed [30/120s]: request error [('Connection aborted.', error(111, 'Connection refused'))]
+```
+删除cloud-init

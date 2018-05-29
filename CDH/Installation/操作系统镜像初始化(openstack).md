@@ -1,8 +1,7 @@
-title: 操作系统要求(openstack)
+title: 操作系统镜像初始化(openstack)
 categories: [CDH,Installation]
 date: 2018-05-23 09:57:35
 ---
-
 # 资源池环境搭建
 >Nameless13
 

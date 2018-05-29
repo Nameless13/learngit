@@ -2,7 +2,7 @@ title: hive zk 锁分区
 categories: [CDH,Error]
 date: 2017-06-30
 ---
-错误日志:
+## 错误日志:
 ```
 Got user-level KeeperException when processing sessionid:0x15bfba733be2c2b type:create cxid:0x8621e1c zxid:0x170a4b8e0d txntype:-1 reqpath:n/a Error Path:/hive_zookeeper_namespace_hive/rptdata/fact_kesheng_sdk_new_device_hourly/src_file_day=20170414/src_file_hour=07 Error:KeeperErrorCode = NodeExists for /hive_zookeeper_namespace_hive/rptdata/fact_kesheng_sdk_new_device_hourly/src_file_day=20170414/src_file_hour=07
 ```
@@ -11,10 +11,10 @@ Got user-level KeeperException when processing sessionid:0x15bfba733be2c2b type:
 org.apache.zookeeper.KeeperException$NoNodeException: KeeperErrorCode = NoNode for /hive_zookeeper_namespace/<hiveDBName>/<Table>/<PARTITION>/LOCK-SHARED-0000000000
 ```
 
-在ZK中可以看到对应的分区锁住了
+### 在ZK中可以看到对应的分区锁住了
 `/hive_zookeeper_namespace_hive/<hiveDBName>/<Table>/LOCK-SHARED-`
 
-在beeline中查看被锁的表和分区
+### 在beeline中查看被锁的表和分区
 ```
 show locks <hiveDBName>.<Table>
 
@@ -27,14 +27,13 @@ unlock table
 | <hiveDBName>@ugc_90103_bossmonthorderlog_test@<PARTITION>/<PARTITION> | SHARED     |
 ```
 
-解锁:
+## 解锁table:
 ```
 unlock table <hiveDBName>.<Table>;
 ```
 
-依旧在beeline中:
+## 或者在beeline中,强行把配置删除对应table(不建议)
 `set hive.support.concurrency=false;`
-然后把分区删了,重建
 
 之后又被锁了一次,详细过程如下:
 ```
@@ -116,7 +115,9 @@ INFO  : OK
 +----------------------------------------------------+---------+--+
 
 ```
-解锁分区
+## 解锁分区
+`unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00');`
+
 ```
 > unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00');
 INFO  : Compiling command(queryId=hive_20171115221717_540d811a-473a-443a-91c3-e5aa545a2bc1): unlock table ods.migulive_10108_func_use_log_ex partition(src_file_day='20171114', src_file_hour='00')
@@ -139,3 +140,4 @@ INFO  : Completed executing command(queryId=hive_20171115221717_a3869646-831b-4d
 INFO  : OK
 No rows affected (0.117 seconds)
 ```
+

@@ -4,11 +4,11 @@ date: 2017-09-24
 ---
 # JournalNode 与namenode同步问题
 
-https://github.com/mattshma/bigdata/issues/45
-http://blog.csdn.net/bdchome/article/details/52550519
 因为开发误操作导致集群中缺少了JournalNode和Zookeeper节点各一个,在集群中其他机器上补上缺失的角色后,zk选举正常,但是新添加的JournalNode节点和活动的namenode节点之间同步失败,
 查询日志后发现后
 ```
 java.io.FileNotFoundException: /hadoop/dfs/jn/myhadoop/current/last-promised-epoch.tmp (No such file or directory)
 ```
 `/hadoop/dfs/jn` 是jn的存放目录,我的做法是先停止journalnode,然后从另外两台正常jn节点上复制jn路径下的其他文件,同时检查是否有current文件夹.如果没有新建一个后,修改路径权限`chown -R hdfs:hadoop /hadoop/dfs/jn/` 后重启jn节点 
+[参考文档1](https://github.com/mattshma/bigdata/issues/45)
+[参考文档1](http://blog.csdn.net/bdchome/article/details/52550519)

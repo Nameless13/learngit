@@ -3,7 +3,7 @@ categories: [CDH,Kerberos MIT]
 date: 2017-11-24
 ---
 
-```
+```bash
 ddp-dn-01:~/hct # cat /etc/krb5.conf 
 [libdefaults]
 #       default_realm = EXAMPLE.COM 
@@ -42,11 +42,6 @@ cmdmp.com = CMDMP.COM
 
 
 
-
-
-
-
-
 ------------
 
 ```
@@ -80,7 +75,7 @@ Principal "krbtgt/CMDMP.COM@SJTEST.COM" created.
 
 
 -------------
-```
+```bash
 [libdefaults]
 default_realm = CMDMP.COM
 dns_lookup_realm = false

@@ -1,4 +1,4 @@
-title: SUSE hostname 4分钟修改为host-ip
+title: SUSE hostname 每4分钟修改为host-ip
 categories: [CDH,Error]
 date: 2018-05-23 09:57:34
 ---

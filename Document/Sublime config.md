@@ -28,7 +28,7 @@ date: 2017-07-07
    {
     "extensions":
     [
-        "md"
+        "md","mdown"
     ],
 
     // "color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",

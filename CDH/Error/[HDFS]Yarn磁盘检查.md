@@ -6,7 +6,9 @@ date: 2017-07-06
 保证mapreduce shuffle阶段不会因为磁盘检测问题导致写入失败影响作业进度,cm默认配置为95%
 
 报错如下:
-    Directory /mnt/sdd1/yarn/nm error, used space above threshold of 95.0%, removing from list of valid directories
+```
+Directory /mnt/sdd1/yarn/nm error, used space above threshold of 95.0%, removing from list of valid directories
+```
 
 ```    
 Failed to setup application log directory for application_1494574323287_3723
