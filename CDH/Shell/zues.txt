@@ -1,0 +1,65 @@
+## root用户操作
+```
+mkdir zeus
+
+chown -R biadmin zeus
+
+
+
+ln -s /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop /usr/lib/hadoop
+
+ll /usr/lib/
+
+ln -s /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive /usr/lib/hive
+
+chown -R biadmin apache-tomcat-7.0.88
+
+chown -R biadmin apache-tomcat-7.0.88exit
+```
+
+## biadmin业务用户操作
+```
+vi .bash_profile
+cat .bash_profile
+export JAVA_HOME=/usr/java/jdk1.7.0_67-cloudera
+export PATH=$JAVA_HOME/bin:$PATH
+source  .bash_profile
+java -version
+sudo su -
+cd /mnt/sdb1
+cd zeus
+mkdir logs
+mkdir job_dir
+mkdir /tmp/zeus
+ll /usr/lib/hadoop
+ll /etc/hadoop/conf
+ll /etc/hive/conf
+find / -name hive
+sudo su -
+cd /mnt/sdb1
+ll
+cd apache-tomcat-7.0.88/
+cd /mnt/sdb1
+ll
+cd apache-tomcat-7.0.88/
+ll
+bin/startup.sh
+cd /mnt/sdb1/apache-tomcat-7.0.88/
+ll
+cd webapps/
+ll
+cd zeus-web/
+ll
+cd ..
+ll
+l
+cd ..
+ll
+tail -n300 logs/catalina.out
+tail -n300 /mnt/sdb1/apache-tomcat-7.0.88/logs/catalina.out
+ps -ef|grep tomcat
+kill 7658
+ps -ef|grep tomcat
+/mnt/sdb1/apache-tomcat-7.0.88/bin/startup.sh
+tail -n300 /mnt/sdb1/apache-tomcat-7.0.88/logs/catalina.out
+```

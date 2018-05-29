@@ -50,7 +50,7 @@ def write_title(filename_path,fname):
         categories_format = 'title: ' + fname + '\n' + \
                             'categories: ' + '[' + secondpath_tostr + ']' + '\n' + \
                             'date: ' + filemtime + '\n' + \
-                            '---' + '\n' + '\n' 
+                            '---' + '\n' 
         s = categories_format+s
         f = open(filename_path,'w',encoding='UTF-8')
         f.seek(0)
