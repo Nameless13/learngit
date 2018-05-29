@@ -2,9 +2,7 @@ title: sudo使用echo命令提示权限问题
 categories: [Linux]
 date: 2018-05-29 16:48:31
 ---
-避免’sudo echo x >’ 时’Permission denied’ 甲： 示例 sudo echo a > 1.txt -bash: 1.txt: Permission denied
-
-示例
+示例:
 ```
 sudo echo a > 1.txt
 -bash: 1.txt: Permission denied
@@ -20,7 +18,7 @@ bash 拒绝这么做，说是权限不够.
 
 `sudo sh -c "echo a > 1.txt"`
 
-利用bash -c 也是一样的，现在bash shell 流行。
+利用bash -c 也是一样的。
 
 
 2.  利用管道和 tee 命令，该命令可以从标准输入中读入信息并将其写入标准输出或文件中，
@@ -30,9 +28,6 @@ echo a |sudo tee 1.txt
 echo a |sudo tee -a 1.txt   // -a 是追加的意思，等同于 >>
 ```
 tee 命令很好用，它从管道接受信息，一边向屏幕输出，一边向文件写入。
-
-Linux 总是有一些小工具为我们考虑的很贴切！
-
 
 3. 提升shell 权限。
 ```
