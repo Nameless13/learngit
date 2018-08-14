@@ -1,0 +1,48 @@
+  ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+  Hive SQL Language Manual:
+ ☐ Commands and CLIs
+    ☐ Commands
+    ☐ Hive CLI (old)
+    ☐ Beeline CLI (new)
+    ☐ Variable Substitution
+    ☐ HCatalog CLI
+ ☐ File Formats
+    ☐ Avro Files
+    ☐ ORC Files
+    ☐ Parquet
+    ☐ Compressed Data Storage
+    ☐ LZO Compression
+ ☐ Data Types
+ ☐ Data Definition Statements
+    ☐ DDL Statements
+        ☐ Bucketed Tables
+    ☐ Statistics (Analyze and Describe)
+    ☐ Indexes
+    ☐ Archiving
+ ☐ Data Manipulation Statements
+    ☐ DML: Load, Insert, Update, Delete
+    ☐ Import/Export
+    ☐ Data Retrieval: Queries
+        ☐ Select
+            ☐ Group By
+            ☐ Sort/Distribute/Cluster/Order By
+            ☐ Transform and Map-Reduce Scripts
+            ☐ Operators and User-Defined Functions (UDFs)
+            ☐ XPath-specific Functions
+            ☐ Joins
+            ☐ Join Optimization
+            ☐ Union
+            ☐ Lateral View
+        ☐ Sub Queries
+        ☐ Sampling
+        ☐ Virtual Columns
+        ☐ Windowing and Analytics Functions
+        ☐ Enhanced Aggregation, Cube, Grouping and Rollup
+    ☐ Procedural Language:  Hive HPL/SQL
+    ☐ Explain Execution Plan
+ ☐ Locks
+ ☐ Authorization
+    ☐ Storage Based Authorization
+    ☐ SQL Standard Based Authorization
+    ☐ Hive deprecated authorization mode / Legacy Mode
+ ☐ Configuration Properties

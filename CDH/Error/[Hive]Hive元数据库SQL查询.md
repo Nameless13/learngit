@@ -22,3 +22,14 @@ db2   tb3   EXTERNAL_TABLE  hdfs://ns1/user/hive/warehouse/db2.db/tb3
 db2   tb4   EXTERNAL_TABLE  hdfs://ns1/user/hive/warehouse/db2.db/tb4
 db2   tb5   EXTERNAL_TABLE  hdfs://ns1/user/hive/warehouse/db2.db/tb5
 ```
+
+
+
+## 列出hive元数据库中,所有Database中所有表个数
+`use metastore;select d.NAME,b.DB_TABLES from DBS d join (select a.DB_ID,count(*) as BD_TABLES from TBLS a group by DB_ID) b where b.DB_ID=d.DB_ID order by d.NAME;`
+
+
+## DB所有者以及Table所有者
+DB所有者可以在DBS表中看到 
+### 列出table级别的所有者
+`select d.NAME,a.TBL_NAME,a.TBL_TYPE,c.LOCATION,a.OWNER from TBLS a join SDS c join DBS d where a.SD_ID=c.SD_ID and a.DB_ID=d.DB_ID order by d.NAME;`

@@ -1,0 +1,97 @@
+  ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+  Hadoop:
+ ☐ General
+    ✔ Overview @done (18-08-07 16:29)
+    ✔ Single Node Setup @done (18-08-07 16:29)
+    ✔ Cluster Setup @done (18-08-08 17:50)
+        Hadoop Rack Awareness
+        Monitoring Health of NodeManagers
+    ✔ Hadoop Commands Reference @done (18-08-09 16:26)
+    ✔ FileSystem Shell @done (18-08-09 16:36)
+    ☐ Hadoop Compatibility
+    ☐ FileSystem Specification
+ ☐ Common
+    ✔ CLI Mini Cluster @done (18-08-09 16:59)
+    ✔ Native Libraries @done (18-08-09 17:04)
+    ✔ Superusers @done (18-08-09 17:11)
+    ✔ Secure Mode @done (18-08-10 09:37)
+        As of version 2.6.0, SASL can be used to authenticate the data transfer protocol. In this configuration, it is no longer required for secured clusters to start the DataNode as root using jsvc and bind to privileged ports. To enable SASL on data transfer protocol, set dfs.data.transfer.protection in hdfs-site.xml, set a non-privileged port for dfs.datanode.address, set dfs.http.policy to HTTPS_ONLY and make sure the HADOOP_SECURE_DN_USER environment variable is not defined. Note that it is not possible to use SASL on data transfer protocol if dfs.datanode.address is set to a privileged port. This is required for backwards-compatibility reasons.(目前生产是配置dfs.datanode.address)
+    ✔ Service Level Authorization @done (18-08-10 17:36)
+        $HADOOP_CONF_DIR/hadoop-policy.xml defines an access control list for each Hadoop service. Every access control list has a simple format:
+    ☐ HTTP Authentication
+    ☐ Hadoop KMS
+    ☐ Tracing
+ ☐ HDFS
+    ☐ HDFS User Guide
+    ☐ HDFS Commands Reference
+    ☐ High Availability With QJM
+    ☐ High Availability With NFS
+    ☐ Federation
+    ☐ ViewFs Guide
+    ☐ HDFS Snapshots
+    ☐ HDFS Architecture
+    ☐ Edits Viewer
+    ☐ Image Viewer
+    ☐ Permissions and HDFS
+    ☐ Quotas and HDFS
+    ☐ HFTP
+    ☐ C API libhdfs
+    ☐ WebHDFS REST API
+    ☐ HttpFS Gateway
+    ☐ Short Circuit Local Reads
+    ☐ Centralized Cache Management
+    ☐ HDFS NFS Gateway
+    ☐ HDFS Rolling Upgrade
+    ☐ Extended Attributes
+    ☐ Transparent Encryption
+    ☐ HDFS Support for Multihoming
+    ☐ Archival Storage, SSD & Memory
+ ☐ MapReduce
+    ☐ MapReduce Tutorial
+    ☐ MapReduce Commands Reference
+    ☐ Compatibilty between Hadoop 1.x and Hadoop 2.x
+    ☐ Encrypted Shuffle
+    ☐ Pluggable Shuffle/Sort
+    ☐ Distributed Cache Deploy
+    ☐ Hadoop Streaming
+    ☐ Hadoop Archives
+    ☐ DistCp
+ ☐ MapReduce REST APIs
+    ☐ MR Application Master
+    ☐ MR History Server
+ ☐ YARN
+    ☐ YARN Architecture
+    ☐ Capacity Scheduler
+    ☐ Fair Scheduler
+    ☐ ResourceManager Restart
+    ☐ ResourceManager HA
+    ☐ Web Application Proxy
+    ☐ YARN Timeline Server
+    ☐ Writing YARN Applications
+    ☐ YARN Commands
+    ☐ Scheduler Load Simulator
+    ☐ NodeManager Restart
+    ☐ DockerContainerExecutor
+ ☐ YARN REST APIs
+    ✔ Introduction @done (18-08-07 10:40)
+    ☐ Resource Manager
+    ☐ Node Manager
+ ☐ Auth
+    ☐ Overview
+    ☐ Examples
+    ☐ Configuration
+    ☐ Building
+ ☐ Reference
+    ☐ Release Notes
+    ☐ API docs
+    ☐ Common CHANGES.txt
+    ☐ HDFS CHANGES.txt
+    ☐ MapReduce CHANGES.txt
+    ☐ YARN CHANGES.txt
+    ☐ Metrics
+ ☐ Configuration
+    ☐ core-default.xml
+    ☐ hdfs-default.xml
+    ☐ mapred-default.xml
+    ☐ yarn-default.xml
+    ☐ Deprecated Properties

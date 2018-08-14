@@ -18,6 +18,8 @@ PARTITIONED BY (
  ROW FORMAT SERDE 
 ```
 
+后续:
+完成集群数据梳理工作，包括HDFS数据，Hive数据，重点的目录以及table,同时hive部分table的partition数目过多，导致Zookeeper snapshot占用空间异常大大，并且给ZK内存带来压力。后续需要开发人员对Partition进行修改。梳理出所有影响Zookeeper服务的所有table,下线所有不合理的任务流程,没有整改前全部不允许在生产环境调用
 
 ## 列出hive元数据库中所有表所拥有的分区个数
 `use metastore;select d.NAME, a.TBL_NAME, b.count, c.LOCATION from TBLS a join (select TBL_ID,count(*) as count from PARTITIONS group by TBL_ID ) b join SDS c join DBS d where a.TBL_ID=b.TBL_ID and a.SD_ID=c.SD_ID and a.DB_ID=d.DB_ID order by b.count;`

@@ -1,0 +1,7 @@
+ ☐ http://supervisord.org/introduction.html
+
+ ✘ airflow @cancelled (18-08-06 14:42)
+     配置python虚拟环境
+     更新python2.7 编译pip 
+     本机下载pip 对应的包
+     导入目标地址 

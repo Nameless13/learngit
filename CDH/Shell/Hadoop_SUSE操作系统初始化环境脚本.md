@@ -3,6 +3,7 @@ categories: [CDH,Shell]
 date: 2018-05-29 16:46:37
 ---
 # Hadoop_SUSE操作系统初始化环境脚本
+
 ```bash
 #!/usr/bin/shell
 # 批量处理鹏博士机房,由于安全加固导致无法使用root账户分发以及批量更改配置的处理脚本
