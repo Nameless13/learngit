@@ -1,9 +1,9 @@
-title: Cloudera部署CentOS
+title: CentOS6.5部署CHD5.10.041
 categories: [CDH,Installation]
 date: 2017-06-30
 ---
 >操作系统:CentOS 6.5
->CM版本:CM5.10.041
+>CM版本:CM
 >CDH版本:CDH5.10.041
 >使用version用户对集群进行部署
 

@@ -1,4 +1,4 @@
-title: rmall
+title: CDH_RemoveALL
 categories: [CDH,Shell]
 date: 2018-05-23 09:57:35
 ---

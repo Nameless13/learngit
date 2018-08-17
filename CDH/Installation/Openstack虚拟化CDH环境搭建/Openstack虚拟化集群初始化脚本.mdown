@@ -1,0 +1,66 @@
+# Openstack虚拟化集群初始化脚本
+
+```
+# 使用内部yum源
+sudo find /etc/yum.repos.d/ -name "*.repo" -exec mv {} {}.bak \;
+sudo rpm -ivh --force --nodeps http://10.200.40.49/pub/centos-release-el7.noarch.rpm
+sudo yum clean all
+sudo yum makecache
+
+# 关闭防火墙
+sudo systemctl stop firewalld.service 
+sudo systemctl disable firewalld.service
+sudo firewall-cmd --state
+
+# 关闭SELINUX
+sudo setenforce 0
+sudo echo "SELINUX=disabled" > /etc/sysconfig/selinux;
+
+# 关闭hugepage
+sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled
+sudo echo never > /sys/kernel/mm/transparent_hugepage/defrag
+sudo scp /etc/rc.d/rc.local $i:/etc/rc.d/rc.local
+sudo chmod +x /etc/rc.d/rc.local
+
+# 关闭Swap
+sudo echo 0 >/proc/sys/vm/swappiness
+# sudo echo -e 'vm.swappiness=0' > /etc/sysctl.conf
+
+# 配置limits
+sudo scp /etc/security/limits.conf $i:/etc/security/limits.conf
+
+# 安装并配置ntp 
+sudo yum install -y ntp
+sudo scp /etc/ntp.conf_bak56 $i:/etc/ntp.conf
+sudo systemctl disable chronyd
+sudo systemctl start ntpd.service
+sudo systemctl enable ntpd.service
+
+
+# 禁用ipv6
+sudo scp /etc/default/grub  $i:/etc/default/grub 
+sudo scp /etc/sysctl.conf $i:/etc/sysctl.conf
+sudo scp /etc/sysconfig/network $i:/etc/sysconfig/network
+
+# 禁用cloud init 
+sudo scp /etc/cloud/cloud.cfg $i:/etc/cloud/cloud.cfg
+```
+
+## 禁用cloudinit 避免主机名被dhcp SERVER修改
+
+```
+[root@dsj-fx-f01-2 ~]# cd /etc/cloud/
+[root@dsj-fx-f01-2 cloud]# tail -10 cloud.cfg
+    shell: /bin/bash
+  distro: rhel
+  paths:
+    cloud_dir: /var/lib/cloud
+    templates_dir: /etc/cloud/templates
+  ssh_svcname: sshd
+
+# vim:syntax=yaml
+config
+  network: disable
+
+```
+

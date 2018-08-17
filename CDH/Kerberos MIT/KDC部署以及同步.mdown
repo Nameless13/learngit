@@ -1,0 +1,179 @@
+# kdc 部署以及同步 
+```
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/lib/kerberos/krb5kdc/principal' for realm 'SJTEST.COM',
+master key name 'K/M@SJTEST.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+kdb5_util: No such file or directory while creating database '/var/lib/kerberos/krb5kdc/principal'
+[root@dsj-ddp-test-mstr-02 krb5kdc]# vi kdc.conf
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'SJTEST.COM',
+master key name 'K/M@SJTEST.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+kdb5_util: Required parameters in kdc.conf missing while initializing the Kerberos admin interface
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kadmin.local 
+Authenticating as principal root/admin@SJTEST.COM with password.
+kadmin.local: Required parameters in kdc.conf missing while initializing kadmin.local interface
+[root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# ll
+total 28
+-rw------- 1 root root   21 Jan 10 06:43 kadm5.acl
+-rw------- 1 root root  975 Jan 10 06:53 kdc.conf
+-rw------- 1 root root  451 Jan 10 06:43 kdc.conf_bak
+-rw------- 1 root root 8192 Jan 10 06:53 principal
+-rw------- 1 root root 8192 Jan 10 06:53 principal.kadm5
+-rw------- 1 root root    0 Jan 10 06:53 principal.kadm5.lock
+-rw------- 1 root root    0 Jan 10 06:53 principal.ok
+[root@dsj-ddp-test-mstr-02 krb5kdc]# vi kadm5.acl 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# cat kdc.conf
+[kdcdefaults]
+ kdc_ports = 750,88
+ kdc_tcp_ports = 750,88
+
+[realms]
+# EXAMPLE.COM = {
+#  master_key_type = aes256-cts
+#  acl_file = /var/kerberos/krb5kdc/kadm5.acl
+#  dict_file = /usr/share/dict/words
+#  admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab
+#  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal camellia256-cts:normal camellia128-cts:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal
+# }
+  SJTEST.COM = {
+  max_renewable_life = 7d 0h 0m 0s
+  database_name = /var/kerberos/krb5kdc/principal
+  acl_file = /var/kerberos/krb5kdc/kadm5.acl
+  dict_file = /var/kerberos/krb5kdc/kadm5.dict
+  admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab
+  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal des-hmac-sha1:normal dex-cbc-md5:normal des-cbc-crc:normal
+}
+
+[logging]
+	kdc = FILE:/var/log/krb5/krb5kdc.log
+	admin_server = FILE:/var/log/krb5/kadmind.log
+[root@dsj-ddp-test-mstr-02 krb5kdc]# cat kadm5.acl 
+*/admin@SJTEST.COM  *
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'SJTEST.COM',
+master key name 'K/M@SJTEST.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+kdb5_util: Cannot open DB2 database '/var/kerberos/krb5kdc/principal': File exists while creating database '/var/kerberos/krb5kdc/principal'
+[root@dsj-ddp-test-mstr-02 krb5kdc]# rm -rf *principal*
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'SJTEST.COM',
+master key name 'K/M@SJTEST.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+kdb5_util: Required parameters in kdc.conf missing while initializing the Kerberos admin interface
+[root@dsj-ddp-test-mstr-02 krb5kdc]# rm -rf *principal*
+[root@dsj-ddp-test-mstr-02 krb5kdc]# vi kdc.conf
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kdb5_util create -s
+Loading random data
+Initializing database '/var/kerberos/krb5kdc/principal' for realm 'SJTEST.COM',
+master key name 'K/M@SJTEST.COM'
+You will be prompted for the database Master Password.
+It is important that you NOT FORGET this password.
+Enter KDC database master key: 
+Re-enter KDC database master key to verify: 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# service krb5kdc start
+Redirecting to /bin/systemctl start krb5kdc.service
+[root@dsj-ddp-test-mstr-02 krb5kdc]# service kadmin start
+Redirecting to /bin/systemctl start kadmin.service
+[root@dsj-ddp-test-mstr-02 krb5kdc]# chkconfig krb5kdc on
+Note: Forwarding request to 'systemctl enable krb5kdc.service'.
+Created symlink from /etc/systemd/system/multi-user.target.wants/krb5kdc.service to /usr/lib/systemd/system/krb5kdc.service.
+[root@dsj-ddp-test-mstr-02 krb5kdc]# systemctl enable krb5kdc.service
+[root@dsj-ddp-test-mstr-02 krb5kdc]# systemctl enable kadmin.service
+Created symlink from /etc/systemd/system/multi-user.target.wants/kadmin.service to /usr/lib/systemd/system/kadmin.service.
+[root@dsj-ddp-test-mstr-02 krb5kdc]# kadmin.local
+Authenticating as principal root/admin@SJTEST.COM with password.
+kadmin.local:  modprinc -maxrenewlife 1week krbtgt/SJTEST.COM@SJTEST.COM
+Principal "krbtgt/SJTEST.COM@SJTEST.COM" modified.
+kadmin.local:  addprinc -pw 3edc#EDC cloudera/admin@SJTEST.COM
+WARNING: no policy specified for cloudera/admin@SJTEST.COM; defaulting to no policy
+Principal "cloudera/admin@SJTEST.COM" created.
+kadmin.local:  modprinc -maxrenewlife 1week cloudera/admin@SJTEST.COM
+Principal "cloudera/admin@SJTEST.COM" modified.
+kadmin.local:  addprinc -pw 3edc#EDC root@SJTEST.COM
+WARNING: no policy specified for root@SJTEST.COM; defaulting to no policy
+Principal "root@SJTEST.COM" created.
+kadmin.local:  addprinc -randkey host/dsj-ddp-test-mstr-02
+WARNING: no policy specified for host/dsj-ddp-test-mstr-02@SJTEST.COM; defaulting to no policy
+Principal "host/dsj-ddp-test-mstr-02@SJTEST.COM" created.
+kadmin.local:  addprinc -randkey host/dsj-ddp-test-mstr-06
+WARNING: no policy specified for host/dsj-ddp-test-mstr-06@SJTEST.COM; defaulting to no policy
+Principal "host/dsj-ddp-test-mstr-06@SJTEST.COM" created.
+kadmin.local:  ktadd host/dsj-ddp-test-mstr-02
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type des3-cbc-sha1 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type arcfour-hmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type camellia256-cts-cmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type camellia128-cts-cmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type des-hmac-sha1 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-02 with kvno 2, encryption type des-cbc-md5 added to keytab FILE:/etc/krb5.keytab.
+kadmin.local:  ktadd host/dsj-ddp-test-mstr-06
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type des3-cbc-sha1 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type arcfour-hmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type camellia256-cts-cmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type camellia128-cts-cmac added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type des-hmac-sha1 added to keytab FILE:/etc/krb5.keytab.
+Entry for principal host/dsj-ddp-test-mstr-06 with kvno 2, encryption type des-cbc-md5 added to keytab FILE:/etc/krb5.keytab.
+kadmin.local:  [root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# scp /etc/krb5.keytab 10.151.164.46:/etc/krb5.keytab
+The authenticity of host '10.151.164.46 (10.151.164.46)' can't be established.
+ECDSA key fingerprint is SHA256:KT/ai1eM7RCnSr/Sa8rJ9/tHlOmEuMEtM1Sa7hQe0a8.
+ECDSA key fingerprint is MD5:01:ae:65:6e:b1:9c:78:81:8b:89:39:3f:99:36:b2:e6.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '10.151.164.46' (ECDSA) to the list of known hosts.
+root@10.151.164.46's password: 
+krb5.keytab                                                                                                                               100% 1314     5.3MB/s   00:00    
+[root@dsj-ddp-test-mstr-02 krb5kdc]# ll
+total 36
+-rw------- 1 root root    21 Jan 10 06:43 kadm5.acl
+-rw------- 1 root root   624 Jan 10 07:01 kdc.conf
+-rw------- 1 root root   451 Jan 10 06:43 kdc.conf_bak
+-rw------- 1 root root 16384 Jan 10 07:17 principal
+-rw------- 1 root root  8192 Jan 10 07:01 principal.kadm5
+-rw------- 1 root root     0 Jan 10 07:01 principal.kadm5.lock
+-rw------- 1 root root     0 Jan 10 07:17 principal.ok
+[root@dsj-ddp-test-mstr-02 krb5kdc]# ll -a
+total 48
+drwxr-xr-x  2 root root  4096 Jan 10 07:01 .
+drwxr-xr-x. 4 root root  4096 Jan 10 02:56 ..
+-rw-------  1 root root    75 Jan 10 07:01 .k5.SJTEST.COM
+-rw-------  1 root root    21 Jan 10 06:43 kadm5.acl
+-rw-------  1 root root   624 Jan 10 07:01 kdc.conf
+-rw-------  1 root root   451 Jan 10 06:43 kdc.conf_bak
+-rw-------  1 root root 16384 Jan 10 07:17 principal
+-rw-------  1 root root  8192 Jan 10 07:01 principal.kadm5
+-rw-------  1 root root     0 Jan 10 07:01 principal.kadm5.lock
+-rw-------  1 root root     0 Jan 10 07:17 principal.ok
+[root@dsj-ddp-test-mstr-02 krb5kdc]# scp -r .k5.SJTEST.COM kadm5.acl kdc.conf /var/kerberos/krb5
+krb5/    krb5kdc/ 
+[root@dsj-ddp-test-mstr-02 krb5kdc]# scp -r .k5.SJTEST.COM kadm5.acl kdc.conf 10.151.164.46:/var/kerberos/krb5kdc/
+root@10.151.164.46's password: 
+.k5.SJTEST.COM                                                                                                                            100%   75   533.4KB/s   00:00    
+kadm5.acl                                                                                                                                 100%   21   241.3KB/s   00:00    
+kdc.conf                                                                                                                                  100%  624     6.4MB/s   00:00    
+```

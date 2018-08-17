@@ -1,10 +1,10 @@
-title: Cloudera部署SUSE
+title: SUSE11部署CDH5.10
 categories: [CDH,Installation]
 date: 2017-06-27
 ---
->操作系统:SUSE11 SP3
+>操作系统:SUSE SP3
 >CM版本:CM5.11.0
->CDH版本:CDH5.10.1
+>CDH版本:.1
 >使用root用户对集群进行部署
 
 ## 服务器配置

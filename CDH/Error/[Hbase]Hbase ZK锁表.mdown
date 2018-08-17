@@ -19,12 +19,13 @@ Failed to archive class org.apache.hadoop.hbase.backup.HFileArchiver$FileablePat
 Failed to archive class org.apache.hadoop.hbase.backup.HFileArchiver$FileablePath, file:hdfs://nameservice2/hbase/.tmp/data/default/user_order_info/63fa237eba286bf13d01d0e04b13d149/info/88be874a75d345af848dfd07f0ff0340_SeqId_55_
 ```
 
-手动删除后发现,HMaster节点虽然启动成功但不能被选举为active,读取日志发现,打开文件数过多,最终导致HMaster节点一段时间后自动停止服务,
+手动删除后发现,由于重启次数过多，生成了很多临时的HDFS文件,HMaster节点虽然启动成功但不能被选举为active,读取日志发现,打开文件数过多,最终导致HMaster节点一段时间后自动停止服务,
 - 开始的想法是通过`ulimit -n`手动调整hbase用户所能打开的最大文件数,发现修改后不起作用
-- 把/hbase//MasterProcWALs目录下的文件mv出去
+- 把/hbase/MasterProcWALs目录下的文件mv出去
 - 同时需要删除HDFS下tmp目录下对应的临时文件，然后重启成功
 
-因为HMaster启动的时候会加载这个目录下的所有文件，才会导致too many open files,这个是HBase自身的问题导致是HDFS的connection太多了,重启太多，然后又失败导致的。重启成功后，所有那个目录下的文件应该会被删除的
+
+因为HMaster启动的时候会加载这个目录下的所有文件，才会导致too many open files,这个是HBase自身的问题,导致HDFS的connection太多了,重启次数太多，然后又失败。正常情况下重启成功后，所有那个目录下的文件应该会被删除的
 
 
 ---

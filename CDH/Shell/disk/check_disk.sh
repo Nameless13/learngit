@@ -23,11 +23,8 @@ done
 
 
 
-PRD_DT-[root@scsp00257 ~]# sudo sh check_disk.sh 
 
 manage@ddp-dn-114:~> sudo sh check_disk.sh |grep faile
-
-
 
 Disk is /dev/sdf1
 Mount on /mnt/sdf1

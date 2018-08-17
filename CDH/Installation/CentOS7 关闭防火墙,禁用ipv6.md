@@ -52,6 +52,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 If the output is 0, IPv6 is enabled.
 If the output is 1, IPv6 is already disabled.
+
 ```
 [root@localhost network-scripts]# cat /proc/sys/net/ipv6/conf/all/disable_ipv6
 0

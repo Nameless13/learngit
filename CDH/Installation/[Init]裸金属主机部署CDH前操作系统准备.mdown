@@ -1,4 +1,4 @@
-title: 裸金属主机部署cdh
+title: 裸金属主机系统初始化
 categories: [CDH,Installation]
 date: 2018-05-23 
 ---

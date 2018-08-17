@@ -10,7 +10,7 @@ cat >establishSSH.exp<<EOF
 spawn ssh-copy-id -i $USER_DIR/.ssh/id_rsa.pub $SSH_IP
 expect {
 	"*yes/no" {send "yes\r"; exp_continue}
-	"*password" {send "$IP_PW\r";}
+	"*assword" {send "$IP_PW\r";}
 }
 expect eof
 EOF
@@ -32,12 +32,12 @@ if [ -f servers.txt ]
 		exit 0
 fi
 
-if ( rpm -qa | grep -q expect)
-	then
-	:
-else
-	yum -y install expect > /dev/null
-fi
+# if ( rpm -qa | grep -q expect)
+# 	then
+# 	:
+# else
+# 	yum -y install expect > /dev/null
+# fi
 
 if [ -f $USER_DIR/.ssh/id_rsa.pub ] 
 	then

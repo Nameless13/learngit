@@ -1,7 +1,31 @@
  ☐ http://supervisord.org/introduction.html
 
  ✘ airflow @cancelled (18-08-06 14:42)
-     配置python虚拟环境
+     ✔ 配置python虚拟环境 @done (18-08-15 15:41)
      更新python2.7 编译pip 
      本机下载pip 对应的包
      导入目标地址 
+ ☐ logging
+
+ ☐ sqlalchemy
+     https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
+
+ ☐ srapy
+     https://docs.scrapy.org/en/latest/intro/tutorial.html#xpath-a-brief-intro
+     http://www.cnblogs.com/qiyeboy/p/5693128.html
+     https://www.cnblogs.com/qiyeboy/p/7016540.html
+     https://github.com/qiyeboy/IPProxyPool
+
+
+https://blog.csdn.net/androidlushangderen/article/list/11?t=1&orderby=UpdateTime
+https://blog.csdn.net/androidlushangderen/article/details/41599873
+https://blog.csdn.net/androidlushangderen/article/details/41625829
+https://blog.csdn.net/androidlushangderen/article/details/41647029
+https://blog.csdn.net/androidlushangderen/article/details/41693625
+https://blog.csdn.net/androidlushangderen/article/details/41751133
+https://blog.csdn.net/androidlushangderen/article/details/41785711
+https://blog.csdn.net/androidlushangderen/article/details/41843169
+https://blog.csdn.net/androidlushangderen/article/details/41862891
+https://blog.csdn.net/androidlushangderen/article/details/41907503
+https://blog.csdn.net/androidlushangderen/article/details/40947915
+https://blog.csdn.net/androidlushangderen/article/details/40515153
